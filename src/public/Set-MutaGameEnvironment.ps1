@@ -2,6 +2,9 @@ Function Set-MutaGameEnvironment {
     [OutputType([Mutagen.Bethesda.Environments.GameEnvironmentState], ParameterSetName = 'passthru')]
     [cmdletbinding()]
     param (
+        [Parameter(
+            Position = 0
+        )]
         [Mutagen.Bethesda.GameRelease]$Release,
         [Parameter(
             ParameterSetName = 'passthru'

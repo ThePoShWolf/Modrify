@@ -1,6 +1,9 @@
 Function Get-MutaWinningOverrides {
     [cmdletbinding()]
     param (
+        [Parameter(
+            Position = 0
+        )]
         [string]$Type,
         [bool]$IncludeDeletedRecords = $false
     )

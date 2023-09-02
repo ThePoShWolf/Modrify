@@ -1,6 +1,6 @@
-Function Get-MutaMod {
-    [OutputType([Mutagen.Bethesda.Skyrim.SkyrimMod], ParameterSetName = 'forEdit')]
-    [OutputType([Mutagen.Bethesda.Skyrim.ISkyrimModDisposableGetter], ParameterSetName = 'readOnly')]
+Function Get-FalloutMod {
+    [OutputType([Mutagen.Bethesda.Fallout4.Fallout4Mod], ParameterSetName = 'forEdit')]
+    [OutputType([Mutagen.Bethesda.Fallout4.IFallout4ModDisposableGetter], ParameterSetName = 'readOnly')]
     [cmdletbinding(
         DefaultParameterSetName = 'forEdit'
     )]
@@ -24,7 +24,7 @@ Function Get-MutaMod {
         [Parameter(
             ParameterSetName = 'forEdit'
         )]
-        [Mutagen.Bethesda.Skyrim.GroupMask]$ImportMask = $null,
+        [Mutagen.Bethesda.Fallout4.GroupMask]$ImportMask = $null,
         [Parameter(
             ParameterSetName = 'forEdit'
         )]
@@ -50,8 +50,9 @@ Function Get-MutaMod {
         [switch]$ReadOnly
     )
     if ($ReadOnly.IsPresent) {
-        [Mutagen.Bethesda.Skyrim.SkyrimMod]::CreateFromBinaryOverlay($Path, $Release, $StringsParam, $FileSystem)
+        [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinaryOverlay($Path, $Release, $StringsParam, $FileSystem)
     } else {
-        [Mutagen.Bethesda.Skyrim.SkyrimMod]::CreateFromBinary($Path, $Release, $ImportMask, $StringsParam, $Parallel, $FileSystem)
+
+        [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinary($Path, $Release, $ImportMask, $StringsParam, $Parallel, $FileSystem)
     }
 }

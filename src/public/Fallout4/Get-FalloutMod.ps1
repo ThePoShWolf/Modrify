@@ -17,13 +17,6 @@ Function Get-FalloutMod {
         [Parameter(
             ParameterSetName = 'forEdit'
         )]
-        [Parameter(
-            ParameterSetName = 'readOnly'
-        )]
-        [Mutagen.Bethesda.GameRelease]$Release = $MutagenGameEnvironment.GameRelease,
-        [Parameter(
-            ParameterSetName = 'forEdit'
-        )]
         [Mutagen.Bethesda.Fallout4.GroupMask]$ImportMask = $null,
         [Parameter(
             ParameterSetName = 'forEdit'
@@ -50,8 +43,8 @@ Function Get-FalloutMod {
         [switch]$ReadOnly
     )
     if ($ReadOnly.IsPresent) {
-        [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinaryOverlay($Path, $Release, $StringsParam, $FileSystem)
+        [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinaryOverlay($Path, $StringsParam, $FileSystem)
     } else {
-        [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinary($Path, $Release, $ImportMask, $StringsParam, $Parallel, $FileSystem)
+        [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinary($Path, $ImportMask, $StringsParam, $Parallel, $FileSystem)
     }
 }

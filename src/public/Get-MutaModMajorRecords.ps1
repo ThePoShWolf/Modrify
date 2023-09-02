@@ -1,5 +1,5 @@
 Function Get-MutaModMajorRecords {
-    [OutputType([System.Collections.Generic.IEnumerable[Mutagen.Bethesda.Plugins.Records.IMajorRecord]])]
+    [OutputType([Mutagen.Bethesda.Plugins.Records.SkyrimMajorRecord[]])]
     [cmdletbinding()]
     param (
         [Mutagen.Bethesda.Plugins.Records.AMod]$Mod

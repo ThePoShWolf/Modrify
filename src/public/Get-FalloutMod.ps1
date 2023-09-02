@@ -52,7 +52,6 @@ Function Get-FalloutMod {
     if ($ReadOnly.IsPresent) {
         [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinaryOverlay($Path, $Release, $StringsParam, $FileSystem)
     } else {
-
         [Mutagen.Bethesda.Fallout4.Fallout4Mod]::CreateFromBinary($Path, $Release, $ImportMask, $StringsParam, $Parallel, $FileSystem)
     }
 }

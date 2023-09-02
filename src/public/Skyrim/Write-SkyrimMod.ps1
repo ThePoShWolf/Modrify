@@ -1,4 +1,4 @@
-Function Write-MutaMod {
+Function Write-SkyrimMod {
     [cmdletbinding()]
     Param (
         [Parameter(

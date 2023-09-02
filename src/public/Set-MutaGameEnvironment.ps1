@@ -1,5 +1,5 @@
 Function Set-MutaGameEnvironment {
-    [OutputType([Mutagen.Bethesda.Environments.GameEnvironmentState], ParameterSetName = 'passthru')]
+    [OutputType([Mutagen.Bethesda.Environments.IGameEnvironment], ParameterSetName = 'passthru')]
     [cmdletbinding()]
     param (
         [Parameter(

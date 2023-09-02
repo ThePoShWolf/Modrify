@@ -1,7 +1,13 @@
 Function Write-MutaMod {
     [cmdletbinding()]
     Param (
+        [Parameter(
+            Mandatory
+        )]
         [Mutagen.Bethesda.Plugins.Records.AMod]$Mod,
+        [Parameter(
+            Mandatory
+        )]
         [System.IO.FileInfo]$Path,
         [Mutagen.Bethesda.Plugins.Binary.Parameters.BinaryWriteParameters]$BinaryWriteParameters = $null,
         [Mutagen.Bethesda.Plugins.Binary.Parameters.ParallelWriteParameters]$ParallelWriteParameters = $null,

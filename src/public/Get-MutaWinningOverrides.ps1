@@ -2,6 +2,7 @@ Function Get-MutaWinningOverrides {
     [cmdletbinding()]
     param (
         [Parameter(
+            Mandatory,
             Position = 0
         )]
         [string]$Type,

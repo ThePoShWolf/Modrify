@@ -15,6 +15,9 @@ Function Get-MutaWinningOverrides {
         '^Skyrim' {
             "Mutagen.Bethesda.Skyrim.I$Type`Getter"
         }
+        '^Fallout' {
+            "Mutagen.Bethesda.Fallout4.I$Type`Getter"
+        }
     }
     Write-Verbose "Type: $typeName"
     $([Mutagen.Bethesda.OverrideMixIns]::WinningOverrides($MutagenGameEnvironment.LoadOrder.PriorityOrder, $typeName , $IncludeDeletedRecords))
@@ -27,7 +30,18 @@ $sb = {
         $allTypes = [AppDomain]::CurrentDomain.GetAssemblies().GetTypes() | Where-Object { $_.Namespace -like 'Mutagen.Bethesda*' }
         # filtering for types that implement the ISkyrimMajorRecordGetter
         # this will need to be Improved to account for other games
-        $mrgs = $allTypes | Where-Object { $_.ImplementedInterfaces.FullName -contains 'Mutagen.Bethesda.Skyrim.ISkyrimMajorRecordGetter' }
+        $getterSearch = Switch -Regex ($MutagenGameEnvironment.GameRelease) {
+            '^Skyrim' {
+                'Mutagen.Bethesda.Skyrim.ISkyrimMajorRecordGetter'
+            }
+            '^Fallout' {
+                'Mutagen.Bethesda.Fallout4.IFallout4MajorRecordGetter'
+            }
+            default {
+                'Mutagen.Bethesda.Skyrim.ISkyrimMajorRecordGetter'
+            }
+        }
+        $mrgs = $allTypes | Where-Object { $_.ImplementedInterfaces.FullName -contains $getterSearch }
         # convert to short type name
         # i.e. INpcGetter to Npc
         $script:MajorRecordTypeNameCompleters = $mrgs | Where-Object { $_.name -like '*Getter' } | ForEach-Object {

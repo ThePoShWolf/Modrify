@@ -8,7 +8,7 @@ Function Get-MutaWinningOverrides {
         [string]$Type,
         [bool]$IncludeDeletedRecords = $false
     )
-    if (-not (Get-Variable MutagenGameEnvironment -Scope Script -ErrorAction SilentlyContinue)) {
+    if (-not (Test-MutaGameEnvironment)) {
         Throw 'Please run Set-MutaGameEnvironment first.'
     }
     $typeName = Switch -Regex ($MutagenGameEnvironment.GameRelease) {

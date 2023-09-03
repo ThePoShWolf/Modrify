@@ -3,16 +3,41 @@ Function Get-MutaModMajorRecords {
     [cmdletbinding()]
     param (
         [Parameter(
-            Mandatory
+            Mandatory,
+            ValueFromPipeline
         )]
-        [Mutagen.Bethesda.Plugins.Records.AMod]$Mod
+        [Mutagen.Bethesda.Plugins.Records.IModGetter]$Mod,
+        [string]$Type
     )
-    switch -regex ($Mod.GameRelease) {
-        '^Skyrim' {
-            $([Mutagen.Bethesda.Skyrim.SkyrimModMixIn]::EnumerateMajorRecords($mod))
-        }
-        '^Fallout' {
-            $([Mutagen.Bethesda.Fallout4.Fallout4ModMixIn]::EnumerateMajorRecords($mod))
+    Begin {
+        if ($PSBoundParameters.Keys -contains 'Type') {
+            $typeName = Switch -Regex ($MutagenGameEnvironment.GameRelease) {
+                '^Skyrim' {
+                    "Mutagen.Bethesda.Skyrim.I$Type`Getter"
+                }
+                '^Fallout' {
+                    "Mutagen.Bethesda.Fallout4.I$Type`Getter"
+                }
+            }
         }
     }
+    Process {
+        switch -regex ($Mod.GameRelease) {
+            '^Skyrim' {
+                if ($PSBoundParameters.Keys -contains 'Type') {
+                    $([Mutagen.Bethesda.Skyrim.SkyrimModMixIn]::EnumerateMajorRecords($mod, $typeName))
+                } else {
+                    $([Mutagen.Bethesda.Skyrim.SkyrimModMixIn]::EnumerateMajorRecords($mod))
+                }
+            }
+            '^Fallout' {
+                if ($PSBoundParameters.Keys -contains 'Type') {
+                    $([Mutagen.Bethesda.Fallout4.Fallout4ModMixIn]::EnumerateMajorRecords($mod, $typeName))
+                } else {
+                    $([Mutagen.Bethesda.Fallout4.Fallout4ModMixIn]::EnumerateMajorRecords($mod))
+                }
+            }
+        }
+    }
+    End {}
 }

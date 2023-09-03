@@ -3,9 +3,6 @@ Function Get-MutaGameEnvironment {
     param (
 
     )
-    if (Test-MutaGameEnvironment) {
-        $MutagenGameEnvironment
-    } else {
-        Write-Warning "First set your game environment with 'Set-MutaGameEnvironment'"
-    }
+    Test-MutaGameEnvironment
+    $MutagenGameEnvironment
 }

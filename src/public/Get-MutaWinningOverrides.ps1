@@ -8,9 +8,7 @@ Function Get-MutaWinningOverrides {
         [string]$Type,
         [bool]$IncludeDeletedRecords = $false
     )
-    if (-not (Test-MutaGameEnvironment)) {
-        Throw 'Please run Set-MutaGameEnvironment first.'
-    }
+    Test-MutaGameEnvironment
     $typeName = Switch -Regex ($MutagenGameEnvironment.GameRelease) {
         '^Skyrim' {
             "Mutagen.Bethesda.Skyrim.I$Type`Getter"

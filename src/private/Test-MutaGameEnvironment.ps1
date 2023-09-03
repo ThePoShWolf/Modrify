@@ -5,7 +5,6 @@ Function Test-MutaGameEnvironment {
 
     )
     if (-not (Get-Variable MutagenGameEnvironment -Scope Script -ErrorAction SilentlyContinue)) {
-        return $false
+        Throw 'Please run Set-MutaGameEnvironment first.'
     }
-    return $true
 }

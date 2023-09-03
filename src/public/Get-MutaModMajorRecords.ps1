@@ -11,6 +11,7 @@ Function Get-MutaModMajorRecords {
     )
     Begin {
         if ($PSBoundParameters.Keys -contains 'Type') {
+            Test-MutaGameEnvironment
             $typeName = Switch -Regex ($MutagenGameEnvironment.GameRelease) {
                 '^Skyrim' {
                     "Mutagen.Bethesda.Skyrim.I$Type`Getter"

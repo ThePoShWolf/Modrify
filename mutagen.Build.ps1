@@ -29,8 +29,14 @@ task DocBuild ModuleBuild, {
     New-ExternalHelp $docPath -OutputPath "$modulePath\EN-US"
 }
 
+task DownloadDependencies {
+    Set-Location $srcPath
+    dotnet restore
+    dotnet build
+}
+
 # Build the module
-task ModuleBuild Clean, {
+task ModuleBuild Clean, DownloadDependencies, {
     $moduleScriptFiles = Get-ChildItem $srcPath -Filter *.ps1 -File -Recurse
     if (-not(Test-Path $modulePath)) {
         New-Item $modulePath -ItemType Directory
@@ -60,8 +66,13 @@ task ModuleBuild Clean, {
         }
     }
 
-    # Copy the .dlls
-    Copy-Item $PSScriptRoot\lib -Destination $modulePath -Recurse -Force -ErrorAction SilentlyContinue
+    # Copy the dependency .dlls
+    if (-not (Test-Path $modulePath\lib -PathType Container)) {
+        New-Item $modulePath\lib -ItemType Directory
+    }
+    Get-ChildItem $srcPath\bin\Debug\*.dll | Where-Object { $_.Name -notlike "$moduleName.dependencies*" } | ForEach-Object {
+        Move-Item $_.FullName -Destination $modulePath\lib\ -Force
+    }
 
     # Copy the manifest
     Copy-Item "$srcPath\$moduleName.psd1" -Destination $modulePath

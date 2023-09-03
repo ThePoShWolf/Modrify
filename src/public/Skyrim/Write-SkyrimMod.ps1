@@ -2,7 +2,8 @@ Function Write-SkyrimMod {
     [cmdletbinding()]
     Param (
         [Parameter(
-            Mandatory
+            Mandatory,
+            ValueFromPipeline = $true
         )]
         [Mutagen.Bethesda.Plugins.Records.AMod]$Mod,
         [Parameter(

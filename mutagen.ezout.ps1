@@ -10,7 +10,7 @@ Push-Location $myRoot
 $formatting = @(
     # Add your own Write-FormatView here,
     # or put them in a Formatting or Views directory
-    foreach ($potentialDirectory in 'Formatting', 'Views') {
+    foreach ($potentialDirectory in 'formatting', 'views') {
         Join-Path $myRoot $potentialDirectory |
         Get-ChildItem -ea ignore |
         Import-FormatView -FilePath { $_.Fullname }

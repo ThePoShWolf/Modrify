@@ -33,6 +33,7 @@ task DownloadDependencies {
     Set-Location $srcPath
     dotnet restore
     dotnet build
+    Set-Location $PSScriptRoot
 }
 
 # Build the module

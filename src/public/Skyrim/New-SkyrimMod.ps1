@@ -5,5 +5,9 @@ Function New-SkyrimMod {
         [Mutagen.Bethesda.Plugins.ModKey]$ModKey,
         [Mutagen.Bethesda.Skyrim.SkyrimRelease]$GameRelease = $MutagenGameEnvironment.GameRelease
     )
-    [Mutagen.Bethesda.Skyrim.SkyrimMod]::new($ModKey, $GameRelease)
+    Begin {}
+    Process {
+        [Mutagen.Bethesda.Skyrim.SkyrimMod]::new($ModKey, $GameRelease)
+    }
+    End {}
 }

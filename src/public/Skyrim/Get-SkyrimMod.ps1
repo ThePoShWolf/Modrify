@@ -49,9 +49,13 @@ Function Get-SkyrimMod {
         )]
         [switch]$ReadOnly
     )
-    if ($ReadOnly.IsPresent) {
-        [Mutagen.Bethesda.Skyrim.SkyrimMod]::CreateFromBinaryOverlay($Path, $Release, $StringsParam, $FileSystem)
-    } else {
-        [Mutagen.Bethesda.Skyrim.SkyrimMod]::CreateFromBinary($Path, $Release, $ImportMask, $StringsParam, $Parallel, $FileSystem)
+    Begin {}
+    Process {
+        if ($ReadOnly.IsPresent) {
+            [Mutagen.Bethesda.Skyrim.SkyrimMod]::CreateFromBinaryOverlay($Path, $Release, $StringsParam, $FileSystem)
+        } else {
+            [Mutagen.Bethesda.Skyrim.SkyrimMod]::CreateFromBinary($Path, $Release, $ImportMask, $StringsParam, $Parallel, $FileSystem)
+        }
     }
+    End {}
 }

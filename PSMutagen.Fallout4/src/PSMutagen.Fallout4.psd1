@@ -63,7 +63,7 @@
     #TypesToProcess    = @( 'PSMutagen.types.ps1xml' )
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess  = @( 'PSMutagen.Fallout4.format.ps1xml' )
+    # FormatsToProcess  = @( 'PSMutagen.Fallout4.format.ps1xml' )
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()

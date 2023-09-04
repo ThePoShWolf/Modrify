@@ -196,4 +196,15 @@ task QuickClean {
 
 task QuickBuild QuickClean, BuildModuleFile, GenerateFormats
 
+task QuickReimport QuickBuild, {
+    foreach ($m in $modules.Keys) {
+        if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
+            continue
+        }
+        if (Test-Path $modules[$m].modulePath) {
+            Import-Module $modules[$m].modulePath
+        }
+    }
+}
+
 task All ModuleBuild, Publish

@@ -1,1 +1,1 @@
-Write-FormatView -TypeName Mutagen.Bethesda.Skyrim.SkyrimMajorRecord -Property @('EditorID', 'TitleString', 'FormKey', 'FormVersion', 'Type') -AutoSize
+Write-FormatView -TypeName Mutagen.Bethesda.Fallout4.Fallout4MajorRecord -Property @('EditorID', 'TitleString', 'FormKey', 'FormVersion', 'Type') -AutoSize

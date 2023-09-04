@@ -1,3 +1,4 @@
 /build
-/src/bin
-/src/obj
+/*/build
+/*/src/bin
+/*/src/obj

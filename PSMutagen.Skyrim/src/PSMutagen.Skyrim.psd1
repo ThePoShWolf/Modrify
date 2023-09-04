@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule        = 'mutagen.psm1'
+    RootModule        = 'PSMutagen.Skyrim.psm1'
 
     # Version number of this module.
     ModuleVersion     = '0.0.1'
@@ -18,13 +18,13 @@
     # CompatiblePSEditions = @()
 
     # ID used to uniquely identify this module
-    GUID              = 'edac2199-f937-411b-8887-7979063f0a67'
+    GUID              = '417ba17b-f0ef-4d5d-bd0c-70e71e58e590  '
 
     # Author of this module
     Author            = 'ThePoShWolf'
 
     # Company or vendor of this module
-    CompanyName       = 'Howell IT, LLC'
+    CompanyName       = ''
 
     # Copyright statement for this module
     Copyright         = '(c) ThePoShWolf. All rights reserved.'
@@ -63,7 +63,7 @@
     #TypesToProcess    = @( 'mutagen.types.ps1xml' )
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess  = @( 'mutagen.format.ps1xml' )
+    FormatsToProcess  = @( 'PSMutagen.Skyrim.format.ps1xml' )
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()
@@ -98,10 +98,10 @@
             # Tags = @()
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/ThePoShWolf/mutagen/blob/main/LICENSE'
+            LicenseUri = 'https://github.com/ThePoShWolf/PSMutagen/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/ThePoShWolf/mutagen'
+            ProjectUri = 'https://github.com/ThePoShWolf/PSMutagen'
 
             # A URL to an icon representing this module.
             # IconUri = ''

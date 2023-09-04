@@ -8,6 +8,7 @@ $docPath = "$PSScriptRoot\docs"
 $testPath = "$PSScriptRoot\tests"
 $moduleName = ($MyInvocation.MyCommand.Name.Split('.') | Select-Object -SkipLast 2) -join '.'
 $modulePath = "$buildPath\$ModuleName"
+$isSubModule = $true
 
 Write-Host "Version: $($version)"
 
@@ -71,7 +72,10 @@ task ModuleBuild Clean, DownloadDependencies, {
     if (-not (Test-Path $modulePath\lib -PathType Container)) {
         New-Item $modulePath\lib -ItemType Directory
     }
-    Get-ChildItem $srcPath\bin\Debug\*.dll | Where-Object { $_.Name -notlike "$moduleName.dependencies*" } | ForEach-Object {
+    $filesToSkip = if ($isSubModule) {
+        Get-ChildItem '..\PSMutagen\build\PSMutagen\lib\*.dll'
+    }
+    Get-ChildItem $srcPath\bin\Debug\*.dll | Where-Object { $_.Name -notlike "$moduleName.dependencies*" -and $filesToSkip.Name -notcontains $_.Name } | ForEach-Object {
         Move-Item $_.FullName -Destination $modulePath\lib\ -Force
     }
 
@@ -94,7 +98,7 @@ task ModuleBuild Clean, DownloadDependencies, {
         ModuleVersion     = $version
         <#RequiredModules   = @{
             ModuleName = 'PSMutagen'
-            RequiredVersion = '0.0.1'
+            RequiredVersion = [version]'0.0.1'
         }#>
     }
     if ($null -ne $preRelease) {

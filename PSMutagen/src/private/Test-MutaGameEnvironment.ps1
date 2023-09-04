@@ -4,7 +4,7 @@ Function Test-MutaGameEnvironment {
     param (
 
     )
-    if (-not (Get-Variable MutagenGameEnvironment -Scope Script -ErrorAction SilentlyContinue)) {
+    if (-not (Get-Variable MutagenGameEnvironment -Scope Global -ErrorAction SilentlyContinue)) {
         Throw 'Please run Set-MutaGameEnvironment first.'
     }
 }

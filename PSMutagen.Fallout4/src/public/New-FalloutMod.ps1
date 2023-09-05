@@ -1,6 +1,6 @@
 Function New-FalloutMod {
-    [cmdletbinding([Mutagen.Bethesda.Fallout4.Fallout4Mod])]
-    [OutputType()]
+    [OutputType([Mutagen.Bethesda.Fallout4.Fallout4Mod])]
+    [cmdletbinding()]
     param (
         [Mutagen.Bethesda.Plugins.ModKey]$ModKey
     )

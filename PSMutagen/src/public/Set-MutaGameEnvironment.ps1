@@ -15,7 +15,7 @@ Function Set-MutaGameEnvironment {
         )]
         [switch]$Passthru
     )
-    $script:MutagenGameEnvironment = [Mutagen.Bethesda.Environments.GameEnvironment]::Typical.Construct($Release)
+    $global:MutagenGameEnvironment = [Mutagen.Bethesda.Environments.GameEnvironment]::Typical.Construct($Release)
     if ($Passthru.IsPresent) {
         $MutagenGameEnvironment
     }

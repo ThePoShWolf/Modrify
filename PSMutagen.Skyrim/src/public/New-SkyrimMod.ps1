@@ -1,6 +1,6 @@
 Function New-SkyrimMod {
-    [cmdletbinding([Mutagen.Bethesda.Skyrim.SkyrimMod])]
-    [OutputType()]
+    [OutputType([Mutagen.Bethesda.Skyrim.SkyrimMod])]
+    [cmdletbinding()]
     param (
         [Mutagen.Bethesda.Plugins.ModKey]$ModKey,
         [Mutagen.Bethesda.Skyrim.SkyrimRelease]$GameRelease = $MutagenGameEnvironment.GameRelease

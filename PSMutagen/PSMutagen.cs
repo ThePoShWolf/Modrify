@@ -2,21 +2,7 @@
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Environments;
 using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Environments.DI;
-using Mutagen.Bethesda.Installs;
-using Mutagen.Bethesda.Installs.DI;
-using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Implicit.DI;
-using Mutagen.Bethesda.Plugins.Order;
-using Mutagen.Bethesda.Plugins.Order.DI;
-using Mutagen.Bethesda.Plugins.Records.DI;
 using Noggog;
-using System;
-using Microsoft.CSharp;
-using System.CodeDom.Compiler;
-using System.Linq;
-using System.Reflection;
 using System.Reflection.Metadata;
 
 namespace MutagenCmdlets

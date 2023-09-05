@@ -6,6 +6,8 @@ using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Binary.Parameters;
+using System.IO.Abstractions;
 
 namespace PSMutagen.Fallout4
 {
@@ -49,12 +51,53 @@ namespace PSMutagen.Fallout4
     [OutputType(typeof(IFallout4Mod))]
     public class NewFalloutMod : Cmdlet
     {
-        [Parameter()]
+        [Parameter(Mandatory = true)]
         public ModKey ModKey;
 
         protected override void ProcessRecord()
         {
             WriteObject(new Fallout4Mod(ModKey));
+        }
+    }
+
+    [Cmdlet(VerbsCommunications.Write, "FalloutMod")]
+    public class WriteFalloutMod : Cmdlet
+    {
+        [Parameter()]
+        public IMod Mod;
+
+        [Parameter()]
+        public FileInfo Path;
+
+        [Parameter()]
+        public BinaryWriteParameters BinaryWriteParameters = BinaryWriteParameters.Default;
+
+        [Parameter()]
+        public ParallelWriteParameters ParallelWriteParameters = ParallelWriteParameters.Default;
+
+        [Parameter()]
+        public IFileSystem FileSystem;
+
+        [Parameter()]
+        public SwitchParameter SkipCompressionFix;
+
+        protected override void ProcessRecord()
+        {
+            if (!SkipCompressionFix.IsPresent)
+            {
+                foreach (var rec in Mod.EnumerateMajorRecords())
+                {
+                    rec.IsCompressed = false;
+                }
+            }
+            if (ParallelWriteParameters != null)
+            {
+                Mod.WriteToBinaryParallel(Path, BinaryWriteParameters, FileSystem, ParallelWriteParameters);
+            }
+            else
+            {
+                Mod.WriteToBinary(Path, BinaryWriteParameters, FileSystem);
+            }
         }
     }
 }

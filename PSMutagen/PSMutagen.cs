@@ -5,7 +5,7 @@ using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
 
-namespace PSMutagen
+namespace PSMutagen.Core
 {
 
     public class Config

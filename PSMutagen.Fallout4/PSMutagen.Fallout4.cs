@@ -5,11 +5,14 @@ using Mutagen.Bethesda.Environments;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
+using Mutagen.Bethesda.Plugins;
 
 namespace PSMutagen.Fallout4
 {
-    [Cmdlet(VerbsCommon.Get, "FalloutMod")]
-    public class GetWinningOverrides : Cmdlet
+    [Cmdlet(VerbsCommon.Get, "FalloutMod", DefaultParameterSetName = "readwrite")]
+    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "readonly" })]
+    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "readwrite" })]
+    public class GetFalloutMod : Cmdlet
     {
         [Parameter(Mandatory = true)]
         public Mutagen.Bethesda.Plugins.ModPath Path;
@@ -26,7 +29,7 @@ namespace PSMutagen.Fallout4
         [Parameter()]
         public System.IO.Abstractions.IFileSystem FileSystem;
 
-        [Parameter()]
+        [Parameter(ParameterSetName = "readonly")]
         public SwitchParameter ReadOnly;
 
         protected override void ProcessRecord()
@@ -39,6 +42,19 @@ namespace PSMutagen.Fallout4
             {
                 WriteObject(Fallout4Mod.CreateFromBinary(Path, ImportMask, StringsParam, Parallel, FileSystem));
             }
+        }
+    }
+
+    [Cmdlet(VerbsCommon.New, "FalloutMod")]
+    [OutputType(typeof(IFallout4Mod))]
+    public class NewFalloutMod : Cmdlet
+    {
+        [Parameter()]
+        public ModKey ModKey;
+
+        protected override void ProcessRecord()
+        {
+            WriteObject(new Fallout4Mod(ModKey));
         }
     }
 }

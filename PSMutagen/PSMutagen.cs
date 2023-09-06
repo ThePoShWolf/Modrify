@@ -11,7 +11,7 @@ namespace PSMutagen.Core
 
     public class PSMutagenConfig
     {
-        public static IGameEnvironment Environment;
+        public static IGameEnvironment? Environment;
 
         public static GameRelease TryGetGameRelease()
         {
@@ -225,7 +225,14 @@ namespace PSMutagen.Core
 
         protected override void ProcessRecord()
         {
-            WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.Environment.LoadOrder.PriorityOrder, MajorRecordInfo.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
+            if (PSMutagenConfig.Environment == null)
+            {
+                throw new PSInvalidOperationException("Unable to load the load order. Please set your environment with 'Set-MutaGameEnvironment'");
+            }
+            else
+            {
+                WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.Environment.LoadOrder.PriorityOrder, MajorRecordInfo.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
+            }
         }
     }
 
@@ -264,8 +271,6 @@ namespace PSMutagen.Core
 
         protected override void ProcessRecord()
         {
-
-
             if (PSMutagenConfig.CheckIfModuleIsLoaded(Game))
             {
                 PSMutagenConfig.Environment = GameEnvironment.Typical.Construct(Game);

@@ -8,7 +8,7 @@ using System.Reflection.Metadata;
 namespace PSMutagen.Core
 {
 
-    public class Config
+    public class PSMutagenConfig
     {
         public static IGameEnvironment Environment;
     }
@@ -188,7 +188,7 @@ namespace PSMutagen.Core
 
         protected override void ProcessRecord()
         {
-            WriteObject(OverrideMixIns.WinningOverrides(Config.Environment.LoadOrder.PriorityOrder, MajorRecordInfo.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
+            WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.Environment.LoadOrder.PriorityOrder, MajorRecordInfo.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
         }
     }
 
@@ -227,10 +227,10 @@ namespace PSMutagen.Core
 
         protected override void ProcessRecord()
         {
-            Config.Environment = GameEnvironment.Typical.Construct(Game);
+            PSMutagenConfig.Environment = GameEnvironment.Typical.Construct(Game);
             if (PassThru.IsPresent)
             {
-                WriteObject(Config.Environment);
+                WriteObject(PSMutagenConfig.Environment);
             }
         }
     }
@@ -241,7 +241,7 @@ namespace PSMutagen.Core
     {
         protected override void ProcessRecord()
         {
-            WriteObject(Config.Environment);
+            WriteObject(PSMutagenConfig.Environment);
         }
     }
 }

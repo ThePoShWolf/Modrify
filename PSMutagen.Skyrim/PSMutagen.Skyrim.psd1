@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule        = 'PSMutagen.Skyrim.psm1'
+    RootModule        = 'PSMutagen.Skyrim.dll'
 
     # Version number of this module.
     ModuleVersion     = '0.0.1'

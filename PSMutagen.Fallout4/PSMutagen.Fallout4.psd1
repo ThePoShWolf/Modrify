@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule        = 'PSMutagen.psm1'
+    RootModule        = 'PSMutagen.Fallout4.dll'
 
     # Version number of this module.
     ModuleVersion     = '0.0.1'
@@ -18,13 +18,13 @@
     # CompatiblePSEditions = @()
 
     # ID used to uniquely identify this module
-    GUID              = 'edac2199-f937-411b-8887-7979063f0a67'
+    GUID              = '74270c5f-3546-408a-9441-5d0e9288e680'
 
     # Author of this module
     Author            = 'ThePoShWolf'
 
     # Company or vendor of this module
-    CompanyName       = 'Howell IT, LLC'
+    CompanyName       = ''
 
     # Copyright statement for this module
     Copyright         = '(c) ThePoShWolf. All rights reserved.'
@@ -60,10 +60,10 @@
     # ScriptsToProcess = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    # TypesToProcess    = @( 'mutagen.types.ps1xml' )
+    #TypesToProcess    = @( 'PSMutagen.types.ps1xml' )
 
     # Format files (.ps1xml) to be loaded when importing this module
-    # FormatsToProcess  = @( 'PSMutagen.format.ps1xml' )
+    # FormatsToProcess  = @( 'PSMutagen.Fallout4.format.ps1xml' )
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()

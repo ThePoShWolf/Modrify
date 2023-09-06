@@ -164,7 +164,7 @@ namespace PSMutagen.Fallout
     }
 
     [Cmdlet(VerbsCommon.Get, "FalloutWinningOverrides")]
-    public class GetFalloutWinningOverrides : Cmdlet
+    public class GetFalloutWinningOverrides : PSCmdlet
     {
         [Parameter(Mandatory = true)]
         // set taken from MajorRecordInfo
@@ -189,7 +189,7 @@ namespace PSMutagen.Fallout
     }
 
     [Cmdlet(VerbsCommon.Get, "FalloutMajorRecords")]
-    public class GetFalloutMajorRecords : Cmdlet
+    public class GetFalloutMajorRecords : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IModGetter Mod;

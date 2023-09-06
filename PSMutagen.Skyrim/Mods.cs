@@ -16,7 +16,7 @@ namespace PSMutagen.Skyrim
     [Cmdlet(VerbsCommon.Get, "SkyrimMod", DefaultParameterSetName = "readwrite")]
     [OutputType(typeof(ISkyrimModDisposableGetter), ParameterSetName = new string[] { "readonly" })]
     [OutputType(typeof(ISkyrimMod), ParameterSetName = new string[] { "readwrite" })]
-    public class GetSkyrimMod : Cmdlet
+    public class GetSkyrimMod : PSCmdlet
     {
         [Parameter(Mandatory = true)]
         public required ModPath Path;
@@ -54,13 +54,13 @@ namespace PSMutagen.Skyrim
 
     [Cmdlet(VerbsCommon.New, "SkyrimMod")]
     [OutputType(typeof(ISkyrimMod))]
-    public class NewSkyrimMod : Cmdlet
+    public class NewSkyrimMod : PSCmdlet
     {
         [Parameter(Mandatory = true)]
         public required ModKey ModKey;
 
         [Parameter()]
-        public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
+        public SkyrimRelease Release = PSMutagenConfig.TryGetGameRelease().ToSkyrimRelease();
 
         protected override void ProcessRecord()
         {
@@ -69,7 +69,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommunications.Write, "SkyrimMod")]
-    public class WriteSkyrimMod : Cmdlet
+    public class WriteSkyrimMod : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;

@@ -52,7 +52,7 @@ namespace PSMutagen.Core
 
     [Cmdlet(VerbsCommon.Set, "MutaGameEnvironment")]
     [OutputType(typeof(IGameEnvironment), ParameterSetName = new string[] { "passthru" })]
-    public class SetGameEnvironment : Cmdlet
+    public class SetGameEnvironment : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
         public GameRelease Game { get; set; }
@@ -80,7 +80,7 @@ namespace PSMutagen.Core
 
     [Cmdlet(VerbsCommon.Get, "MutaGameEnvironment")]
     [OutputType(typeof(IGameEnvironment))]
-    public class GetGameEnvironment : Cmdlet
+    public class GetGameEnvironment : PSCmdlet
     {
         protected override void ProcessRecord()
         {

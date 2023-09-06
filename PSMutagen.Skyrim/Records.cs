@@ -185,7 +185,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Get, "SkyrimWinningOverrides")]
-    public class GetSkyrimWinningOverrides : Cmdlet
+    public class GetSkyrimWinningOverrides : PSCmdlet
     {
         [Parameter(Mandatory = true)]
         // set taken from MajorRecordInfo
@@ -209,7 +209,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Get, "SkyrimMajorRecords")]
-    public class GetSkyrimMajorRecords : Cmdlet
+    public class GetSkyrimMajorRecords : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IModGetter Mod;

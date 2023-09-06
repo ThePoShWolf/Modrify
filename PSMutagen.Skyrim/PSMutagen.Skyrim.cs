@@ -32,7 +32,7 @@ namespace PSMutagen.Skyrim
         [Parameter()]
         public System.IO.Abstractions.IFileSystem FileSystem;
 
-        [Parameter(Mandatory = true)]
+        [Parameter()]
         public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
 
         [Parameter(ParameterSetName = "readonly")]
@@ -58,7 +58,7 @@ namespace PSMutagen.Skyrim
         [Parameter(Mandatory = true)]
         public ModKey ModKey;
 
-        [Parameter(Mandatory = true)]
+        [Parameter()]
         public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
 
         protected override void ProcessRecord()
@@ -70,10 +70,10 @@ namespace PSMutagen.Skyrim
     [Cmdlet(VerbsCommunications.Write, "SkyrimMod")]
     public class WriteSkyrimMod : Cmdlet
     {
-        [Parameter()]
+        [Parameter(Mandatory = true)]
         public IMod Mod;
 
-        [Parameter()]
+        [Parameter(Mandatory = true)]
         public FileInfo Path;
 
         [Parameter()]

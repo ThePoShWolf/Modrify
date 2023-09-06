@@ -68,17 +68,17 @@ task dotnetBuild {
         }
         Get-ChildItem "$($modules[$m].basePath)\build\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
-                Move-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
+                Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
             } else {
                 Remove-Item $_.FullName -Force
             }
         }
 
+        Move-Item "$($modules[$m].modulePath)\lib\$m.dll" -Destination $($modules[$m].modulePath) -Force
+
         if (Test-Path "$($modules[$m].modulePath)\lib\PSMutagen.dll") {
             Remove-Item "$($modules[$m].modulePath)\lib\PSMutagen.dll" -Force
         }
-
-        Move-Item "$($modules[$m].modulePath)\lib\$m.dll" -Destination $($modules[$m].modulePath)
     }
 }
 

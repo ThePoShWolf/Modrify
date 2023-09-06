@@ -33,7 +33,7 @@ namespace PSMutagen.Skyrim
         public System.IO.Abstractions.IFileSystem FileSystem;
 
         [Parameter()]
-        public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
+        public SkyrimRelease Release = PSMutagenConfig.TryGetGameRelease().ToSkyrimRelease();
 
         [Parameter(ParameterSetName = "readonly")]
         public SwitchParameter ReadOnly;

@@ -2,6 +2,7 @@ using System.Management.Automation;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Environments;
+using Mutagen.Bethesda.Strings;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
@@ -18,19 +19,19 @@ namespace PSMutagen.Skyrim
     public class GetSkyrimMod : Cmdlet
     {
         [Parameter(Mandatory = true)]
-        public Mutagen.Bethesda.Plugins.ModPath Path;
+        public required ModPath Path;
 
         [Parameter()]
-        public Mutagen.Bethesda.Skyrim.GroupMask ImportMask;
+        public GroupMask? ImportMask;
 
         [Parameter()]
-        public Mutagen.Bethesda.Strings.StringsReadParameters StringsParam;
+        public StringsReadParameters? StringsParam;
 
         [Parameter()]
         public bool Parallel;
 
         [Parameter()]
-        public System.IO.Abstractions.IFileSystem FileSystem;
+        public IFileSystem? FileSystem;
 
         [Parameter()]
         public SkyrimRelease Release = PSMutagenConfig.TryGetGameRelease().ToSkyrimRelease();
@@ -56,7 +57,7 @@ namespace PSMutagen.Skyrim
     public class NewSkyrimMod : Cmdlet
     {
         [Parameter(Mandatory = true)]
-        public ModKey ModKey;
+        public required ModKey ModKey;
 
         [Parameter()]
         public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
@@ -71,10 +72,10 @@ namespace PSMutagen.Skyrim
     public class WriteSkyrimMod : Cmdlet
     {
         [Parameter(Mandatory = true)]
-        public IMod Mod;
+        public required IMod Mod;
 
         [Parameter(Mandatory = true)]
-        public FileInfo Path;
+        public required FileInfo Path;
 
         [Parameter()]
         public BinaryWriteParameters BinaryWriteParameters = BinaryWriteParameters.Default;
@@ -83,7 +84,7 @@ namespace PSMutagen.Skyrim
         public ParallelWriteParameters ParallelWriteParameters = ParallelWriteParameters.Default;
 
         [Parameter()]
-        public IFileSystem FileSystem;
+        public IFileSystem? FileSystem;
 
         [Parameter()]
         public SwitchParameter SkipCompressionFix;

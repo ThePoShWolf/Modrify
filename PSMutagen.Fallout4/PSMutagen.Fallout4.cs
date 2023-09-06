@@ -3,6 +3,7 @@ using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Environments;
 using Mutagen.Bethesda.Plugins.Records;
+using Mutagen.Bethesda.Strings;
 using Noggog;
 using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
@@ -17,19 +18,19 @@ namespace PSMutagen.Fallout4
     public class GetFalloutMod : Cmdlet
     {
         [Parameter(Mandatory = true)]
-        public Mutagen.Bethesda.Plugins.ModPath Path;
+        public required ModPath Path;
 
         [Parameter()]
-        public Mutagen.Bethesda.Fallout4.GroupMask ImportMask;
+        public GroupMask? ImportMask;
 
         [Parameter()]
-        public Mutagen.Bethesda.Strings.StringsReadParameters StringsParam;
+        public StringsReadParameters? StringsParam;
 
         [Parameter()]
         public bool Parallel;
 
         [Parameter()]
-        public System.IO.Abstractions.IFileSystem FileSystem;
+        public IFileSystem? FileSystem;
 
         [Parameter(ParameterSetName = "readonly")]
         public SwitchParameter ReadOnly;
@@ -63,11 +64,11 @@ namespace PSMutagen.Fallout4
     [Cmdlet(VerbsCommunications.Write, "FalloutMod")]
     public class WriteFalloutMod : Cmdlet
     {
-        [Parameter()]
-        public IMod Mod;
+        [Parameter(Mandatory = true)]
+        public required IMod Mod;
 
         [Parameter()]
-        public FileInfo Path;
+        public FileInfo? Path;
 
         [Parameter()]
         public BinaryWriteParameters BinaryWriteParameters = BinaryWriteParameters.Default;
@@ -76,7 +77,7 @@ namespace PSMutagen.Fallout4
         public ParallelWriteParameters ParallelWriteParameters = ParallelWriteParameters.Default;
 
         [Parameter()]
-        public IFileSystem FileSystem;
+        public IFileSystem? FileSystem;
 
         [Parameter()]
         public SwitchParameter SkipCompressionFix;

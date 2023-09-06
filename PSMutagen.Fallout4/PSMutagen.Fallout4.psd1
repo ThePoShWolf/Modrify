@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule        = 'PSMutagen.Fallout4.psm1'
+    RootModule        = 'PSMutagen.Fallout4.dll'
 
     # Version number of this module.
     ModuleVersion     = '0.0.1'

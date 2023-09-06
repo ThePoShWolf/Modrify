@@ -67,8 +67,8 @@ namespace PSMutagen.Fallout4
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
-        [Parameter()]
-        public FileInfo? Path;
+        [Parameter(Mandatory = true)]
+        public required FileInfo Path;
 
         [Parameter()]
         public BinaryWriteParameters BinaryWriteParameters = BinaryWriteParameters.Default;

@@ -232,7 +232,7 @@ namespace PSMutagen.Core
     [Cmdlet(VerbsCommon.Get, "MutaMajorRecords")]
     public class GetMajorRecords : Cmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IModGetter Mod;
 
         [Parameter()]

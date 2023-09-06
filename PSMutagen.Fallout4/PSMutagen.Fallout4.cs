@@ -64,7 +64,7 @@ namespace PSMutagen.Fallout4
     [Cmdlet(VerbsCommunications.Write, "FalloutMod")]
     public class WriteFalloutMod : Cmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
         [Parameter()]

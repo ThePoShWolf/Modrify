@@ -71,7 +71,7 @@ namespace PSMutagen.Skyrim
     [Cmdlet(VerbsCommunications.Write, "SkyrimMod")]
     public class WriteSkyrimMod : Cmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
         [Parameter(Mandatory = true)]

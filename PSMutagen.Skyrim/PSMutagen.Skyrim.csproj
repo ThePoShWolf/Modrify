@@ -8,4 +8,7 @@
 		<PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.42.0" />
 		<PackageReference Include="System.Management.Automation" Version="7.3.6" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\PSMutagen\PSMutagen.csproj" />
+	</ItemGroup>
 </Project>

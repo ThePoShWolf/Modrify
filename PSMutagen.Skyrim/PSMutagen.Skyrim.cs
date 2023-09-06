@@ -8,6 +8,7 @@ using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Binary.Parameters;
 using System.IO.Abstractions;
+using PSMutagen.Core;
 
 namespace PSMutagen.Skyrim
 {
@@ -32,7 +33,7 @@ namespace PSMutagen.Skyrim
         public System.IO.Abstractions.IFileSystem FileSystem;
 
         [Parameter(Mandatory = true)]
-        public SkyrimRelease Release;
+        public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
 
         [Parameter(ParameterSetName = "readonly")]
         public SwitchParameter ReadOnly;
@@ -58,7 +59,7 @@ namespace PSMutagen.Skyrim
         public ModKey ModKey;
 
         [Parameter(Mandatory = true)]
-        public SkyrimRelease Release;
+        public SkyrimRelease Release = PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease();
 
         protected override void ProcessRecord()
         {

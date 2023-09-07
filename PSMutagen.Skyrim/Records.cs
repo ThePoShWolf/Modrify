@@ -246,7 +246,6 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            WriteObject(Record.GetType().Name);
             switch (Record.GetType().Name)
             {
                 case "GameSetting":

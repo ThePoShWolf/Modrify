@@ -9,13 +9,6 @@ using Mutagen.Bethesda.Plugins.Binary.Translations;
 
 namespace PSMutagen.Skyrim
 {
-
-    public enum CopyType
-    {
-        AsOverride,
-        AsNewRecord,
-        DeepCopy
-    }
     public static class Helpers
     {
         public static Dictionary<string, Type> MajorRecordTypes = new Dictionary<string, Type>()
@@ -186,7 +179,7 @@ namespace PSMutagen.Skyrim
             { "ISound", Type.GetType("Mutagen.Bethesda.Skyrim.IISoundGetter, Mutagen.Bethesda.Skyrim") }
         };
 
-        public static void CopyHelper(ISkyrimMod mod, ISkyrimMajorRecordGetter Record, CopyType copyType)
+        public static void CopyHelper(ISkyrimMod mod, ISkyrimMajorRecordGetter Record, PSMutagenConfig.CopyType copyType)
         {
             switch (Record.GetType().Name, copyType)
             {

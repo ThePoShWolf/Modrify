@@ -48,6 +48,13 @@ namespace PSMutagen.Core
                     throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on PSMutagen's GitHub repository.");
             }
         }
+
+        public enum CopyType
+        {
+            AsOverride,
+            AsNewRecord,
+            DeepCopy
+        }
     }
 
     [Cmdlet(VerbsCommon.Set, "MutaGameEnvironment")]

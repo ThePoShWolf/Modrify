@@ -226,8 +226,8 @@ namespace PSMutagen.Fallout
     }
 
     [OutputType(typeof(IFallout4MajorRecordInternal))]
-    [Cmdlet(VerbsCommon.Copy, "FalloutRecord")]
-    public class CopySkyrimRecord : PSCmdlet
+    [Cmdlet(VerbsCommon.Copy, "FalloutRecordAsOverride")]
+    public class CopyFalloutRecordAsOverride : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required IFallout4Mod Mod;

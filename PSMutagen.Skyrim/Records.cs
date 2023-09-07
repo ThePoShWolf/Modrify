@@ -235,8 +235,8 @@ namespace PSMutagen.Skyrim
     }
 
     [OutputType(typeof(ISkyrimMajorRecordInternal))]
-    [Cmdlet(VerbsCommon.Copy, "SkyrimRecord")]
-    public class CopySkyrimRecord : PSCmdlet
+    [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsOverride")]
+    public class CopySkyrimRecordAsOverride : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required ISkyrimMod Mod;

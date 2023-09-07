@@ -1,8 +1,22 @@
 $switchCaseTemplate = @'
-            case "{type}":
-            case "{type}BinaryOverlay":
-                Mod.{name}.GetOrAddAsOverride(Record);
-                break;
+                case ("{type}", CopyType.AsOverride):
+                case ("{type}BinaryOverlay", CopyType.AsOverride):
+                    mod.{name}.GetOrAddAsOverride(Record);
+                    break;
+                case ("{type}", CopyType.AsNewRecord):
+                case ("{type}BinaryOverlay", CopyType.AsNewRecord):
+                    mod.{name}.DuplicateInAsNewRecord(Record);
+                    break;
+                case ("{type}", CopyType.DeepCopy):
+                case ("{type}BinaryOverlay", CopyType.DeepCopy):
+                    {type} new{type}Record = ({type})Record.DeepCopy();
+                    mod.{name}.Add(new{type}Record);
+                    break;
+'@
+
+$default = @'
+                default:
+                    throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
 '@
 
 #Import-Module ".\build\PSMutagen\"
@@ -20,4 +34,4 @@ $switches = foreach ($prop in $props) {
     }
 }
 
-$switches -join "`n" | clip
+@($switches + $default) -join "`n" | clip

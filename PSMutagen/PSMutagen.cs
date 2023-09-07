@@ -45,7 +45,7 @@ namespace PSMutagen.Core
                 case GameRelease.Fallout4:
                     return "PSMutagen.Fallout4";
                 default:
-                    throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on GitHub.");
+                    throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on PSMutagen's GitHub repository.");
             }
         }
     }

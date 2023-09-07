@@ -9,6 +9,13 @@ using System.Collections;
 namespace PSMutagen.Core
 {
 
+    public enum CopyType
+    {
+        AsOverride,
+        AsNewRecord,
+        DeepCopy
+    }
+
     public class PSMutagenConfig
     {
         public static IGameEnvironment? Environment;
@@ -47,13 +54,6 @@ namespace PSMutagen.Core
                 default:
                     throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on PSMutagen's GitHub repository.");
             }
-        }
-
-        public enum CopyType
-        {
-            AsOverride,
-            AsNewRecord,
-            DeepCopy
         }
     }
 

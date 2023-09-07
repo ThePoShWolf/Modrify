@@ -179,7 +179,7 @@ namespace PSMutagen.Skyrim
             { "ISound", Type.GetType("Mutagen.Bethesda.Skyrim.IISoundGetter, Mutagen.Bethesda.Skyrim") }
         };
 
-        public static void CopyHelper(ISkyrimMod mod, ISkyrimMajorRecordGetter Record, PSMutagenConfig.CopyType copyType)
+        public static void CopyHelper(ISkyrimMod mod, ISkyrimMajorRecordGetter Record, CopyType copyType)
         {
             switch (Record.GetType().Name, copyType)
             {

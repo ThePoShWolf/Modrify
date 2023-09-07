@@ -1701,7 +1701,6 @@ namespace PSMutagen.Skyrim
         }
     }
 
-    [OutputType(typeof(ISkyrimMajorRecordInternal))]
     [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsOverride")]
     public class CopySkyrimRecordAsOverride : PSCmdlet
     {
@@ -1714,6 +1713,36 @@ namespace PSMutagen.Skyrim
         protected override void ProcessRecord()
         {
             Helpers.CopyHelper(Mod, Record, CopyType.AsOverride);
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsNewRecord")]
+    public class CopySkyrimRecordAsNewRecord : PSCmdlet
+    {
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        public required ISkyrimMod Mod;
+
+        [Parameter(Mandatory = true)]
+        public required ISkyrimMajorRecordGetter Record;
+
+        protected override void ProcessRecord()
+        {
+            Helpers.CopyHelper(Mod, Record, CopyType.AsNewRecord);
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsDeepCopy")]
+    public class CopySkyrimRecordAsDeepCopy : PSCmdlet
+    {
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        public required ISkyrimMod Mod;
+
+        [Parameter(Mandatory = true)]
+        public required ISkyrimMajorRecordGetter Record;
+
+        protected override void ProcessRecord()
+        {
+            Helpers.CopyHelper(Mod, Record, CopyType.DeepCopy);
         }
     }
 }

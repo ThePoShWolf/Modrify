@@ -15,7 +15,7 @@ namespace PSMutagen.Fallout4
     [Cmdlet(VerbsCommon.Get, "FalloutMod", DefaultParameterSetName = "readwrite")]
     [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "readonly" })]
     [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "readwrite" })]
-    public class GetFalloutMod : Cmdlet
+    public class GetFalloutMod : PSCmdlet
     {
         [Parameter(Mandatory = true)]
         public required ModPath Path;
@@ -50,7 +50,7 @@ namespace PSMutagen.Fallout4
 
     [Cmdlet(VerbsCommon.New, "FalloutMod")]
     [OutputType(typeof(IFallout4Mod))]
-    public class NewFalloutMod : Cmdlet
+    public class NewFalloutMod : PSCmdlet
     {
         [Parameter(Mandatory = true)]
         public ModKey ModKey;
@@ -62,7 +62,7 @@ namespace PSMutagen.Fallout4
     }
 
     [Cmdlet(VerbsCommunications.Write, "FalloutMod")]
-    public class WriteFalloutMod : Cmdlet
+    public class WriteFalloutMod : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;

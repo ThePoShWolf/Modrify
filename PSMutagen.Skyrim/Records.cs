@@ -1,17 +1,10 @@
 using System.Management.Automation;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda;
-using Mutagen.Bethesda.Environments;
-using Mutagen.Bethesda.Strings;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
-using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Binary.Parameters;
-using System.IO.Abstractions;
 using PSMutagen.Core;
-using Mutagen.Bethesda.Plugins.Binary.Translations;
-using System.CodeDom;
 
 namespace PSMutagen.Skyrim
 {

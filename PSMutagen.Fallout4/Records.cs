@@ -1,25 +1,10 @@
 using System.Management.Automation;
 using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda;
-using Mutagen.Bethesda.Environments;
-using Mutagen.Bethesda.Strings;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
-using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Binary.Parameters;
-using System.IO.Abstractions;
 using PSMutagen.Core;
-using Mutagen.Bethesda.Plugins.Binary.Translations;
-using System.CodeDom;
-using Mutagen.Bethesda.Plugins.Order;
-using Mutagen.Bethesda.Plugins;
-using Noggog;
-using System.Diagnostics.CodeAnalysis;
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Plugins.Cache.Internals;
-using Mutagen.Bethesda.Plugins.Records;
-using Mutagen.Bethesda.Plugins.Exceptions;
 
 namespace PSMutagen.Fallout
 {

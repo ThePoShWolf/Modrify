@@ -157,1640 +157,1391 @@ namespace PSMutagen.Fallout
             { "ObjectVisibilityManager", Type.GetType("Mutagen.Bethesda.Fallout4.IObjectVisibilityManagerGetter, Mutagen.Bethesda.Fallout4") },
         };
 
-        public static void CopyHelper(IFallout4Mod mod, IFallout4MajorRecordGetter Record, CopyType copyType)
+        public static Fallout4MajorRecord CopyHelper(IFallout4Mod mod, IFallout4MajorRecordGetter Record, CopyType copyType)
         {
             switch (Record.GetType().Name, copyType)
             {
                 case ("GameSetting", CopyType.AsOverride):
                 case ("GameSettingBinaryOverlay", CopyType.AsOverride):
-                    mod.GameSettings.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.GameSettings.GetOrAddAsOverride(Record);
                 case ("GameSetting", CopyType.AsNewRecord):
                 case ("GameSettingBinaryOverlay", CopyType.AsNewRecord):
-                    mod.GameSettings.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.GameSettings.DuplicateInAsNewRecord(Record);
                 case ("GameSetting", CopyType.DeepCopy):
                 case ("GameSettingBinaryOverlay", CopyType.DeepCopy):
                     GameSetting newGameSettingRecord = (GameSetting)Record.DeepCopy();
                     mod.GameSettings.Add(newGameSettingRecord);
-                    break;
+                    return newGameSettingRecord;
                 case ("Keyword", CopyType.AsOverride):
                 case ("KeywordBinaryOverlay", CopyType.AsOverride):
-                    mod.Keywords.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Keywords.GetOrAddAsOverride(Record);
                 case ("Keyword", CopyType.AsNewRecord):
                 case ("KeywordBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Keywords.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Keywords.DuplicateInAsNewRecord(Record);
                 case ("Keyword", CopyType.DeepCopy):
                 case ("KeywordBinaryOverlay", CopyType.DeepCopy):
                     Keyword newKeywordRecord = (Keyword)Record.DeepCopy();
                     mod.Keywords.Add(newKeywordRecord);
-                    break;
+                    return newKeywordRecord;
                 case ("LocationReferenceType", CopyType.AsOverride):
                 case ("LocationReferenceTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.LocationReferenceTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LocationReferenceTypes.GetOrAddAsOverride(Record);
                 case ("LocationReferenceType", CopyType.AsNewRecord):
                 case ("LocationReferenceTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LocationReferenceTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LocationReferenceTypes.DuplicateInAsNewRecord(Record);
                 case ("LocationReferenceType", CopyType.DeepCopy):
                 case ("LocationReferenceTypeBinaryOverlay", CopyType.DeepCopy):
                     LocationReferenceType newLocationReferenceTypeRecord = (LocationReferenceType)Record.DeepCopy();
                     mod.LocationReferenceTypes.Add(newLocationReferenceTypeRecord);
-                    break;
+                    return newLocationReferenceTypeRecord;
                 case ("ActionRecord", CopyType.AsOverride):
                 case ("ActionRecordBinaryOverlay", CopyType.AsOverride):
-                    mod.Actions.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Actions.GetOrAddAsOverride(Record);
                 case ("ActionRecord", CopyType.AsNewRecord):
                 case ("ActionRecordBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Actions.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Actions.DuplicateInAsNewRecord(Record);
                 case ("ActionRecord", CopyType.DeepCopy):
                 case ("ActionRecordBinaryOverlay", CopyType.DeepCopy):
                     ActionRecord newActionRecordRecord = (ActionRecord)Record.DeepCopy();
                     mod.Actions.Add(newActionRecordRecord);
-                    break;
+                    return newActionRecordRecord;
                 case ("Transform", CopyType.AsOverride):
                 case ("TransformBinaryOverlay", CopyType.AsOverride):
-                    mod.Transforms.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Transforms.GetOrAddAsOverride(Record);
                 case ("Transform", CopyType.AsNewRecord):
                 case ("TransformBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Transforms.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Transforms.DuplicateInAsNewRecord(Record);
                 case ("Transform", CopyType.DeepCopy):
                 case ("TransformBinaryOverlay", CopyType.DeepCopy):
                     Transform newTransformRecord = (Transform)Record.DeepCopy();
                     mod.Transforms.Add(newTransformRecord);
-                    break;
+                    return newTransformRecord;
                 case ("Component", CopyType.AsOverride):
                 case ("ComponentBinaryOverlay", CopyType.AsOverride):
-                    mod.Components.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Components.GetOrAddAsOverride(Record);
                 case ("Component", CopyType.AsNewRecord):
                 case ("ComponentBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Components.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Components.DuplicateInAsNewRecord(Record);
                 case ("Component", CopyType.DeepCopy):
                 case ("ComponentBinaryOverlay", CopyType.DeepCopy):
                     Component newComponentRecord = (Component)Record.DeepCopy();
                     mod.Components.Add(newComponentRecord);
-                    break;
+                    return newComponentRecord;
                 case ("TextureSet", CopyType.AsOverride):
                 case ("TextureSetBinaryOverlay", CopyType.AsOverride):
-                    mod.TextureSets.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.TextureSets.GetOrAddAsOverride(Record);
                 case ("TextureSet", CopyType.AsNewRecord):
                 case ("TextureSetBinaryOverlay", CopyType.AsNewRecord):
-                    mod.TextureSets.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.TextureSets.DuplicateInAsNewRecord(Record);
                 case ("TextureSet", CopyType.DeepCopy):
                 case ("TextureSetBinaryOverlay", CopyType.DeepCopy):
                     TextureSet newTextureSetRecord = (TextureSet)Record.DeepCopy();
                     mod.TextureSets.Add(newTextureSetRecord);
-                    break;
+                    return newTextureSetRecord;
                 case ("Global", CopyType.AsOverride):
                 case ("GlobalBinaryOverlay", CopyType.AsOverride):
-                    mod.Globals.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Globals.GetOrAddAsOverride(Record);
                 case ("Global", CopyType.AsNewRecord):
                 case ("GlobalBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Globals.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Globals.DuplicateInAsNewRecord(Record);
                 case ("Global", CopyType.DeepCopy):
                 case ("GlobalBinaryOverlay", CopyType.DeepCopy):
                     Global newGlobalRecord = (Global)Record.DeepCopy();
                     mod.Globals.Add(newGlobalRecord);
-                    break;
+                    return newGlobalRecord;
                 case ("ADamageType", CopyType.AsOverride):
                 case ("ADamageTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.DamageTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.DamageTypes.GetOrAddAsOverride(Record);
                 case ("ADamageType", CopyType.AsNewRecord):
                 case ("ADamageTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.DamageTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.DamageTypes.DuplicateInAsNewRecord(Record);
                 case ("ADamageType", CopyType.DeepCopy):
                 case ("ADamageTypeBinaryOverlay", CopyType.DeepCopy):
                     ADamageType newADamageTypeRecord = (ADamageType)Record.DeepCopy();
                     mod.DamageTypes.Add(newADamageTypeRecord);
-                    break;
+                    return newADamageTypeRecord;
                 case ("Class", CopyType.AsOverride):
                 case ("ClassBinaryOverlay", CopyType.AsOverride):
-                    mod.Classes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Classes.GetOrAddAsOverride(Record);
                 case ("Class", CopyType.AsNewRecord):
                 case ("ClassBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Classes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Classes.DuplicateInAsNewRecord(Record);
                 case ("Class", CopyType.DeepCopy):
                 case ("ClassBinaryOverlay", CopyType.DeepCopy):
                     Class newClassRecord = (Class)Record.DeepCopy();
                     mod.Classes.Add(newClassRecord);
-                    break;
+                    return newClassRecord;
                 case ("Faction", CopyType.AsOverride):
                 case ("FactionBinaryOverlay", CopyType.AsOverride):
-                    mod.Factions.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Factions.GetOrAddAsOverride(Record);
                 case ("Faction", CopyType.AsNewRecord):
                 case ("FactionBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Factions.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Factions.DuplicateInAsNewRecord(Record);
                 case ("Faction", CopyType.DeepCopy):
                 case ("FactionBinaryOverlay", CopyType.DeepCopy):
                     Faction newFactionRecord = (Faction)Record.DeepCopy();
                     mod.Factions.Add(newFactionRecord);
-                    break;
+                    return newFactionRecord;
                 case ("HeadPart", CopyType.AsOverride):
                 case ("HeadPartBinaryOverlay", CopyType.AsOverride):
-                    mod.HeadParts.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.HeadParts.GetOrAddAsOverride(Record);
                 case ("HeadPart", CopyType.AsNewRecord):
                 case ("HeadPartBinaryOverlay", CopyType.AsNewRecord):
-                    mod.HeadParts.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.HeadParts.DuplicateInAsNewRecord(Record);
                 case ("HeadPart", CopyType.DeepCopy):
                 case ("HeadPartBinaryOverlay", CopyType.DeepCopy):
                     HeadPart newHeadPartRecord = (HeadPart)Record.DeepCopy();
                     mod.HeadParts.Add(newHeadPartRecord);
-                    break;
+                    return newHeadPartRecord;
                 case ("Race", CopyType.AsOverride):
                 case ("RaceBinaryOverlay", CopyType.AsOverride):
-                    mod.Races.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Races.GetOrAddAsOverride(Record);
                 case ("Race", CopyType.AsNewRecord):
                 case ("RaceBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Races.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Races.DuplicateInAsNewRecord(Record);
                 case ("Race", CopyType.DeepCopy):
                 case ("RaceBinaryOverlay", CopyType.DeepCopy):
                     Race newRaceRecord = (Race)Record.DeepCopy();
                     mod.Races.Add(newRaceRecord);
-                    break;
+                    return newRaceRecord;
                 case ("SoundMarker", CopyType.AsOverride):
                 case ("SoundMarkerBinaryOverlay", CopyType.AsOverride):
-                    mod.SoundMarkers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.SoundMarkers.GetOrAddAsOverride(Record);
                 case ("SoundMarker", CopyType.AsNewRecord):
                 case ("SoundMarkerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.SoundMarkers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.SoundMarkers.DuplicateInAsNewRecord(Record);
                 case ("SoundMarker", CopyType.DeepCopy):
                 case ("SoundMarkerBinaryOverlay", CopyType.DeepCopy):
                     SoundMarker newSoundMarkerRecord = (SoundMarker)Record.DeepCopy();
                     mod.SoundMarkers.Add(newSoundMarkerRecord);
-                    break;
+                    return newSoundMarkerRecord;
                 case ("AcousticSpace", CopyType.AsOverride):
                 case ("AcousticSpaceBinaryOverlay", CopyType.AsOverride):
-                    mod.AcousticSpaces.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AcousticSpaces.GetOrAddAsOverride(Record);
                 case ("AcousticSpace", CopyType.AsNewRecord):
                 case ("AcousticSpaceBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AcousticSpaces.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AcousticSpaces.DuplicateInAsNewRecord(Record);
                 case ("AcousticSpace", CopyType.DeepCopy):
                 case ("AcousticSpaceBinaryOverlay", CopyType.DeepCopy):
                     AcousticSpace newAcousticSpaceRecord = (AcousticSpace)Record.DeepCopy();
                     mod.AcousticSpaces.Add(newAcousticSpaceRecord);
-                    break;
+                    return newAcousticSpaceRecord;
                 case ("MagicEffect", CopyType.AsOverride):
                 case ("MagicEffectBinaryOverlay", CopyType.AsOverride):
-                    mod.MagicEffects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MagicEffects.GetOrAddAsOverride(Record);
                 case ("MagicEffect", CopyType.AsNewRecord):
                 case ("MagicEffectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MagicEffects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MagicEffects.DuplicateInAsNewRecord(Record);
                 case ("MagicEffect", CopyType.DeepCopy):
                 case ("MagicEffectBinaryOverlay", CopyType.DeepCopy):
                     MagicEffect newMagicEffectRecord = (MagicEffect)Record.DeepCopy();
                     mod.MagicEffects.Add(newMagicEffectRecord);
-                    break;
+                    return newMagicEffectRecord;
                 case ("LandscapeTexture", CopyType.AsOverride):
                 case ("LandscapeTextureBinaryOverlay", CopyType.AsOverride):
-                    mod.LandscapeTextures.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LandscapeTextures.GetOrAddAsOverride(Record);
                 case ("LandscapeTexture", CopyType.AsNewRecord):
                 case ("LandscapeTextureBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LandscapeTextures.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LandscapeTextures.DuplicateInAsNewRecord(Record);
                 case ("LandscapeTexture", CopyType.DeepCopy):
                 case ("LandscapeTextureBinaryOverlay", CopyType.DeepCopy):
                     LandscapeTexture newLandscapeTextureRecord = (LandscapeTexture)Record.DeepCopy();
                     mod.LandscapeTextures.Add(newLandscapeTextureRecord);
-                    break;
+                    return newLandscapeTextureRecord;
                 case ("ObjectEffect", CopyType.AsOverride):
                 case ("ObjectEffectBinaryOverlay", CopyType.AsOverride):
-                    mod.ObjectEffects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ObjectEffects.GetOrAddAsOverride(Record);
                 case ("ObjectEffect", CopyType.AsNewRecord):
                 case ("ObjectEffectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ObjectEffects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ObjectEffects.DuplicateInAsNewRecord(Record);
                 case ("ObjectEffect", CopyType.DeepCopy):
                 case ("ObjectEffectBinaryOverlay", CopyType.DeepCopy):
                     ObjectEffect newObjectEffectRecord = (ObjectEffect)Record.DeepCopy();
                     mod.ObjectEffects.Add(newObjectEffectRecord);
-                    break;
+                    return newObjectEffectRecord;
                 case ("Spell", CopyType.AsOverride):
                 case ("SpellBinaryOverlay", CopyType.AsOverride):
-                    mod.Spells.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Spells.GetOrAddAsOverride(Record);
                 case ("Spell", CopyType.AsNewRecord):
                 case ("SpellBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Spells.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Spells.DuplicateInAsNewRecord(Record);
                 case ("Spell", CopyType.DeepCopy):
                 case ("SpellBinaryOverlay", CopyType.DeepCopy):
                     Spell newSpellRecord = (Spell)Record.DeepCopy();
                     mod.Spells.Add(newSpellRecord);
-                    break;
+                    return newSpellRecord;
                 case ("Activator", CopyType.AsOverride):
                 case ("ActivatorBinaryOverlay", CopyType.AsOverride):
-                    mod.Activators.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Activators.GetOrAddAsOverride(Record);
                 case ("Activator", CopyType.AsNewRecord):
                 case ("ActivatorBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Activators.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Activators.DuplicateInAsNewRecord(Record);
                 case ("Activator", CopyType.DeepCopy):
                 case ("ActivatorBinaryOverlay", CopyType.DeepCopy):
                     Mutagen.Bethesda.Fallout4.Activator newActivatorRecord = (Mutagen.Bethesda.Fallout4.Activator)Record.DeepCopy();
                     mod.Activators.Add(newActivatorRecord);
-                    break;
+                    return newActivatorRecord;
                 case ("TalkingActivator", CopyType.AsOverride):
                 case ("TalkingActivatorBinaryOverlay", CopyType.AsOverride):
-                    mod.TalkingActivators.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.TalkingActivators.GetOrAddAsOverride(Record);
                 case ("TalkingActivator", CopyType.AsNewRecord):
                 case ("TalkingActivatorBinaryOverlay", CopyType.AsNewRecord):
-                    mod.TalkingActivators.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.TalkingActivators.DuplicateInAsNewRecord(Record);
                 case ("TalkingActivator", CopyType.DeepCopy):
                 case ("TalkingActivatorBinaryOverlay", CopyType.DeepCopy):
                     TalkingActivator newTalkingActivatorRecord = (TalkingActivator)Record.DeepCopy();
                     mod.TalkingActivators.Add(newTalkingActivatorRecord);
-                    break;
+                    return newTalkingActivatorRecord;
                 case ("Armor", CopyType.AsOverride):
                 case ("ArmorBinaryOverlay", CopyType.AsOverride):
-                    mod.Armors.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Armors.GetOrAddAsOverride(Record);
                 case ("Armor", CopyType.AsNewRecord):
                 case ("ArmorBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Armors.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Armors.DuplicateInAsNewRecord(Record);
                 case ("Armor", CopyType.DeepCopy):
                 case ("ArmorBinaryOverlay", CopyType.DeepCopy):
                     Armor newArmorRecord = (Armor)Record.DeepCopy();
                     mod.Armors.Add(newArmorRecord);
-                    break;
+                    return newArmorRecord;
                 case ("Book", CopyType.AsOverride):
                 case ("BookBinaryOverlay", CopyType.AsOverride):
-                    mod.Books.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Books.GetOrAddAsOverride(Record);
                 case ("Book", CopyType.AsNewRecord):
                 case ("BookBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Books.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Books.DuplicateInAsNewRecord(Record);
                 case ("Book", CopyType.DeepCopy):
                 case ("BookBinaryOverlay", CopyType.DeepCopy):
                     Book newBookRecord = (Book)Record.DeepCopy();
                     mod.Books.Add(newBookRecord);
-                    break;
+                    return newBookRecord;
                 case ("Container", CopyType.AsOverride):
                 case ("ContainerBinaryOverlay", CopyType.AsOverride):
-                    mod.Containers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Containers.GetOrAddAsOverride(Record);
                 case ("Container", CopyType.AsNewRecord):
                 case ("ContainerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Containers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Containers.DuplicateInAsNewRecord(Record);
                 case ("Container", CopyType.DeepCopy):
                 case ("ContainerBinaryOverlay", CopyType.DeepCopy):
                     Container newContainerRecord = (Container)Record.DeepCopy();
                     mod.Containers.Add(newContainerRecord);
-                    break;
+                    return newContainerRecord;
                 case ("Door", CopyType.AsOverride):
                 case ("DoorBinaryOverlay", CopyType.AsOverride):
-                    mod.Doors.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Doors.GetOrAddAsOverride(Record);
                 case ("Door", CopyType.AsNewRecord):
                 case ("DoorBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Doors.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Doors.DuplicateInAsNewRecord(Record);
                 case ("Door", CopyType.DeepCopy):
                 case ("DoorBinaryOverlay", CopyType.DeepCopy):
                     Door newDoorRecord = (Door)Record.DeepCopy();
                     mod.Doors.Add(newDoorRecord);
-                    break;
+                    return newDoorRecord;
                 case ("Ingredient", CopyType.AsOverride):
                 case ("IngredientBinaryOverlay", CopyType.AsOverride):
-                    mod.Ingredients.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Ingredients.GetOrAddAsOverride(Record);
                 case ("Ingredient", CopyType.AsNewRecord):
                 case ("IngredientBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Ingredients.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Ingredients.DuplicateInAsNewRecord(Record);
                 case ("Ingredient", CopyType.DeepCopy):
                 case ("IngredientBinaryOverlay", CopyType.DeepCopy):
                     Ingredient newIngredientRecord = (Ingredient)Record.DeepCopy();
                     mod.Ingredients.Add(newIngredientRecord);
-                    break;
+                    return newIngredientRecord;
                 case ("Light", CopyType.AsOverride):
                 case ("LightBinaryOverlay", CopyType.AsOverride):
-                    mod.Lights.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Lights.GetOrAddAsOverride(Record);
                 case ("Light", CopyType.AsNewRecord):
                 case ("LightBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Lights.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Lights.DuplicateInAsNewRecord(Record);
                 case ("Light", CopyType.DeepCopy):
                 case ("LightBinaryOverlay", CopyType.DeepCopy):
                     Light newLightRecord = (Light)Record.DeepCopy();
                     mod.Lights.Add(newLightRecord);
-                    break;
+                    return newLightRecord;
                 case ("MiscItem", CopyType.AsOverride):
                 case ("MiscItemBinaryOverlay", CopyType.AsOverride):
-                    mod.MiscItems.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MiscItems.GetOrAddAsOverride(Record);
                 case ("MiscItem", CopyType.AsNewRecord):
                 case ("MiscItemBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MiscItems.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MiscItems.DuplicateInAsNewRecord(Record);
                 case ("MiscItem", CopyType.DeepCopy):
                 case ("MiscItemBinaryOverlay", CopyType.DeepCopy):
                     MiscItem newMiscItemRecord = (MiscItem)Record.DeepCopy();
                     mod.MiscItems.Add(newMiscItemRecord);
-                    break;
+                    return newMiscItemRecord;
                 case ("Static", CopyType.AsOverride):
                 case ("StaticBinaryOverlay", CopyType.AsOverride):
-                    mod.Statics.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Statics.GetOrAddAsOverride(Record);
                 case ("Static", CopyType.AsNewRecord):
                 case ("StaticBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Statics.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Statics.DuplicateInAsNewRecord(Record);
                 case ("Static", CopyType.DeepCopy):
                 case ("StaticBinaryOverlay", CopyType.DeepCopy):
                     Static newStaticRecord = (Static)Record.DeepCopy();
                     mod.Statics.Add(newStaticRecord);
-                    break;
+                    return newStaticRecord;
                 case ("StaticCollection", CopyType.AsOverride):
                 case ("StaticCollectionBinaryOverlay", CopyType.AsOverride):
-                    mod.StaticCollections.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.StaticCollections.GetOrAddAsOverride(Record);
                 case ("StaticCollection", CopyType.AsNewRecord):
                 case ("StaticCollectionBinaryOverlay", CopyType.AsNewRecord):
-                    mod.StaticCollections.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.StaticCollections.DuplicateInAsNewRecord(Record);
                 case ("StaticCollection", CopyType.DeepCopy):
                 case ("StaticCollectionBinaryOverlay", CopyType.DeepCopy):
                     StaticCollection newStaticCollectionRecord = (StaticCollection)Record.DeepCopy();
                     mod.StaticCollections.Add(newStaticCollectionRecord);
-                    break;
+                    return newStaticCollectionRecord;
                 case ("MovableStatic", CopyType.AsOverride):
                 case ("MovableStaticBinaryOverlay", CopyType.AsOverride):
-                    mod.MovableStatics.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MovableStatics.GetOrAddAsOverride(Record);
                 case ("MovableStatic", CopyType.AsNewRecord):
                 case ("MovableStaticBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MovableStatics.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MovableStatics.DuplicateInAsNewRecord(Record);
                 case ("MovableStatic", CopyType.DeepCopy):
                 case ("MovableStaticBinaryOverlay", CopyType.DeepCopy):
                     MovableStatic newMovableStaticRecord = (MovableStatic)Record.DeepCopy();
                     mod.MovableStatics.Add(newMovableStaticRecord);
-                    break;
+                    return newMovableStaticRecord;
                 case ("Grass", CopyType.AsOverride):
                 case ("GrassBinaryOverlay", CopyType.AsOverride):
-                    mod.Grasses.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Grasses.GetOrAddAsOverride(Record);
                 case ("Grass", CopyType.AsNewRecord):
                 case ("GrassBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Grasses.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Grasses.DuplicateInAsNewRecord(Record);
                 case ("Grass", CopyType.DeepCopy):
                 case ("GrassBinaryOverlay", CopyType.DeepCopy):
                     Grass newGrassRecord = (Grass)Record.DeepCopy();
                     mod.Grasses.Add(newGrassRecord);
-                    break;
+                    return newGrassRecord;
                 case ("Tree", CopyType.AsOverride):
                 case ("TreeBinaryOverlay", CopyType.AsOverride):
-                    mod.Trees.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Trees.GetOrAddAsOverride(Record);
                 case ("Tree", CopyType.AsNewRecord):
                 case ("TreeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Trees.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Trees.DuplicateInAsNewRecord(Record);
                 case ("Tree", CopyType.DeepCopy):
                 case ("TreeBinaryOverlay", CopyType.DeepCopy):
                     Tree newTreeRecord = (Tree)Record.DeepCopy();
                     mod.Trees.Add(newTreeRecord);
-                    break;
+                    return newTreeRecord;
                 case ("Flora", CopyType.AsOverride):
                 case ("FloraBinaryOverlay", CopyType.AsOverride):
-                    mod.Florae.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Florae.GetOrAddAsOverride(Record);
                 case ("Flora", CopyType.AsNewRecord):
                 case ("FloraBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Florae.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Florae.DuplicateInAsNewRecord(Record);
                 case ("Flora", CopyType.DeepCopy):
                 case ("FloraBinaryOverlay", CopyType.DeepCopy):
                     Flora newFloraRecord = (Flora)Record.DeepCopy();
                     mod.Florae.Add(newFloraRecord);
-                    break;
+                    return newFloraRecord;
                 case ("Furniture", CopyType.AsOverride):
                 case ("FurnitureBinaryOverlay", CopyType.AsOverride):
-                    mod.Furniture.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Furniture.GetOrAddAsOverride(Record);
                 case ("Furniture", CopyType.AsNewRecord):
                 case ("FurnitureBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Furniture.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Furniture.DuplicateInAsNewRecord(Record);
                 case ("Furniture", CopyType.DeepCopy):
                 case ("FurnitureBinaryOverlay", CopyType.DeepCopy):
                     Furniture newFurnitureRecord = (Furniture)Record.DeepCopy();
                     mod.Furniture.Add(newFurnitureRecord);
-                    break;
+                    return newFurnitureRecord;
                 case ("Weapon", CopyType.AsOverride):
                 case ("WeaponBinaryOverlay", CopyType.AsOverride):
-                    mod.Weapons.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Weapons.GetOrAddAsOverride(Record);
                 case ("Weapon", CopyType.AsNewRecord):
                 case ("WeaponBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Weapons.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Weapons.DuplicateInAsNewRecord(Record);
                 case ("Weapon", CopyType.DeepCopy):
                 case ("WeaponBinaryOverlay", CopyType.DeepCopy):
                     Weapon newWeaponRecord = (Weapon)Record.DeepCopy();
                     mod.Weapons.Add(newWeaponRecord);
-                    break;
+                    return newWeaponRecord;
                 case ("Ammunition", CopyType.AsOverride):
                 case ("AmmunitionBinaryOverlay", CopyType.AsOverride):
-                    mod.Ammunitions.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Ammunitions.GetOrAddAsOverride(Record);
                 case ("Ammunition", CopyType.AsNewRecord):
                 case ("AmmunitionBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Ammunitions.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Ammunitions.DuplicateInAsNewRecord(Record);
                 case ("Ammunition", CopyType.DeepCopy):
                 case ("AmmunitionBinaryOverlay", CopyType.DeepCopy):
                     Ammunition newAmmunitionRecord = (Ammunition)Record.DeepCopy();
                     mod.Ammunitions.Add(newAmmunitionRecord);
-                    break;
+                    return newAmmunitionRecord;
                 case ("Npc", CopyType.AsOverride):
                 case ("NpcBinaryOverlay", CopyType.AsOverride):
-                    mod.Npcs.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Npcs.GetOrAddAsOverride(Record);
                 case ("Npc", CopyType.AsNewRecord):
                 case ("NpcBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Npcs.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Npcs.DuplicateInAsNewRecord(Record);
                 case ("Npc", CopyType.DeepCopy):
                 case ("NpcBinaryOverlay", CopyType.DeepCopy):
                     Npc newNpcRecord = (Npc)Record.DeepCopy();
                     mod.Npcs.Add(newNpcRecord);
-                    break;
+                    return newNpcRecord;
                 case ("LeveledNpc", CopyType.AsOverride):
                 case ("LeveledNpcBinaryOverlay", CopyType.AsOverride):
-                    mod.LeveledNpcs.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LeveledNpcs.GetOrAddAsOverride(Record);
                 case ("LeveledNpc", CopyType.AsNewRecord):
                 case ("LeveledNpcBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LeveledNpcs.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LeveledNpcs.DuplicateInAsNewRecord(Record);
                 case ("LeveledNpc", CopyType.DeepCopy):
                 case ("LeveledNpcBinaryOverlay", CopyType.DeepCopy):
                     LeveledNpc newLeveledNpcRecord = (LeveledNpc)Record.DeepCopy();
                     mod.LeveledNpcs.Add(newLeveledNpcRecord);
-                    break;
+                    return newLeveledNpcRecord;
                 case ("Key", CopyType.AsOverride):
                 case ("KeyBinaryOverlay", CopyType.AsOverride):
-                    mod.Keys.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Keys.GetOrAddAsOverride(Record);
                 case ("Key", CopyType.AsNewRecord):
                 case ("KeyBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Keys.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Keys.DuplicateInAsNewRecord(Record);
                 case ("Key", CopyType.DeepCopy):
                 case ("KeyBinaryOverlay", CopyType.DeepCopy):
                     Key newKeyRecord = (Key)Record.DeepCopy();
                     mod.Keys.Add(newKeyRecord);
-                    break;
+                    return newKeyRecord;
                 case ("Ingestible", CopyType.AsOverride):
                 case ("IngestibleBinaryOverlay", CopyType.AsOverride):
-                    mod.Ingestibles.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Ingestibles.GetOrAddAsOverride(Record);
                 case ("Ingestible", CopyType.AsNewRecord):
                 case ("IngestibleBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Ingestibles.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Ingestibles.DuplicateInAsNewRecord(Record);
                 case ("Ingestible", CopyType.DeepCopy):
                 case ("IngestibleBinaryOverlay", CopyType.DeepCopy):
                     Ingestible newIngestibleRecord = (Ingestible)Record.DeepCopy();
                     mod.Ingestibles.Add(newIngestibleRecord);
-                    break;
+                    return newIngestibleRecord;
                 case ("IdleMarker", CopyType.AsOverride):
                 case ("IdleMarkerBinaryOverlay", CopyType.AsOverride):
-                    mod.IdleMarkers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.IdleMarkers.GetOrAddAsOverride(Record);
                 case ("IdleMarker", CopyType.AsNewRecord):
                 case ("IdleMarkerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.IdleMarkers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.IdleMarkers.DuplicateInAsNewRecord(Record);
                 case ("IdleMarker", CopyType.DeepCopy):
                 case ("IdleMarkerBinaryOverlay", CopyType.DeepCopy):
                     IdleMarker newIdleMarkerRecord = (IdleMarker)Record.DeepCopy();
                     mod.IdleMarkers.Add(newIdleMarkerRecord);
-                    break;
+                    return newIdleMarkerRecord;
                 case ("Holotape", CopyType.AsOverride):
                 case ("HolotapeBinaryOverlay", CopyType.AsOverride):
-                    mod.Holotapes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Holotapes.GetOrAddAsOverride(Record);
                 case ("Holotape", CopyType.AsNewRecord):
                 case ("HolotapeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Holotapes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Holotapes.DuplicateInAsNewRecord(Record);
                 case ("Holotape", CopyType.DeepCopy):
                 case ("HolotapeBinaryOverlay", CopyType.DeepCopy):
                     Holotape newHolotapeRecord = (Holotape)Record.DeepCopy();
                     mod.Holotapes.Add(newHolotapeRecord);
-                    break;
+                    return newHolotapeRecord;
                 case ("Projectile", CopyType.AsOverride):
                 case ("ProjectileBinaryOverlay", CopyType.AsOverride):
-                    mod.Projectiles.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Projectiles.GetOrAddAsOverride(Record);
                 case ("Projectile", CopyType.AsNewRecord):
                 case ("ProjectileBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Projectiles.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Projectiles.DuplicateInAsNewRecord(Record);
                 case ("Projectile", CopyType.DeepCopy):
                 case ("ProjectileBinaryOverlay", CopyType.DeepCopy):
                     Projectile newProjectileRecord = (Projectile)Record.DeepCopy();
                     mod.Projectiles.Add(newProjectileRecord);
-                    break;
+                    return newProjectileRecord;
                 case ("Hazard", CopyType.AsOverride):
                 case ("HazardBinaryOverlay", CopyType.AsOverride):
-                    mod.Hazards.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Hazards.GetOrAddAsOverride(Record);
                 case ("Hazard", CopyType.AsNewRecord):
                 case ("HazardBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Hazards.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Hazards.DuplicateInAsNewRecord(Record);
                 case ("Hazard", CopyType.DeepCopy):
                 case ("HazardBinaryOverlay", CopyType.DeepCopy):
                     Hazard newHazardRecord = (Hazard)Record.DeepCopy();
                     mod.Hazards.Add(newHazardRecord);
-                    break;
+                    return newHazardRecord;
                 case ("BendableSpline", CopyType.AsOverride):
                 case ("BendableSplineBinaryOverlay", CopyType.AsOverride):
-                    mod.BendableSplines.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.BendableSplines.GetOrAddAsOverride(Record);
                 case ("BendableSpline", CopyType.AsNewRecord):
                 case ("BendableSplineBinaryOverlay", CopyType.AsNewRecord):
-                    mod.BendableSplines.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.BendableSplines.DuplicateInAsNewRecord(Record);
                 case ("BendableSpline", CopyType.DeepCopy):
                 case ("BendableSplineBinaryOverlay", CopyType.DeepCopy):
                     BendableSpline newBendableSplineRecord = (BendableSpline)Record.DeepCopy();
                     mod.BendableSplines.Add(newBendableSplineRecord);
-                    break;
+                    return newBendableSplineRecord;
                 case ("Terminal", CopyType.AsOverride):
                 case ("TerminalBinaryOverlay", CopyType.AsOverride):
-                    mod.Terminals.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Terminals.GetOrAddAsOverride(Record);
                 case ("Terminal", CopyType.AsNewRecord):
                 case ("TerminalBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Terminals.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Terminals.DuplicateInAsNewRecord(Record);
                 case ("Terminal", CopyType.DeepCopy):
                 case ("TerminalBinaryOverlay", CopyType.DeepCopy):
                     Terminal newTerminalRecord = (Terminal)Record.DeepCopy();
                     mod.Terminals.Add(newTerminalRecord);
-                    break;
+                    return newTerminalRecord;
                 case ("LeveledItem", CopyType.AsOverride):
                 case ("LeveledItemBinaryOverlay", CopyType.AsOverride):
-                    mod.LeveledItems.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LeveledItems.GetOrAddAsOverride(Record);
                 case ("LeveledItem", CopyType.AsNewRecord):
                 case ("LeveledItemBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LeveledItems.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LeveledItems.DuplicateInAsNewRecord(Record);
                 case ("LeveledItem", CopyType.DeepCopy):
                 case ("LeveledItemBinaryOverlay", CopyType.DeepCopy):
                     LeveledItem newLeveledItemRecord = (LeveledItem)Record.DeepCopy();
                     mod.LeveledItems.Add(newLeveledItemRecord);
-                    break;
+                    return newLeveledItemRecord;
                 case ("Weather", CopyType.AsOverride):
                 case ("WeatherBinaryOverlay", CopyType.AsOverride):
-                    mod.Weather.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Weather.GetOrAddAsOverride(Record);
                 case ("Weather", CopyType.AsNewRecord):
                 case ("WeatherBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Weather.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Weather.DuplicateInAsNewRecord(Record);
                 case ("Weather", CopyType.DeepCopy):
                 case ("WeatherBinaryOverlay", CopyType.DeepCopy):
                     Weather newWeatherRecord = (Weather)Record.DeepCopy();
                     mod.Weather.Add(newWeatherRecord);
-                    break;
+                    return newWeatherRecord;
                 case ("Climate", CopyType.AsOverride):
                 case ("ClimateBinaryOverlay", CopyType.AsOverride):
-                    mod.Climates.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Climates.GetOrAddAsOverride(Record);
                 case ("Climate", CopyType.AsNewRecord):
                 case ("ClimateBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Climates.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Climates.DuplicateInAsNewRecord(Record);
                 case ("Climate", CopyType.DeepCopy):
                 case ("ClimateBinaryOverlay", CopyType.DeepCopy):
                     Climate newClimateRecord = (Climate)Record.DeepCopy();
                     mod.Climates.Add(newClimateRecord);
-                    break;
+                    return newClimateRecord;
                 case ("ShaderParticleGeometry", CopyType.AsOverride):
                 case ("ShaderParticleGeometryBinaryOverlay", CopyType.AsOverride):
-                    mod.ShaderParticleGeometries.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ShaderParticleGeometries.GetOrAddAsOverride(Record);
                 case ("ShaderParticleGeometry", CopyType.AsNewRecord):
                 case ("ShaderParticleGeometryBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ShaderParticleGeometries.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ShaderParticleGeometries.DuplicateInAsNewRecord(Record);
                 case ("ShaderParticleGeometry", CopyType.DeepCopy):
                 case ("ShaderParticleGeometryBinaryOverlay", CopyType.DeepCopy):
                     ShaderParticleGeometry newShaderParticleGeometryRecord = (ShaderParticleGeometry)Record.DeepCopy();
                     mod.ShaderParticleGeometries.Add(newShaderParticleGeometryRecord);
-                    break;
+                    return newShaderParticleGeometryRecord;
                 case ("VisualEffect", CopyType.AsOverride):
                 case ("VisualEffectBinaryOverlay", CopyType.AsOverride):
-                    mod.VisualEffects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.VisualEffects.GetOrAddAsOverride(Record);
                 case ("VisualEffect", CopyType.AsNewRecord):
                 case ("VisualEffectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.VisualEffects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.VisualEffects.DuplicateInAsNewRecord(Record);
                 case ("VisualEffect", CopyType.DeepCopy):
                 case ("VisualEffectBinaryOverlay", CopyType.DeepCopy):
                     VisualEffect newVisualEffectRecord = (VisualEffect)Record.DeepCopy();
                     mod.VisualEffects.Add(newVisualEffectRecord);
-                    break;
+                    return newVisualEffectRecord;
                 case ("Region", CopyType.AsOverride):
                 case ("RegionBinaryOverlay", CopyType.AsOverride):
-                    mod.Regions.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Regions.GetOrAddAsOverride(Record);
                 case ("Region", CopyType.AsNewRecord):
                 case ("RegionBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Regions.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Regions.DuplicateInAsNewRecord(Record);
                 case ("Region", CopyType.DeepCopy):
                 case ("RegionBinaryOverlay", CopyType.DeepCopy):
                     Region newRegionRecord = (Region)Record.DeepCopy();
                     mod.Regions.Add(newRegionRecord);
-                    break;
+                    return newRegionRecord;
                 case ("NavigationMeshInfoMap", CopyType.AsOverride):
                 case ("NavigationMeshInfoMapBinaryOverlay", CopyType.AsOverride):
-                    mod.NavigationMeshInfoMaps.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.NavigationMeshInfoMaps.GetOrAddAsOverride(Record);
                 case ("NavigationMeshInfoMap", CopyType.AsNewRecord):
                 case ("NavigationMeshInfoMapBinaryOverlay", CopyType.AsNewRecord):
-                    mod.NavigationMeshInfoMaps.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.NavigationMeshInfoMaps.DuplicateInAsNewRecord(Record);
                 case ("NavigationMeshInfoMap", CopyType.DeepCopy):
                 case ("NavigationMeshInfoMapBinaryOverlay", CopyType.DeepCopy):
                     NavigationMeshInfoMap newNavigationMeshInfoMapRecord = (NavigationMeshInfoMap)Record.DeepCopy();
                     mod.NavigationMeshInfoMaps.Add(newNavigationMeshInfoMapRecord);
-                    break;
+                    return newNavigationMeshInfoMapRecord;
                 case ("Worldspace", CopyType.AsOverride):
                 case ("WorldspaceBinaryOverlay", CopyType.AsOverride):
-                    mod.Worldspaces.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Worldspaces.GetOrAddAsOverride(Record);
                 case ("Worldspace", CopyType.AsNewRecord):
                 case ("WorldspaceBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Worldspaces.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Worldspaces.DuplicateInAsNewRecord(Record);
                 case ("Worldspace", CopyType.DeepCopy):
                 case ("WorldspaceBinaryOverlay", CopyType.DeepCopy):
                     Worldspace newWorldspaceRecord = (Worldspace)Record.DeepCopy();
                     mod.Worldspaces.Add(newWorldspaceRecord);
-                    break;
+                    return newWorldspaceRecord;
                 case ("Quest", CopyType.AsOverride):
                 case ("QuestBinaryOverlay", CopyType.AsOverride):
-                    mod.Quests.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Quests.GetOrAddAsOverride(Record);
                 case ("Quest", CopyType.AsNewRecord):
                 case ("QuestBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Quests.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Quests.DuplicateInAsNewRecord(Record);
                 case ("Quest", CopyType.DeepCopy):
                 case ("QuestBinaryOverlay", CopyType.DeepCopy):
                     Quest newQuestRecord = (Quest)Record.DeepCopy();
                     mod.Quests.Add(newQuestRecord);
-                    break;
+                    return newQuestRecord;
                 case ("IdleAnimation", CopyType.AsOverride):
                 case ("IdleAnimationBinaryOverlay", CopyType.AsOverride):
-                    mod.IdleAnimations.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.IdleAnimations.GetOrAddAsOverride(Record);
                 case ("IdleAnimation", CopyType.AsNewRecord):
                 case ("IdleAnimationBinaryOverlay", CopyType.AsNewRecord):
-                    mod.IdleAnimations.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.IdleAnimations.DuplicateInAsNewRecord(Record);
                 case ("IdleAnimation", CopyType.DeepCopy):
                 case ("IdleAnimationBinaryOverlay", CopyType.DeepCopy):
                     IdleAnimation newIdleAnimationRecord = (IdleAnimation)Record.DeepCopy();
                     mod.IdleAnimations.Add(newIdleAnimationRecord);
-                    break;
+                    return newIdleAnimationRecord;
                 case ("Package", CopyType.AsOverride):
                 case ("PackageBinaryOverlay", CopyType.AsOverride):
-                    mod.Packages.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Packages.GetOrAddAsOverride(Record);
                 case ("Package", CopyType.AsNewRecord):
                 case ("PackageBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Packages.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Packages.DuplicateInAsNewRecord(Record);
                 case ("Package", CopyType.DeepCopy):
                 case ("PackageBinaryOverlay", CopyType.DeepCopy):
                     Package newPackageRecord = (Package)Record.DeepCopy();
                     mod.Packages.Add(newPackageRecord);
-                    break;
+                    return newPackageRecord;
                 case ("CombatStyle", CopyType.AsOverride):
                 case ("CombatStyleBinaryOverlay", CopyType.AsOverride):
-                    mod.CombatStyles.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.CombatStyles.GetOrAddAsOverride(Record);
                 case ("CombatStyle", CopyType.AsNewRecord):
                 case ("CombatStyleBinaryOverlay", CopyType.AsNewRecord):
-                    mod.CombatStyles.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.CombatStyles.DuplicateInAsNewRecord(Record);
                 case ("CombatStyle", CopyType.DeepCopy):
                 case ("CombatStyleBinaryOverlay", CopyType.DeepCopy):
                     CombatStyle newCombatStyleRecord = (CombatStyle)Record.DeepCopy();
                     mod.CombatStyles.Add(newCombatStyleRecord);
-                    break;
+                    return newCombatStyleRecord;
                 case ("LoadScreen", CopyType.AsOverride):
                 case ("LoadScreenBinaryOverlay", CopyType.AsOverride):
-                    mod.LoadScreens.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LoadScreens.GetOrAddAsOverride(Record);
                 case ("LoadScreen", CopyType.AsNewRecord):
                 case ("LoadScreenBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LoadScreens.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LoadScreens.DuplicateInAsNewRecord(Record);
                 case ("LoadScreen", CopyType.DeepCopy):
                 case ("LoadScreenBinaryOverlay", CopyType.DeepCopy):
                     LoadScreen newLoadScreenRecord = (LoadScreen)Record.DeepCopy();
                     mod.LoadScreens.Add(newLoadScreenRecord);
-                    break;
+                    return newLoadScreenRecord;
                 case ("AnimatedObject", CopyType.AsOverride):
                 case ("AnimatedObjectBinaryOverlay", CopyType.AsOverride):
-                    mod.AnimatedObjects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AnimatedObjects.GetOrAddAsOverride(Record);
                 case ("AnimatedObject", CopyType.AsNewRecord):
                 case ("AnimatedObjectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AnimatedObjects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AnimatedObjects.DuplicateInAsNewRecord(Record);
                 case ("AnimatedObject", CopyType.DeepCopy):
                 case ("AnimatedObjectBinaryOverlay", CopyType.DeepCopy):
                     AnimatedObject newAnimatedObjectRecord = (AnimatedObject)Record.DeepCopy();
                     mod.AnimatedObjects.Add(newAnimatedObjectRecord);
-                    break;
+                    return newAnimatedObjectRecord;
                 case ("Water", CopyType.AsOverride):
                 case ("WaterBinaryOverlay", CopyType.AsOverride):
-                    mod.Waters.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Waters.GetOrAddAsOverride(Record);
                 case ("Water", CopyType.AsNewRecord):
                 case ("WaterBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Waters.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Waters.DuplicateInAsNewRecord(Record);
                 case ("Water", CopyType.DeepCopy):
                 case ("WaterBinaryOverlay", CopyType.DeepCopy):
                     Water newWaterRecord = (Water)Record.DeepCopy();
                     mod.Waters.Add(newWaterRecord);
-                    break;
+                    return newWaterRecord;
                 case ("EffectShader", CopyType.AsOverride):
                 case ("EffectShaderBinaryOverlay", CopyType.AsOverride):
-                    mod.EffectShaders.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.EffectShaders.GetOrAddAsOverride(Record);
                 case ("EffectShader", CopyType.AsNewRecord):
                 case ("EffectShaderBinaryOverlay", CopyType.AsNewRecord):
-                    mod.EffectShaders.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.EffectShaders.DuplicateInAsNewRecord(Record);
                 case ("EffectShader", CopyType.DeepCopy):
                 case ("EffectShaderBinaryOverlay", CopyType.DeepCopy):
                     EffectShader newEffectShaderRecord = (EffectShader)Record.DeepCopy();
                     mod.EffectShaders.Add(newEffectShaderRecord);
-                    break;
+                    return newEffectShaderRecord;
                 case ("Explosion", CopyType.AsOverride):
                 case ("ExplosionBinaryOverlay", CopyType.AsOverride):
-                    mod.Explosions.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Explosions.GetOrAddAsOverride(Record);
                 case ("Explosion", CopyType.AsNewRecord):
                 case ("ExplosionBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Explosions.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Explosions.DuplicateInAsNewRecord(Record);
                 case ("Explosion", CopyType.DeepCopy):
                 case ("ExplosionBinaryOverlay", CopyType.DeepCopy):
                     Explosion newExplosionRecord = (Explosion)Record.DeepCopy();
                     mod.Explosions.Add(newExplosionRecord);
-                    break;
+                    return newExplosionRecord;
                 case ("Debris", CopyType.AsOverride):
                 case ("DebrisBinaryOverlay", CopyType.AsOverride):
-                    mod.Debris.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Debris.GetOrAddAsOverride(Record);
                 case ("Debris", CopyType.AsNewRecord):
                 case ("DebrisBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Debris.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Debris.DuplicateInAsNewRecord(Record);
                 case ("Debris", CopyType.DeepCopy):
                 case ("DebrisBinaryOverlay", CopyType.DeepCopy):
                     Debris newDebrisRecord = (Debris)Record.DeepCopy();
                     mod.Debris.Add(newDebrisRecord);
-                    break;
+                    return newDebrisRecord;
                 case ("ImageSpace", CopyType.AsOverride):
                 case ("ImageSpaceBinaryOverlay", CopyType.AsOverride):
-                    mod.ImageSpaces.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ImageSpaces.GetOrAddAsOverride(Record);
                 case ("ImageSpace", CopyType.AsNewRecord):
                 case ("ImageSpaceBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ImageSpaces.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ImageSpaces.DuplicateInAsNewRecord(Record);
                 case ("ImageSpace", CopyType.DeepCopy):
                 case ("ImageSpaceBinaryOverlay", CopyType.DeepCopy):
                     ImageSpace newImageSpaceRecord = (ImageSpace)Record.DeepCopy();
                     mod.ImageSpaces.Add(newImageSpaceRecord);
-                    break;
+                    return newImageSpaceRecord;
                 case ("ImageSpaceAdapter", CopyType.AsOverride):
                 case ("ImageSpaceAdapterBinaryOverlay", CopyType.AsOverride):
-                    mod.ImageSpaceAdapters.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ImageSpaceAdapters.GetOrAddAsOverride(Record);
                 case ("ImageSpaceAdapter", CopyType.AsNewRecord):
                 case ("ImageSpaceAdapterBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ImageSpaceAdapters.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ImageSpaceAdapters.DuplicateInAsNewRecord(Record);
                 case ("ImageSpaceAdapter", CopyType.DeepCopy):
                 case ("ImageSpaceAdapterBinaryOverlay", CopyType.DeepCopy):
                     ImageSpaceAdapter newImageSpaceAdapterRecord = (ImageSpaceAdapter)Record.DeepCopy();
                     mod.ImageSpaceAdapters.Add(newImageSpaceAdapterRecord);
-                    break;
+                    return newImageSpaceAdapterRecord;
                 case ("FormList", CopyType.AsOverride):
                 case ("FormListBinaryOverlay", CopyType.AsOverride):
-                    mod.FormLists.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.FormLists.GetOrAddAsOverride(Record);
                 case ("FormList", CopyType.AsNewRecord):
                 case ("FormListBinaryOverlay", CopyType.AsNewRecord):
-                    mod.FormLists.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.FormLists.DuplicateInAsNewRecord(Record);
                 case ("FormList", CopyType.DeepCopy):
                 case ("FormListBinaryOverlay", CopyType.DeepCopy):
                     FormList newFormListRecord = (FormList)Record.DeepCopy();
                     mod.FormLists.Add(newFormListRecord);
-                    break;
+                    return newFormListRecord;
                 case ("Perk", CopyType.AsOverride):
                 case ("PerkBinaryOverlay", CopyType.AsOverride):
-                    mod.Perks.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Perks.GetOrAddAsOverride(Record);
                 case ("Perk", CopyType.AsNewRecord):
                 case ("PerkBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Perks.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Perks.DuplicateInAsNewRecord(Record);
                 case ("Perk", CopyType.DeepCopy):
                 case ("PerkBinaryOverlay", CopyType.DeepCopy):
                     Perk newPerkRecord = (Perk)Record.DeepCopy();
                     mod.Perks.Add(newPerkRecord);
-                    break;
+                    return newPerkRecord;
                 case ("BodyPartData", CopyType.AsOverride):
                 case ("BodyPartDataBinaryOverlay", CopyType.AsOverride):
-                    mod.BodyParts.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.BodyParts.GetOrAddAsOverride(Record);
                 case ("BodyPartData", CopyType.AsNewRecord):
                 case ("BodyPartDataBinaryOverlay", CopyType.AsNewRecord):
-                    mod.BodyParts.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.BodyParts.DuplicateInAsNewRecord(Record);
                 case ("BodyPartData", CopyType.DeepCopy):
                 case ("BodyPartDataBinaryOverlay", CopyType.DeepCopy):
                     BodyPartData newBodyPartDataRecord = (BodyPartData)Record.DeepCopy();
                     mod.BodyParts.Add(newBodyPartDataRecord);
-                    break;
+                    return newBodyPartDataRecord;
                 case ("AddonNode", CopyType.AsOverride):
                 case ("AddonNodeBinaryOverlay", CopyType.AsOverride):
-                    mod.AddonNodes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AddonNodes.GetOrAddAsOverride(Record);
                 case ("AddonNode", CopyType.AsNewRecord):
                 case ("AddonNodeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AddonNodes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AddonNodes.DuplicateInAsNewRecord(Record);
                 case ("AddonNode", CopyType.DeepCopy):
                 case ("AddonNodeBinaryOverlay", CopyType.DeepCopy):
                     AddonNode newAddonNodeRecord = (AddonNode)Record.DeepCopy();
                     mod.AddonNodes.Add(newAddonNodeRecord);
-                    break;
+                    return newAddonNodeRecord;
                 case ("ActorValueInformation", CopyType.AsOverride):
                 case ("ActorValueInformationBinaryOverlay", CopyType.AsOverride):
-                    mod.ActorValueInformation.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ActorValueInformation.GetOrAddAsOverride(Record);
                 case ("ActorValueInformation", CopyType.AsNewRecord):
                 case ("ActorValueInformationBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ActorValueInformation.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ActorValueInformation.DuplicateInAsNewRecord(Record);
                 case ("ActorValueInformation", CopyType.DeepCopy):
                 case ("ActorValueInformationBinaryOverlay", CopyType.DeepCopy):
                     ActorValueInformation newActorValueInformationRecord = (ActorValueInformation)Record.DeepCopy();
                     mod.ActorValueInformation.Add(newActorValueInformationRecord);
-                    break;
+                    return newActorValueInformationRecord;
                 case ("CameraShot", CopyType.AsOverride):
                 case ("CameraShotBinaryOverlay", CopyType.AsOverride):
-                    mod.CameraShots.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.CameraShots.GetOrAddAsOverride(Record);
                 case ("CameraShot", CopyType.AsNewRecord):
                 case ("CameraShotBinaryOverlay", CopyType.AsNewRecord):
-                    mod.CameraShots.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.CameraShots.DuplicateInAsNewRecord(Record);
                 case ("CameraShot", CopyType.DeepCopy):
                 case ("CameraShotBinaryOverlay", CopyType.DeepCopy):
                     CameraShot newCameraShotRecord = (CameraShot)Record.DeepCopy();
                     mod.CameraShots.Add(newCameraShotRecord);
-                    break;
+                    return newCameraShotRecord;
                 case ("CameraPath", CopyType.AsOverride):
                 case ("CameraPathBinaryOverlay", CopyType.AsOverride):
-                    mod.CameraPaths.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.CameraPaths.GetOrAddAsOverride(Record);
                 case ("CameraPath", CopyType.AsNewRecord):
                 case ("CameraPathBinaryOverlay", CopyType.AsNewRecord):
-                    mod.CameraPaths.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.CameraPaths.DuplicateInAsNewRecord(Record);
                 case ("CameraPath", CopyType.DeepCopy):
                 case ("CameraPathBinaryOverlay", CopyType.DeepCopy):
                     CameraPath newCameraPathRecord = (CameraPath)Record.DeepCopy();
                     mod.CameraPaths.Add(newCameraPathRecord);
-                    break;
+                    return newCameraPathRecord;
                 case ("VoiceType", CopyType.AsOverride):
                 case ("VoiceTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.VoiceTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.VoiceTypes.GetOrAddAsOverride(Record);
                 case ("VoiceType", CopyType.AsNewRecord):
                 case ("VoiceTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.VoiceTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.VoiceTypes.DuplicateInAsNewRecord(Record);
                 case ("VoiceType", CopyType.DeepCopy):
                 case ("VoiceTypeBinaryOverlay", CopyType.DeepCopy):
                     VoiceType newVoiceTypeRecord = (VoiceType)Record.DeepCopy();
                     mod.VoiceTypes.Add(newVoiceTypeRecord);
-                    break;
+                    return newVoiceTypeRecord;
                 case ("MaterialType", CopyType.AsOverride):
                 case ("MaterialTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.MaterialTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MaterialTypes.GetOrAddAsOverride(Record);
                 case ("MaterialType", CopyType.AsNewRecord):
                 case ("MaterialTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MaterialTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MaterialTypes.DuplicateInAsNewRecord(Record);
                 case ("MaterialType", CopyType.DeepCopy):
                 case ("MaterialTypeBinaryOverlay", CopyType.DeepCopy):
                     MaterialType newMaterialTypeRecord = (MaterialType)Record.DeepCopy();
                     mod.MaterialTypes.Add(newMaterialTypeRecord);
-                    break;
+                    return newMaterialTypeRecord;
                 case ("Impact", CopyType.AsOverride):
                 case ("ImpactBinaryOverlay", CopyType.AsOverride):
-                    mod.Impacts.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Impacts.GetOrAddAsOverride(Record);
                 case ("Impact", CopyType.AsNewRecord):
                 case ("ImpactBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Impacts.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Impacts.DuplicateInAsNewRecord(Record);
                 case ("Impact", CopyType.DeepCopy):
                 case ("ImpactBinaryOverlay", CopyType.DeepCopy):
                     Impact newImpactRecord = (Impact)Record.DeepCopy();
                     mod.Impacts.Add(newImpactRecord);
-                    break;
+                    return newImpactRecord;
                 case ("ImpactDataSet", CopyType.AsOverride):
                 case ("ImpactDataSetBinaryOverlay", CopyType.AsOverride):
-                    mod.ImpactDataSets.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ImpactDataSets.GetOrAddAsOverride(Record);
                 case ("ImpactDataSet", CopyType.AsNewRecord):
                 case ("ImpactDataSetBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ImpactDataSets.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ImpactDataSets.DuplicateInAsNewRecord(Record);
                 case ("ImpactDataSet", CopyType.DeepCopy):
                 case ("ImpactDataSetBinaryOverlay", CopyType.DeepCopy):
                     ImpactDataSet newImpactDataSetRecord = (ImpactDataSet)Record.DeepCopy();
                     mod.ImpactDataSets.Add(newImpactDataSetRecord);
-                    break;
+                    return newImpactDataSetRecord;
                 case ("ArmorAddon", CopyType.AsOverride):
                 case ("ArmorAddonBinaryOverlay", CopyType.AsOverride):
-                    mod.ArmorAddons.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ArmorAddons.GetOrAddAsOverride(Record);
                 case ("ArmorAddon", CopyType.AsNewRecord):
                 case ("ArmorAddonBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ArmorAddons.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ArmorAddons.DuplicateInAsNewRecord(Record);
                 case ("ArmorAddon", CopyType.DeepCopy):
                 case ("ArmorAddonBinaryOverlay", CopyType.DeepCopy):
                     ArmorAddon newArmorAddonRecord = (ArmorAddon)Record.DeepCopy();
                     mod.ArmorAddons.Add(newArmorAddonRecord);
-                    break;
+                    return newArmorAddonRecord;
                 case ("EncounterZone", CopyType.AsOverride):
                 case ("EncounterZoneBinaryOverlay", CopyType.AsOverride):
-                    mod.EncounterZones.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.EncounterZones.GetOrAddAsOverride(Record);
                 case ("EncounterZone", CopyType.AsNewRecord):
                 case ("EncounterZoneBinaryOverlay", CopyType.AsNewRecord):
-                    mod.EncounterZones.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.EncounterZones.DuplicateInAsNewRecord(Record);
                 case ("EncounterZone", CopyType.DeepCopy):
                 case ("EncounterZoneBinaryOverlay", CopyType.DeepCopy):
                     EncounterZone newEncounterZoneRecord = (EncounterZone)Record.DeepCopy();
                     mod.EncounterZones.Add(newEncounterZoneRecord);
-                    break;
+                    return newEncounterZoneRecord;
                 case ("Location", CopyType.AsOverride):
                 case ("LocationBinaryOverlay", CopyType.AsOverride):
-                    mod.Locations.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Locations.GetOrAddAsOverride(Record);
                 case ("Location", CopyType.AsNewRecord):
                 case ("LocationBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Locations.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Locations.DuplicateInAsNewRecord(Record);
                 case ("Location", CopyType.DeepCopy):
                 case ("LocationBinaryOverlay", CopyType.DeepCopy):
                     Location newLocationRecord = (Location)Record.DeepCopy();
                     mod.Locations.Add(newLocationRecord);
-                    break;
+                    return newLocationRecord;
                 case ("Message", CopyType.AsOverride):
                 case ("MessageBinaryOverlay", CopyType.AsOverride):
-                    mod.Messages.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Messages.GetOrAddAsOverride(Record);
                 case ("Message", CopyType.AsNewRecord):
                 case ("MessageBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Messages.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Messages.DuplicateInAsNewRecord(Record);
                 case ("Message", CopyType.DeepCopy):
                 case ("MessageBinaryOverlay", CopyType.DeepCopy):
                     Message newMessageRecord = (Message)Record.DeepCopy();
                     mod.Messages.Add(newMessageRecord);
-                    break;
+                    return newMessageRecord;
                 case ("DefaultObjectManager", CopyType.AsOverride):
                 case ("DefaultObjectManagerBinaryOverlay", CopyType.AsOverride):
-                    mod.DefaultObjectManagers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.DefaultObjectManagers.GetOrAddAsOverride(Record);
                 case ("DefaultObjectManager", CopyType.AsNewRecord):
                 case ("DefaultObjectManagerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.DefaultObjectManagers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.DefaultObjectManagers.DuplicateInAsNewRecord(Record);
                 case ("DefaultObjectManager", CopyType.DeepCopy):
                 case ("DefaultObjectManagerBinaryOverlay", CopyType.DeepCopy):
                     DefaultObjectManager newDefaultObjectManagerRecord = (DefaultObjectManager)Record.DeepCopy();
                     mod.DefaultObjectManagers.Add(newDefaultObjectManagerRecord);
-                    break;
+                    return newDefaultObjectManagerRecord;
                 case ("DefaultObject", CopyType.AsOverride):
                 case ("DefaultObjectBinaryOverlay", CopyType.AsOverride):
-                    mod.DefaultObjects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.DefaultObjects.GetOrAddAsOverride(Record);
                 case ("DefaultObject", CopyType.AsNewRecord):
                 case ("DefaultObjectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.DefaultObjects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.DefaultObjects.DuplicateInAsNewRecord(Record);
                 case ("DefaultObject", CopyType.DeepCopy):
                 case ("DefaultObjectBinaryOverlay", CopyType.DeepCopy):
                     DefaultObject newDefaultObjectRecord = (DefaultObject)Record.DeepCopy();
                     mod.DefaultObjects.Add(newDefaultObjectRecord);
-                    break;
+                    return newDefaultObjectRecord;
                 case ("LightingTemplate", CopyType.AsOverride):
                 case ("LightingTemplateBinaryOverlay", CopyType.AsOverride):
-                    mod.LightingTemplates.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LightingTemplates.GetOrAddAsOverride(Record);
                 case ("LightingTemplate", CopyType.AsNewRecord):
                 case ("LightingTemplateBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LightingTemplates.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LightingTemplates.DuplicateInAsNewRecord(Record);
                 case ("LightingTemplate", CopyType.DeepCopy):
                 case ("LightingTemplateBinaryOverlay", CopyType.DeepCopy):
                     LightingTemplate newLightingTemplateRecord = (LightingTemplate)Record.DeepCopy();
                     mod.LightingTemplates.Add(newLightingTemplateRecord);
-                    break;
+                    return newLightingTemplateRecord;
                 case ("MusicType", CopyType.AsOverride):
                 case ("MusicTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.MusicTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MusicTypes.GetOrAddAsOverride(Record);
                 case ("MusicType", CopyType.AsNewRecord):
                 case ("MusicTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MusicTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MusicTypes.DuplicateInAsNewRecord(Record);
                 case ("MusicType", CopyType.DeepCopy):
                 case ("MusicTypeBinaryOverlay", CopyType.DeepCopy):
                     MusicType newMusicTypeRecord = (MusicType)Record.DeepCopy();
                     mod.MusicTypes.Add(newMusicTypeRecord);
-                    break;
+                    return newMusicTypeRecord;
                 case ("Footstep", CopyType.AsOverride):
                 case ("FootstepBinaryOverlay", CopyType.AsOverride):
-                    mod.Footsteps.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Footsteps.GetOrAddAsOverride(Record);
                 case ("Footstep", CopyType.AsNewRecord):
                 case ("FootstepBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Footsteps.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Footsteps.DuplicateInAsNewRecord(Record);
                 case ("Footstep", CopyType.DeepCopy):
                 case ("FootstepBinaryOverlay", CopyType.DeepCopy):
                     Footstep newFootstepRecord = (Footstep)Record.DeepCopy();
                     mod.Footsteps.Add(newFootstepRecord);
-                    break;
+                    return newFootstepRecord;
                 case ("FootstepSet", CopyType.AsOverride):
                 case ("FootstepSetBinaryOverlay", CopyType.AsOverride):
-                    mod.FootstepSets.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.FootstepSets.GetOrAddAsOverride(Record);
                 case ("FootstepSet", CopyType.AsNewRecord):
                 case ("FootstepSetBinaryOverlay", CopyType.AsNewRecord):
-                    mod.FootstepSets.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.FootstepSets.DuplicateInAsNewRecord(Record);
                 case ("FootstepSet", CopyType.DeepCopy):
                 case ("FootstepSetBinaryOverlay", CopyType.DeepCopy):
                     FootstepSet newFootstepSetRecord = (FootstepSet)Record.DeepCopy();
                     mod.FootstepSets.Add(newFootstepSetRecord);
-                    break;
+                    return newFootstepSetRecord;
                 case ("StoryManagerBranchNode", CopyType.AsOverride):
                 case ("StoryManagerBranchNodeBinaryOverlay", CopyType.AsOverride):
-                    mod.StoryManagerBranchNodes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.StoryManagerBranchNodes.GetOrAddAsOverride(Record);
                 case ("StoryManagerBranchNode", CopyType.AsNewRecord):
                 case ("StoryManagerBranchNodeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.StoryManagerBranchNodes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.StoryManagerBranchNodes.DuplicateInAsNewRecord(Record);
                 case ("StoryManagerBranchNode", CopyType.DeepCopy):
                 case ("StoryManagerBranchNodeBinaryOverlay", CopyType.DeepCopy):
                     StoryManagerBranchNode newStoryManagerBranchNodeRecord = (StoryManagerBranchNode)Record.DeepCopy();
                     mod.StoryManagerBranchNodes.Add(newStoryManagerBranchNodeRecord);
-                    break;
+                    return newStoryManagerBranchNodeRecord;
                 case ("StoryManagerQuestNode", CopyType.AsOverride):
                 case ("StoryManagerQuestNodeBinaryOverlay", CopyType.AsOverride):
-                    mod.StoryManagerQuestNodes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.StoryManagerQuestNodes.GetOrAddAsOverride(Record);
                 case ("StoryManagerQuestNode", CopyType.AsNewRecord):
                 case ("StoryManagerQuestNodeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.StoryManagerQuestNodes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.StoryManagerQuestNodes.DuplicateInAsNewRecord(Record);
                 case ("StoryManagerQuestNode", CopyType.DeepCopy):
                 case ("StoryManagerQuestNodeBinaryOverlay", CopyType.DeepCopy):
                     StoryManagerQuestNode newStoryManagerQuestNodeRecord = (StoryManagerQuestNode)Record.DeepCopy();
                     mod.StoryManagerQuestNodes.Add(newStoryManagerQuestNodeRecord);
-                    break;
+                    return newStoryManagerQuestNodeRecord;
                 case ("StoryManagerEventNode", CopyType.AsOverride):
                 case ("StoryManagerEventNodeBinaryOverlay", CopyType.AsOverride):
-                    mod.StoryManagerEventNodes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.StoryManagerEventNodes.GetOrAddAsOverride(Record);
                 case ("StoryManagerEventNode", CopyType.AsNewRecord):
                 case ("StoryManagerEventNodeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.StoryManagerEventNodes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.StoryManagerEventNodes.DuplicateInAsNewRecord(Record);
                 case ("StoryManagerEventNode", CopyType.DeepCopy):
                 case ("StoryManagerEventNodeBinaryOverlay", CopyType.DeepCopy):
                     StoryManagerEventNode newStoryManagerEventNodeRecord = (StoryManagerEventNode)Record.DeepCopy();
                     mod.StoryManagerEventNodes.Add(newStoryManagerEventNodeRecord);
-                    break;
+                    return newStoryManagerEventNodeRecord;
                 case ("MusicTrack", CopyType.AsOverride):
                 case ("MusicTrackBinaryOverlay", CopyType.AsOverride):
-                    mod.MusicTracks.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MusicTracks.GetOrAddAsOverride(Record);
                 case ("MusicTrack", CopyType.AsNewRecord):
                 case ("MusicTrackBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MusicTracks.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MusicTracks.DuplicateInAsNewRecord(Record);
                 case ("MusicTrack", CopyType.DeepCopy):
                 case ("MusicTrackBinaryOverlay", CopyType.DeepCopy):
                     MusicTrack newMusicTrackRecord = (MusicTrack)Record.DeepCopy();
                     mod.MusicTracks.Add(newMusicTrackRecord);
-                    break;
+                    return newMusicTrackRecord;
                 case ("DialogView", CopyType.AsOverride):
                 case ("DialogViewBinaryOverlay", CopyType.AsOverride):
-                    mod.DialogViews.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.DialogViews.GetOrAddAsOverride(Record);
                 case ("DialogView", CopyType.AsNewRecord):
                 case ("DialogViewBinaryOverlay", CopyType.AsNewRecord):
-                    mod.DialogViews.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.DialogViews.DuplicateInAsNewRecord(Record);
                 case ("DialogView", CopyType.DeepCopy):
                 case ("DialogViewBinaryOverlay", CopyType.DeepCopy):
                     DialogView newDialogViewRecord = (DialogView)Record.DeepCopy();
                     mod.DialogViews.Add(newDialogViewRecord);
-                    break;
+                    return newDialogViewRecord;
                 case ("EquipType", CopyType.AsOverride):
                 case ("EquipTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.EquipTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.EquipTypes.GetOrAddAsOverride(Record);
                 case ("EquipType", CopyType.AsNewRecord):
                 case ("EquipTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.EquipTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.EquipTypes.DuplicateInAsNewRecord(Record);
                 case ("EquipType", CopyType.DeepCopy):
                 case ("EquipTypeBinaryOverlay", CopyType.DeepCopy):
                     EquipType newEquipTypeRecord = (EquipType)Record.DeepCopy();
                     mod.EquipTypes.Add(newEquipTypeRecord);
-                    break;
+                    return newEquipTypeRecord;
                 case ("Relationship", CopyType.AsOverride):
                 case ("RelationshipBinaryOverlay", CopyType.AsOverride):
-                    mod.Relationships.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Relationships.GetOrAddAsOverride(Record);
                 case ("Relationship", CopyType.AsNewRecord):
                 case ("RelationshipBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Relationships.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Relationships.DuplicateInAsNewRecord(Record);
                 case ("Relationship", CopyType.DeepCopy):
                 case ("RelationshipBinaryOverlay", CopyType.DeepCopy):
                     Relationship newRelationshipRecord = (Relationship)Record.DeepCopy();
                     mod.Relationships.Add(newRelationshipRecord);
-                    break;
+                    return newRelationshipRecord;
                 case ("AssociationType", CopyType.AsOverride):
                 case ("AssociationTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.AssociationTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AssociationTypes.GetOrAddAsOverride(Record);
                 case ("AssociationType", CopyType.AsNewRecord):
                 case ("AssociationTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AssociationTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AssociationTypes.DuplicateInAsNewRecord(Record);
                 case ("AssociationType", CopyType.DeepCopy):
                 case ("AssociationTypeBinaryOverlay", CopyType.DeepCopy):
                     AssociationType newAssociationTypeRecord = (AssociationType)Record.DeepCopy();
                     mod.AssociationTypes.Add(newAssociationTypeRecord);
-                    break;
+                    return newAssociationTypeRecord;
                 case ("Outfit", CopyType.AsOverride):
                 case ("OutfitBinaryOverlay", CopyType.AsOverride):
-                    mod.Outfits.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Outfits.GetOrAddAsOverride(Record);
                 case ("Outfit", CopyType.AsNewRecord):
                 case ("OutfitBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Outfits.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Outfits.DuplicateInAsNewRecord(Record);
                 case ("Outfit", CopyType.DeepCopy):
                 case ("OutfitBinaryOverlay", CopyType.DeepCopy):
                     Outfit newOutfitRecord = (Outfit)Record.DeepCopy();
                     mod.Outfits.Add(newOutfitRecord);
-                    break;
+                    return newOutfitRecord;
                 case ("ArtObject", CopyType.AsOverride):
                 case ("ArtObjectBinaryOverlay", CopyType.AsOverride):
-                    mod.ArtObjects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ArtObjects.GetOrAddAsOverride(Record);
                 case ("ArtObject", CopyType.AsNewRecord):
                 case ("ArtObjectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ArtObjects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ArtObjects.DuplicateInAsNewRecord(Record);
                 case ("ArtObject", CopyType.DeepCopy):
                 case ("ArtObjectBinaryOverlay", CopyType.DeepCopy):
                     ArtObject newArtObjectRecord = (ArtObject)Record.DeepCopy();
                     mod.ArtObjects.Add(newArtObjectRecord);
-                    break;
+                    return newArtObjectRecord;
                 case ("MaterialObject", CopyType.AsOverride):
                 case ("MaterialObjectBinaryOverlay", CopyType.AsOverride):
-                    mod.MaterialObjects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MaterialObjects.GetOrAddAsOverride(Record);
                 case ("MaterialObject", CopyType.AsNewRecord):
                 case ("MaterialObjectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MaterialObjects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MaterialObjects.DuplicateInAsNewRecord(Record);
                 case ("MaterialObject", CopyType.DeepCopy):
                 case ("MaterialObjectBinaryOverlay", CopyType.DeepCopy):
                     MaterialObject newMaterialObjectRecord = (MaterialObject)Record.DeepCopy();
                     mod.MaterialObjects.Add(newMaterialObjectRecord);
-                    break;
+                    return newMaterialObjectRecord;
                 case ("MovementType", CopyType.AsOverride):
                 case ("MovementTypeBinaryOverlay", CopyType.AsOverride):
-                    mod.MovementTypes.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MovementTypes.GetOrAddAsOverride(Record);
                 case ("MovementType", CopyType.AsNewRecord):
                 case ("MovementTypeBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MovementTypes.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MovementTypes.DuplicateInAsNewRecord(Record);
                 case ("MovementType", CopyType.DeepCopy):
                 case ("MovementTypeBinaryOverlay", CopyType.DeepCopy):
                     MovementType newMovementTypeRecord = (MovementType)Record.DeepCopy();
                     mod.MovementTypes.Add(newMovementTypeRecord);
-                    break;
+                    return newMovementTypeRecord;
                 case ("SoundDescriptor", CopyType.AsOverride):
                 case ("SoundDescriptorBinaryOverlay", CopyType.AsOverride):
-                    mod.SoundDescriptors.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.SoundDescriptors.GetOrAddAsOverride(Record);
                 case ("SoundDescriptor", CopyType.AsNewRecord):
                 case ("SoundDescriptorBinaryOverlay", CopyType.AsNewRecord):
-                    mod.SoundDescriptors.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.SoundDescriptors.DuplicateInAsNewRecord(Record);
                 case ("SoundDescriptor", CopyType.DeepCopy):
                 case ("SoundDescriptorBinaryOverlay", CopyType.DeepCopy):
                     SoundDescriptor newSoundDescriptorRecord = (SoundDescriptor)Record.DeepCopy();
                     mod.SoundDescriptors.Add(newSoundDescriptorRecord);
-                    break;
+                    return newSoundDescriptorRecord;
                 case ("SoundCategory", CopyType.AsOverride):
                 case ("SoundCategoryBinaryOverlay", CopyType.AsOverride):
-                    mod.SoundCategories.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.SoundCategories.GetOrAddAsOverride(Record);
                 case ("SoundCategory", CopyType.AsNewRecord):
                 case ("SoundCategoryBinaryOverlay", CopyType.AsNewRecord):
-                    mod.SoundCategories.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.SoundCategories.DuplicateInAsNewRecord(Record);
                 case ("SoundCategory", CopyType.DeepCopy):
                 case ("SoundCategoryBinaryOverlay", CopyType.DeepCopy):
                     SoundCategory newSoundCategoryRecord = (SoundCategory)Record.DeepCopy();
                     mod.SoundCategories.Add(newSoundCategoryRecord);
-                    break;
+                    return newSoundCategoryRecord;
                 case ("SoundOutputModel", CopyType.AsOverride):
                 case ("SoundOutputModelBinaryOverlay", CopyType.AsOverride):
-                    mod.SoundOutputModels.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.SoundOutputModels.GetOrAddAsOverride(Record);
                 case ("SoundOutputModel", CopyType.AsNewRecord):
                 case ("SoundOutputModelBinaryOverlay", CopyType.AsNewRecord):
-                    mod.SoundOutputModels.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.SoundOutputModels.DuplicateInAsNewRecord(Record);
                 case ("SoundOutputModel", CopyType.DeepCopy):
                 case ("SoundOutputModelBinaryOverlay", CopyType.DeepCopy):
                     SoundOutputModel newSoundOutputModelRecord = (SoundOutputModel)Record.DeepCopy();
                     mod.SoundOutputModels.Add(newSoundOutputModelRecord);
-                    break;
+                    return newSoundOutputModelRecord;
                 case ("CollisionLayer", CopyType.AsOverride):
                 case ("CollisionLayerBinaryOverlay", CopyType.AsOverride):
-                    mod.CollisionLayers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.CollisionLayers.GetOrAddAsOverride(Record);
                 case ("CollisionLayer", CopyType.AsNewRecord):
                 case ("CollisionLayerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.CollisionLayers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.CollisionLayers.DuplicateInAsNewRecord(Record);
                 case ("CollisionLayer", CopyType.DeepCopy):
                 case ("CollisionLayerBinaryOverlay", CopyType.DeepCopy):
                     CollisionLayer newCollisionLayerRecord = (CollisionLayer)Record.DeepCopy();
                     mod.CollisionLayers.Add(newCollisionLayerRecord);
-                    break;
+                    return newCollisionLayerRecord;
                 case ("ColorRecord", CopyType.AsOverride):
                 case ("ColorRecordBinaryOverlay", CopyType.AsOverride):
-                    mod.Colors.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Colors.GetOrAddAsOverride(Record);
                 case ("ColorRecord", CopyType.AsNewRecord):
                 case ("ColorRecordBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Colors.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Colors.DuplicateInAsNewRecord(Record);
                 case ("ColorRecord", CopyType.DeepCopy):
                 case ("ColorRecordBinaryOverlay", CopyType.DeepCopy):
                     ColorRecord newColorRecordRecord = (ColorRecord)Record.DeepCopy();
                     mod.Colors.Add(newColorRecordRecord);
-                    break;
+                    return newColorRecordRecord;
                 case ("ReverbParameters", CopyType.AsOverride):
                 case ("ReverbParametersBinaryOverlay", CopyType.AsOverride):
-                    mod.ReverbParameters.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ReverbParameters.GetOrAddAsOverride(Record);
                 case ("ReverbParameters", CopyType.AsNewRecord):
                 case ("ReverbParametersBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ReverbParameters.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ReverbParameters.DuplicateInAsNewRecord(Record);
                 case ("ReverbParameters", CopyType.DeepCopy):
                 case ("ReverbParametersBinaryOverlay", CopyType.DeepCopy):
                     ReverbParameters newReverbParametersRecord = (ReverbParameters)Record.DeepCopy();
                     mod.ReverbParameters.Add(newReverbParametersRecord);
-                    break;
+                    return newReverbParametersRecord;
                 case ("PackIn", CopyType.AsOverride):
                 case ("PackInBinaryOverlay", CopyType.AsOverride):
-                    mod.PackIns.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.PackIns.GetOrAddAsOverride(Record);
                 case ("PackIn", CopyType.AsNewRecord):
                 case ("PackInBinaryOverlay", CopyType.AsNewRecord):
-                    mod.PackIns.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.PackIns.DuplicateInAsNewRecord(Record);
                 case ("PackIn", CopyType.DeepCopy):
                 case ("PackInBinaryOverlay", CopyType.DeepCopy):
                     PackIn newPackInRecord = (PackIn)Record.DeepCopy();
                     mod.PackIns.Add(newPackInRecord);
-                    break;
+                    return newPackInRecord;
                 case ("ReferenceGroup", CopyType.AsOverride):
                 case ("ReferenceGroupBinaryOverlay", CopyType.AsOverride):
-                    mod.ReferenceGroups.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ReferenceGroups.GetOrAddAsOverride(Record);
                 case ("ReferenceGroup", CopyType.AsNewRecord):
                 case ("ReferenceGroupBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ReferenceGroups.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ReferenceGroups.DuplicateInAsNewRecord(Record);
                 case ("ReferenceGroup", CopyType.DeepCopy):
                 case ("ReferenceGroupBinaryOverlay", CopyType.DeepCopy):
                     ReferenceGroup newReferenceGroupRecord = (ReferenceGroup)Record.DeepCopy();
                     mod.ReferenceGroups.Add(newReferenceGroupRecord);
-                    break;
+                    return newReferenceGroupRecord;
                 case ("AimModel", CopyType.AsOverride):
                 case ("AimModelBinaryOverlay", CopyType.AsOverride):
-                    mod.AimModels.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AimModels.GetOrAddAsOverride(Record);
                 case ("AimModel", CopyType.AsNewRecord):
                 case ("AimModelBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AimModels.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AimModels.DuplicateInAsNewRecord(Record);
                 case ("AimModel", CopyType.DeepCopy):
                 case ("AimModelBinaryOverlay", CopyType.DeepCopy):
                     AimModel newAimModelRecord = (AimModel)Record.DeepCopy();
                     mod.AimModels.Add(newAimModelRecord);
-                    break;
+                    return newAimModelRecord;
                 case ("Layer", CopyType.AsOverride):
                 case ("LayerBinaryOverlay", CopyType.AsOverride):
-                    mod.Layers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Layers.GetOrAddAsOverride(Record);
                 case ("Layer", CopyType.AsNewRecord):
                 case ("LayerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Layers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Layers.DuplicateInAsNewRecord(Record);
                 case ("Layer", CopyType.DeepCopy):
                 case ("LayerBinaryOverlay", CopyType.DeepCopy):
                     Layer newLayerRecord = (Layer)Record.DeepCopy();
                     mod.Layers.Add(newLayerRecord);
-                    break;
+                    return newLayerRecord;
                 case ("ConstructibleObject", CopyType.AsOverride):
                 case ("ConstructibleObjectBinaryOverlay", CopyType.AsOverride):
-                    mod.ConstructibleObjects.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ConstructibleObjects.GetOrAddAsOverride(Record);
                 case ("ConstructibleObject", CopyType.AsNewRecord):
                 case ("ConstructibleObjectBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ConstructibleObjects.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ConstructibleObjects.DuplicateInAsNewRecord(Record);
                 case ("ConstructibleObject", CopyType.DeepCopy):
                 case ("ConstructibleObjectBinaryOverlay", CopyType.DeepCopy):
                     ConstructibleObject newConstructibleObjectRecord = (ConstructibleObject)Record.DeepCopy();
                     mod.ConstructibleObjects.Add(newConstructibleObjectRecord);
-                    break;
+                    return newConstructibleObjectRecord;
                 case ("AObjectModification", CopyType.AsOverride):
                 case ("AObjectModificationBinaryOverlay", CopyType.AsOverride):
-                    mod.ObjectModifications.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ObjectModifications.GetOrAddAsOverride(Record);
                 case ("AObjectModification", CopyType.AsNewRecord):
                 case ("AObjectModificationBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ObjectModifications.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ObjectModifications.DuplicateInAsNewRecord(Record);
                 case ("AObjectModification", CopyType.DeepCopy):
                 case ("AObjectModificationBinaryOverlay", CopyType.DeepCopy):
                     AObjectModification newAObjectModificationRecord = (AObjectModification)Record.DeepCopy();
                     mod.ObjectModifications.Add(newAObjectModificationRecord);
-                    break;
+                    return newAObjectModificationRecord;
                 case ("MaterialSwap", CopyType.AsOverride):
                 case ("MaterialSwapBinaryOverlay", CopyType.AsOverride):
-                    mod.MaterialSwaps.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.MaterialSwaps.GetOrAddAsOverride(Record);
                 case ("MaterialSwap", CopyType.AsNewRecord):
                 case ("MaterialSwapBinaryOverlay", CopyType.AsNewRecord):
-                    mod.MaterialSwaps.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.MaterialSwaps.DuplicateInAsNewRecord(Record);
                 case ("MaterialSwap", CopyType.DeepCopy):
                 case ("MaterialSwapBinaryOverlay", CopyType.DeepCopy):
                     MaterialSwap newMaterialSwapRecord = (MaterialSwap)Record.DeepCopy();
                     mod.MaterialSwaps.Add(newMaterialSwapRecord);
-                    break;
+                    return newMaterialSwapRecord;
                 case ("Zoom", CopyType.AsOverride):
                 case ("ZoomBinaryOverlay", CopyType.AsOverride):
-                    mod.Zooms.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.Zooms.GetOrAddAsOverride(Record);
                 case ("Zoom", CopyType.AsNewRecord):
                 case ("ZoomBinaryOverlay", CopyType.AsNewRecord):
-                    mod.Zooms.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.Zooms.DuplicateInAsNewRecord(Record);
                 case ("Zoom", CopyType.DeepCopy):
                 case ("ZoomBinaryOverlay", CopyType.DeepCopy):
                     Zoom newZoomRecord = (Zoom)Record.DeepCopy();
                     mod.Zooms.Add(newZoomRecord);
-                    break;
+                    return newZoomRecord;
                 case ("InstanceNamingRules", CopyType.AsOverride):
                 case ("InstanceNamingRulesBinaryOverlay", CopyType.AsOverride):
-                    mod.InstanceNamingRules.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.InstanceNamingRules.GetOrAddAsOverride(Record);
                 case ("InstanceNamingRules", CopyType.AsNewRecord):
                 case ("InstanceNamingRulesBinaryOverlay", CopyType.AsNewRecord):
-                    mod.InstanceNamingRules.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.InstanceNamingRules.DuplicateInAsNewRecord(Record);
                 case ("InstanceNamingRules", CopyType.DeepCopy):
                 case ("InstanceNamingRulesBinaryOverlay", CopyType.DeepCopy):
                     InstanceNamingRules newInstanceNamingRulesRecord = (InstanceNamingRules)Record.DeepCopy();
                     mod.InstanceNamingRules.Add(newInstanceNamingRulesRecord);
-                    break;
+                    return newInstanceNamingRulesRecord;
                 case ("SoundKeywordMapping", CopyType.AsOverride):
                 case ("SoundKeywordMappingBinaryOverlay", CopyType.AsOverride):
-                    mod.SoundKeywordMappings.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.SoundKeywordMappings.GetOrAddAsOverride(Record);
                 case ("SoundKeywordMapping", CopyType.AsNewRecord):
                 case ("SoundKeywordMappingBinaryOverlay", CopyType.AsNewRecord):
-                    mod.SoundKeywordMappings.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.SoundKeywordMappings.DuplicateInAsNewRecord(Record);
                 case ("SoundKeywordMapping", CopyType.DeepCopy):
                 case ("SoundKeywordMappingBinaryOverlay", CopyType.DeepCopy):
                     SoundKeywordMapping newSoundKeywordMappingRecord = (SoundKeywordMapping)Record.DeepCopy();
                     mod.SoundKeywordMappings.Add(newSoundKeywordMappingRecord);
-                    break;
+                    return newSoundKeywordMappingRecord;
                 case ("AudioEffectChain", CopyType.AsOverride):
                 case ("AudioEffectChainBinaryOverlay", CopyType.AsOverride):
-                    mod.AudioEffectChains.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AudioEffectChains.GetOrAddAsOverride(Record);
                 case ("AudioEffectChain", CopyType.AsNewRecord):
                 case ("AudioEffectChainBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AudioEffectChains.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AudioEffectChains.DuplicateInAsNewRecord(Record);
                 case ("AudioEffectChain", CopyType.DeepCopy):
                 case ("AudioEffectChainBinaryOverlay", CopyType.DeepCopy):
                     AudioEffectChain newAudioEffectChainRecord = (AudioEffectChain)Record.DeepCopy();
                     mod.AudioEffectChains.Add(newAudioEffectChainRecord);
-                    break;
+                    return newAudioEffectChainRecord;
                 case ("SceneCollection", CopyType.AsOverride):
                 case ("SceneCollectionBinaryOverlay", CopyType.AsOverride):
-                    mod.SceneCollections.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.SceneCollections.GetOrAddAsOverride(Record);
                 case ("SceneCollection", CopyType.AsNewRecord):
                 case ("SceneCollectionBinaryOverlay", CopyType.AsNewRecord):
-                    mod.SceneCollections.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.SceneCollections.DuplicateInAsNewRecord(Record);
                 case ("SceneCollection", CopyType.DeepCopy):
                 case ("SceneCollectionBinaryOverlay", CopyType.DeepCopy):
                     SceneCollection newSceneCollectionRecord = (SceneCollection)Record.DeepCopy();
                     mod.SceneCollections.Add(newSceneCollectionRecord);
-                    break;
+                    return newSceneCollectionRecord;
                 case ("AttractionRule", CopyType.AsOverride):
                 case ("AttractionRuleBinaryOverlay", CopyType.AsOverride):
-                    mod.AttractionRules.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AttractionRules.GetOrAddAsOverride(Record);
                 case ("AttractionRule", CopyType.AsNewRecord):
                 case ("AttractionRuleBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AttractionRules.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AttractionRules.DuplicateInAsNewRecord(Record);
                 case ("AttractionRule", CopyType.DeepCopy):
                 case ("AttractionRuleBinaryOverlay", CopyType.DeepCopy):
                     AttractionRule newAttractionRuleRecord = (AttractionRule)Record.DeepCopy();
                     mod.AttractionRules.Add(newAttractionRuleRecord);
-                    break;
+                    return newAttractionRuleRecord;
                 case ("AudioCategorySnapshot", CopyType.AsOverride):
                 case ("AudioCategorySnapshotBinaryOverlay", CopyType.AsOverride):
-                    mod.AudioCategorySnapshots.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AudioCategorySnapshots.GetOrAddAsOverride(Record);
                 case ("AudioCategorySnapshot", CopyType.AsNewRecord):
                 case ("AudioCategorySnapshotBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AudioCategorySnapshots.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AudioCategorySnapshots.DuplicateInAsNewRecord(Record);
                 case ("AudioCategorySnapshot", CopyType.DeepCopy):
                 case ("AudioCategorySnapshotBinaryOverlay", CopyType.DeepCopy):
                     AudioCategorySnapshot newAudioCategorySnapshotRecord = (AudioCategorySnapshot)Record.DeepCopy();
                     mod.AudioCategorySnapshots.Add(newAudioCategorySnapshotRecord);
-                    break;
+                    return newAudioCategorySnapshotRecord;
                 case ("AnimationSoundTagSet", CopyType.AsOverride):
                 case ("AnimationSoundTagSetBinaryOverlay", CopyType.AsOverride):
-                    mod.AnimationSoundTagSets.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.AnimationSoundTagSets.GetOrAddAsOverride(Record);
                 case ("AnimationSoundTagSet", CopyType.AsNewRecord):
                 case ("AnimationSoundTagSetBinaryOverlay", CopyType.AsNewRecord):
-                    mod.AnimationSoundTagSets.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.AnimationSoundTagSets.DuplicateInAsNewRecord(Record);
                 case ("AnimationSoundTagSet", CopyType.DeepCopy):
                 case ("AnimationSoundTagSetBinaryOverlay", CopyType.DeepCopy):
                     AnimationSoundTagSet newAnimationSoundTagSetRecord = (AnimationSoundTagSet)Record.DeepCopy();
                     mod.AnimationSoundTagSets.Add(newAnimationSoundTagSetRecord);
-                    break;
+                    return newAnimationSoundTagSetRecord;
                 case ("NavigationMeshObstacleManager", CopyType.AsOverride):
                 case ("NavigationMeshObstacleManagerBinaryOverlay", CopyType.AsOverride):
-                    mod.NavigationMeshObstacleManagers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.NavigationMeshObstacleManagers.GetOrAddAsOverride(Record);
                 case ("NavigationMeshObstacleManager", CopyType.AsNewRecord):
                 case ("NavigationMeshObstacleManagerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.NavigationMeshObstacleManagers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.NavigationMeshObstacleManagers.DuplicateInAsNewRecord(Record);
                 case ("NavigationMeshObstacleManager", CopyType.DeepCopy):
                 case ("NavigationMeshObstacleManagerBinaryOverlay", CopyType.DeepCopy):
                     NavigationMeshObstacleManager newNavigationMeshObstacleManagerRecord = (NavigationMeshObstacleManager)Record.DeepCopy();
                     mod.NavigationMeshObstacleManagers.Add(newNavigationMeshObstacleManagerRecord);
-                    break;
+                    return newNavigationMeshObstacleManagerRecord;
                 case ("LensFlare", CopyType.AsOverride):
                 case ("LensFlareBinaryOverlay", CopyType.AsOverride):
-                    mod.LensFlares.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.LensFlares.GetOrAddAsOverride(Record);
                 case ("LensFlare", CopyType.AsNewRecord):
                 case ("LensFlareBinaryOverlay", CopyType.AsNewRecord):
-                    mod.LensFlares.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.LensFlares.DuplicateInAsNewRecord(Record);
                 case ("LensFlare", CopyType.DeepCopy):
                 case ("LensFlareBinaryOverlay", CopyType.DeepCopy):
                     LensFlare newLensFlareRecord = (LensFlare)Record.DeepCopy();
                     mod.LensFlares.Add(newLensFlareRecord);
-                    break;
+                    return newLensFlareRecord;
                 case ("GodRays", CopyType.AsOverride):
                 case ("GodRaysBinaryOverlay", CopyType.AsOverride):
-                    mod.GodRays.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.GodRays.GetOrAddAsOverride(Record);
                 case ("GodRays", CopyType.AsNewRecord):
                 case ("GodRaysBinaryOverlay", CopyType.AsNewRecord):
-                    mod.GodRays.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.GodRays.DuplicateInAsNewRecord(Record);
                 case ("GodRays", CopyType.DeepCopy):
                 case ("GodRaysBinaryOverlay", CopyType.DeepCopy):
                     GodRays newGodRaysRecord = (GodRays)Record.DeepCopy();
                     mod.GodRays.Add(newGodRaysRecord);
-                    break;
+                    return newGodRaysRecord;
                 case ("ObjectVisibilityManager", CopyType.AsOverride):
                 case ("ObjectVisibilityManagerBinaryOverlay", CopyType.AsOverride):
-                    mod.ObjectVisibilityManagers.GetOrAddAsOverride(Record);
-                    break;
+                    return mod.ObjectVisibilityManagers.GetOrAddAsOverride(Record);
                 case ("ObjectVisibilityManager", CopyType.AsNewRecord):
                 case ("ObjectVisibilityManagerBinaryOverlay", CopyType.AsNewRecord):
-                    mod.ObjectVisibilityManagers.DuplicateInAsNewRecord(Record);
-                    break;
+                    return mod.ObjectVisibilityManagers.DuplicateInAsNewRecord(Record);
                 case ("ObjectVisibilityManager", CopyType.DeepCopy):
                 case ("ObjectVisibilityManagerBinaryOverlay", CopyType.DeepCopy):
                     ObjectVisibilityManager newObjectVisibilityManagerRecord = (ObjectVisibilityManager)Record.DeepCopy();
                     mod.ObjectVisibilityManagers.Add(newObjectVisibilityManagerRecord);
-                    break;
+                    return newObjectVisibilityManagerRecord;
+
                 default:
                     throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
-
             }
         }
+
     }
 
     [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
@@ -1856,7 +1607,7 @@ namespace PSMutagen.Fallout
 
         protected override void ProcessRecord()
         {
-            Helpers.CopyHelper(Mod, Record, CopyType.AsOverride);
+            WriteObject(Helpers.CopyHelper(Mod, Record, CopyType.AsOverride));
         }
     }
 
@@ -1871,7 +1622,7 @@ namespace PSMutagen.Fallout
 
         protected override void ProcessRecord()
         {
-            Helpers.CopyHelper(Mod, Record, CopyType.AsNewRecord);
+            WriteObject(Helpers.CopyHelper(Mod, Record, CopyType.AsNewRecord));
         }
     }
 
@@ -1886,7 +1637,7 @@ namespace PSMutagen.Fallout
 
         protected override void ProcessRecord()
         {
-            Helpers.CopyHelper(Mod, Record, CopyType.DeepCopy);
+            WriteObject(Helpers.CopyHelper(Mod, Record, CopyType.DeepCopy));
         }
     }
 }

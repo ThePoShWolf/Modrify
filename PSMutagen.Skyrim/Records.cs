@@ -24,10 +24,7 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            else
-            {
-                WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
-            }
+            WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
         }
     }
 

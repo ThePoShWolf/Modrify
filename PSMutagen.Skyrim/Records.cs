@@ -6,6 +6,7 @@ using Noggog;
 using System.Reflection.Metadata;
 using PSMutagen.Core;
 using Mutagen.Bethesda.Plugins.Binary.Translations;
+using Mutagen.Bethesda.Plugins;
 
 namespace PSMutagen.Skyrim
 {
@@ -1446,26 +1447,36 @@ namespace PSMutagen.Skyrim
         }
     }
 
-    [Cmdlet(VerbsCommon.Get, "SkyrimMajorRecords")]
+    [Cmdlet(VerbsCommon.Get, "SkyrimMajorRecords", DefaultParameterSetName = "bymodkey")]
     [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     public class GetSkyrimMajorRecords : PSCmdlet
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true)]
-        public required IModGetter Mod;
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = "bymod")]
+        public ISkyrimModGetter? Mod;
 
-        [Parameter()]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = "bymodkey")]
+        public ModKey? ModKey;
+
+        [Parameter(ParameterSetName = "bymodkey")]
+        [Parameter(ParameterSetName = "bymod")]
         // Set taken from MajorRecordTypes
         [ValidateSet("AcousticSpace", "ActionRecord", "Activator", "ActorValueInformation", "AddonNode", "AlchemicalApparatus", "Ammunition", "AnimatedObject", "APlacedTrap", "Armor", "ArmorAddon", "ArtObject", "AssociationType", "AStoryManagerNode", "BodyPartData", "Book", "CameraPath", "CameraShot", "Cell", "Class", "Climate", "CollisionLayer", "ColorRecord", "CombatStyle", "ConstructibleObject", "Container", "Debris", "DefaultObjectManager", "DialogBranch", "DialogResponses", "DialogTopic", "DialogView", "Door", "DualCastData", "EffectShader", "EncounterZone", "EquipType", "Explosion", "Eyes", "Faction", "Flora", "Footstep", "FootstepSet", "FormList", "Furniture", "GameSetting", "Global", "Grass", "Hair", "Hazard", "HeadPart", "IdleAnimation", "IdleMarker", "ImageSpace", "ImageSpaceAdapter", "Impact", "ImpactDataSet", "Ingestible", "Ingredient", "Key", "Keyword", "Landscape", "LandscapeTexture", "LensFlare", "LeveledItem", "LeveledNpc", "LeveledSpell", "Light", "LightingTemplate", "LoadScreen", "Location", "LocationReferenceType", "MagicEffect", "MaterialObject", "MaterialType", "Message", "MiscItem", "MoveableStatic", "MovementType", "MusicTrack", "MusicType", "NavigationMesh", "NavigationMeshInfoMap", "Npc", "ObjectEffect", "Outfit", "Package", "Perk", "PlacedNpc", "PlacedObject", "Projectile", "Quest", "Race", "Region", "Relationship", "ReverbParameters", "Scene", "Scroll", "ShaderParticleGeometry", "Shout", "SkyrimMajorRecord", "SoulGem", "SoundCategory", "SoundDescriptor", "SoundMarker", "SoundOutputModel", "Spell", "Static", "TalkingActivator", "TextureSet", "Tree", "VisualEffect", "VoiceType", "VolumetricLighting", "Water", "Weapon", "Weather", "WordOfPower", "Worldspace", "IPlaceableObject", "IReferenceableObject", "IExplodeSpawn", "IIdleRelation", "IObjectId", "IItem", "IItemOrList", "IConstructible", "IOutfitTarget", "IBindableEquipment", "IComplexLocation", "IDialog", "IOwner", "IRelatable", "IRegionTarget", "IAliasVoiceType", "ILockList", "IWorldspaceOrList", "IVoiceTypeOrList", "INpcOrList", "IWeaponOrList", "ISpellOrList", "IPlacedTrapTarget", "IHarvestTarget", "IMagicItem", "IKeywordLinkedReference", "INpcSpawn", "ISpellRecord", "IEmittance", "ILocationRecord", "IKnowable", "IEffectRecord", "ILinkedReference", "IPlaced", "IPlacedSimple", "IPlacedThing", "ISound")]
         public string? RecordType;
 
         protected override void ProcessRecord()
         {
+            if (ParameterSetName == "bymodkey")
+            {
+                ModPath path = $"{PSMutagenConfig.Environment.DataFolderPath}\\{ModKey.ToString()}";
+                Mod = SkyrimMod.CreateFromBinaryOverlay(path, PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease());
+            }
             if (RecordType == null)
             {
                 WriteObject(Mod.EnumerateMajorRecords());
             }
             else
             {
+                //WriteObject(Helpers.MajorRecordTypes[RecordType]);
                 WriteObject(Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]));
             }
         }

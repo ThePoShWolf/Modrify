@@ -1593,7 +1593,7 @@ namespace PSMutagen.Fallout
             if (ParameterSetName == "bymodkey")
             {
                 ModPath path = $"{PSMutagenConfig.TryGetEnvironment().DataFolderPath}\\{ModKey.ToString()}";
-                Mod = Fallout4Mod.CreateFromBinaryOverlay(path, PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
+                Mod = Fallout4Mod.CreateFromBinaryOverlay(path);
             }
             if (RecordType == null)
             {

@@ -1544,8 +1544,8 @@ namespace PSMutagen.Fallout
 
     }
 
-    [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     [Cmdlet(VerbsCommon.Get, "FalloutWinningOverrides")]
+    [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     public class GetFalloutWinningOverrides : PSCmdlet
     {
         [Parameter(Mandatory = true)]
@@ -1570,8 +1570,8 @@ namespace PSMutagen.Fallout
         }
     }
 
-    [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     [Cmdlet(VerbsCommon.Get, "FalloutMajorRecords")]
+    [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     public class GetFalloutMajorRecords : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
@@ -1597,6 +1597,7 @@ namespace PSMutagen.Fallout
     }
 
     [Cmdlet(VerbsCommon.Copy, "FalloutRecordAsOverride")]
+    [OutputType(typeof(Fallout4MajorRecord))]
     public class CopyFalloutRecordAsOverride : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
@@ -1612,6 +1613,7 @@ namespace PSMutagen.Fallout
     }
 
     [Cmdlet(VerbsCommon.Copy, "FalloutRecordAsNewRecord")]
+    [OutputType(typeof(Fallout4MajorRecord))]
     public class CopyFalloutRecordAsNewRecord : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
@@ -1627,6 +1629,7 @@ namespace PSMutagen.Fallout
     }
 
     [Cmdlet(VerbsCommon.Copy, "FalloutRecordAsDeepCopy")]
+    [OutputType(typeof(Fallout4MajorRecord))]
     public class CopyFallout4RecordAsDeepCopy : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]

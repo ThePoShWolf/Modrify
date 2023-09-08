@@ -1244,6 +1244,7 @@ namespace PSMutagen.Skyrim
                     VolumetricLighting newVolumetricLightingRecord = (VolumetricLighting)Record.DeepCopy();
                     mod.VolumetricLightings.Add(newVolumetricLightingRecord);
                     return newVolumetricLightingRecord;
+
                 default:
                     throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
             }

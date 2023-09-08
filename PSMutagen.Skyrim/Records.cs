@@ -1475,10 +1475,11 @@ namespace PSMutagen.Skyrim
     [OutputType(typeof(SkyrimMajorRecord))]
     public class CopySkyrimRecordAsOverride : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
         public required ISkyrimMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required ISkyrimMajorRecordGetter Record;
 
         protected override void ProcessRecord()
@@ -1491,10 +1492,11 @@ namespace PSMutagen.Skyrim
     [OutputType(typeof(SkyrimMajorRecord))]
     public class CopySkyrimRecordAsNewRecord : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
         public required ISkyrimMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required ISkyrimMajorRecordGetter Record;
 
         protected override void ProcessRecord()
@@ -1507,10 +1509,11 @@ namespace PSMutagen.Skyrim
     [OutputType(typeof(SkyrimMajorRecord))]
     public class CopySkyrimRecordAsDeepCopy : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
         public required ISkyrimMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required ISkyrimMajorRecordGetter Record;
 
         protected override void ProcessRecord()

@@ -74,7 +74,7 @@ namespace PSMutagen.Core
                 PSMutagenConfig.Environment = GameEnvironment.Typical.Construct(Game);
                 if (PassThru.IsPresent)
                 {
-                    WriteObject(PSMutagenConfig.Environment);
+                    WriteObject(PSMutagenConfig.TryGetEnvironment());
                 }
             }
             else
@@ -91,7 +91,7 @@ namespace PSMutagen.Core
     {
         protected override void ProcessRecord()
         {
-            WriteObject(PSMutagenConfig.Environment);
+            WriteObject(PSMutagenConfig.TryGetEnvironment());
         }
     }
 }

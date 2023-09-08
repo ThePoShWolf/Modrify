@@ -1,4 +1,14 @@
 $template = @'
+using Mutagen.Bethesda.Skyrim;
+using Mutagen.Bethesda;
+using Mutagen.Bethesda.Plugins.Records;
+using Noggog;
+using PSMutagen.Core;
+
+namespace PSMutagen.Skyrim
+{
+    public static partial class Helpers
+    {
         public static SkyrimMajorRecord CopyHelper(ISkyrimMod mod, ISkyrimMajorRecordGetter Record, CopyType copyType)
         {
             switch (Record.GetType().Name, copyType)
@@ -8,6 +18,8 @@ $template = @'
                     throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
             }
         }
+    }
+}
 '@
 
 $switchCaseTemplate = @'

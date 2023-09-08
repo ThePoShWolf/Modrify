@@ -34,7 +34,7 @@ namespace PSMutagen.Skyrim
         public IFileSystem? FileSystem;
 
         [Parameter()]
-        public SkyrimRelease Release = PSMutagenConfig.TryGetGameRelease().ToSkyrimRelease();
+        public SkyrimRelease Release = PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
         [Parameter(ParameterSetName = "readonly")]
         public SwitchParameter ReadOnly;
@@ -60,7 +60,7 @@ namespace PSMutagen.Skyrim
         public required ModKey ModKey;
 
         [Parameter()]
-        public SkyrimRelease Release = PSMutagenConfig.TryGetGameRelease().ToSkyrimRelease();
+        public SkyrimRelease Release = PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
         protected override void ProcessRecord()
         {

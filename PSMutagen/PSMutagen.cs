@@ -20,13 +20,13 @@ namespace PSMutagen.Core
     {
         public static IGameEnvironment? Environment;
 
-        public static GameRelease TryGetGameRelease()
+        public static IGameEnvironment TryGetEnvironment()
         {
             if (Environment == null)
             {
                 throw new InvalidOperationException("Unable to determine release. Please set the game environment first by running 'Set-MutaGameEnvironment' or passing the release with the -Release parameter");
             }
-            return Environment.GameRelease;
+            return Environment;
         }
 
         public static bool CheckIfModuleIsLoaded(GameRelease Game)

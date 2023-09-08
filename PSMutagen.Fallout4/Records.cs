@@ -1600,10 +1600,11 @@ namespace PSMutagen.Fallout
     [OutputType(typeof(Fallout4MajorRecord))]
     public class CopyFalloutRecordAsOverride : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
         public required IFallout4Mod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required IFallout4MajorRecordGetter Record;
 
         protected override void ProcessRecord()
@@ -1616,10 +1617,11 @@ namespace PSMutagen.Fallout
     [OutputType(typeof(Fallout4MajorRecord))]
     public class CopyFalloutRecordAsNewRecord : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
         public required IFallout4Mod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required IFallout4MajorRecordGetter Record;
 
         protected override void ProcessRecord()
@@ -1632,10 +1634,11 @@ namespace PSMutagen.Fallout
     [OutputType(typeof(Fallout4MajorRecord))]
     public class CopyFallout4RecordAsDeepCopy : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
         public required IFallout4Mod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required IFallout4MajorRecordGetter Record;
 
         protected override void ProcessRecord()

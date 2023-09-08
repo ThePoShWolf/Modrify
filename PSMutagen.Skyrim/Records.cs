@@ -24,13 +24,9 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            if (PSMutagenConfig.Environment == null)
-            {
-                throw new PSInvalidOperationException("Unable to load the load order. Please set your environment with 'Set-MutaGameEnvironment'");
-            }
             else
             {
-                WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.Environment.LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
+                WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
             }
         }
     }

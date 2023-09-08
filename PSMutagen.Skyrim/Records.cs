@@ -5,7 +5,6 @@ using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
 using PSMutagen.Core;
-using Mutagen.Bethesda.Plugins.Binary.Translations;
 using Mutagen.Bethesda.Plugins;
 
 namespace PSMutagen.Skyrim
@@ -1467,8 +1466,8 @@ namespace PSMutagen.Skyrim
         {
             if (ParameterSetName == "bymodkey")
             {
-                ModPath path = $"{PSMutagenConfig.Environment.DataFolderPath}\\{ModKey.ToString()}";
-                Mod = SkyrimMod.CreateFromBinaryOverlay(path, PSMutagenConfig.Environment.GameRelease.ToSkyrimRelease());
+                ModPath path = $"{PSMutagenConfig.TryGetEnvironment().DataFolderPath}\\{ModKey.ToString()}";
+                Mod = SkyrimMod.CreateFromBinaryOverlay(path, PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
             }
             if (RecordType == null)
             {

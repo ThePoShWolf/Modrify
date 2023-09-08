@@ -1422,6 +1422,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Get, "SkyrimWinningOverrides")]
+    [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     public class GetSkyrimWinningOverrides : PSCmdlet
     {
         [Parameter(Mandatory = true)]
@@ -1446,6 +1447,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Get, "SkyrimMajorRecords")]
+    [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     public class GetSkyrimMajorRecords : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
@@ -1470,6 +1472,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsOverride")]
+    [OutputType(typeof(SkyrimMajorRecord))]
     public class CopySkyrimRecordAsOverride : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
@@ -1485,6 +1488,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsNewRecord")]
+    [OutputType(typeof(SkyrimMajorRecord))]
     public class CopySkyrimRecordAsNewRecord : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
@@ -1500,6 +1504,7 @@ namespace PSMutagen.Skyrim
     }
 
     [Cmdlet(VerbsCommon.Copy, "SkyrimRecordAsDeepCopy")]
+    [OutputType(typeof(SkyrimMajorRecord))]
     public class CopySkyrimRecordAsDeepCopy : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]

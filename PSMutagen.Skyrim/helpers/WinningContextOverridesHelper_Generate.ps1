@@ -39,28 +39,9 @@ $skip = @(
 
 Get-ChildItem "$PSScriptRoot\..\build\*.dll" | ForEach-Object { Add-Type -Path $_.FullName }
 
-<#$skyrimTypes = [AppDomain]::CurrentDomain.GetAssemblies().GetTypes() | Where-Object { $_.Namespace -eq 'Mutagen.Bethesda.Skyrim' }
-$mrs = $skyrimTypes | Where-Object { $_.BaseType -eq [Mutagen.Bethesda.Skyrim.SkyrimMajorRecord] }#>
-
-
 $ge = [Mutagen.Bethesda.Environments.GameEnvironment]::Typical.Construct('SkyrimSE')
 $props = $ge.LoadOrder.PriorityOrder.ToArray()[-1].Mod.PSObject.Properties | Where-Object { $_.MemberType -eq 'Property' -and $_.TypeNameOfValue -like 'Mutagen.Bethesda.Skyrim.ISkyrimGroupGetter*' }
 $regex = '^Mutagen\.Bethesda\.Skyrim\.ISkyrimGroupGetter\`1\[\[Mutagen\.Bethesda\.Skyrim\.I(?<type>[^,]+)Getter'
-
-<#$cases = foreach ($prop in $props) {
-    if ($prop.TypeNameOfValue -match $regex) {
-        $strongType = $exceptions -contains $Matches.type ? "Mutagen.Bethesda.Skyrim.$($Matches.type)" : $Matches.type
-        $switchCaseTemplate -replace '\{type\}', $Matches.type -replace '\{name\}', $prop.Name -replace '\{strongtype\}', $strongType
-    } else {
-        
-    }
-}
-
-$template -replace '\{cases\}', ($cases + $default -join "`n") | Out-File $PSScriptRoot\CopyHelper.cs -Force#>
-
-<#$types = $mrs.Name | ForEach-Object {
-    $switchCaseTemplate -replace '\{type\}', $_
-}#>
 
 $types = foreach ($prop in $props) {
     if ($prop.TypeNameOfValue -match $regex) {

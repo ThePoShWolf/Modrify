@@ -9,7 +9,7 @@ namespace PSMutagen.Skyrim
 {
     public static partial class Helpers
     {
-        public static IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> Wco(string recordType)
+        public static IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverrides(string recordType)
         {
             IGameEnvironment<ISkyrimMod, ISkyrimModGetter> sge = GameEnvironment.Typical.Skyrim(PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
             switch (recordType)

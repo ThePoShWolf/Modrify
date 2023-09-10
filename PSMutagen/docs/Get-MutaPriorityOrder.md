@@ -19,6 +19,8 @@ Get-MutaPriorityOrder [<CommonParameters>]
 ## DESCRIPTION
 Assuming Set-MutaGameEnvironment has been run, this will return the current game's load order reversed, which means the last mod loaded is the first mod in the returned array.
 
+For example, in Skyrim Skyrim.esm is last in the returned array.
+
 ## EXAMPLES
 
 ### Example 1

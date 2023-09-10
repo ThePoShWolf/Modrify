@@ -1,10 +1,10 @@
 ﻿using System.Management.Automation;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Environments;
-using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
 using System.Collections;
+using Mutagen.Bethesda.Plugins;
 
 namespace PSMutagen.Core
 {
@@ -54,6 +54,11 @@ namespace PSMutagen.Core
                 default:
                     throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on PSMutagen's GitHub repository.");
             }
+        }
+
+        public static string ResolveModkeyPath(ModKey modkey)
+        {
+            return $"{TryGetEnvironment().DataFolderPath}\\{modkey}";
         }
     }
 

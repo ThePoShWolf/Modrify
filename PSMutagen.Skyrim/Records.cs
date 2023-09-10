@@ -56,7 +56,7 @@ namespace PSMutagen.Skyrim
         public required ISkyrimModGetter Mod;
 
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = "bymodkey")]
-        public ModKey? ModKey;
+        public ModKey ModKey;
 
         [Parameter(ParameterSetName = "bymodkey")]
         [Parameter(ParameterSetName = "bymod")]
@@ -68,8 +68,7 @@ namespace PSMutagen.Skyrim
         {
             if (ParameterSetName == "bymodkey")
             {
-                ModPath path = $"{PSMutagenConfig.TryGetEnvironment().DataFolderPath}\\{ModKey.ToString()}";
-                Mod = SkyrimMod.CreateFromBinaryOverlay(path, PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
+                Mod = SkyrimMod.CreateFromBinaryOverlay(PSMutagenConfig.ResolveModkeyPath(ModKey), PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
             }
             if (RecordType == null)
             {

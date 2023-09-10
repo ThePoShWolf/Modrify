@@ -9,16 +9,22 @@ using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Binary.Parameters;
 using System.IO.Abstractions;
+using PSMutagen.Core;
 
 namespace PSMutagen.Fallout4
 {
-    [Cmdlet(VerbsCommon.Get, "FalloutMod", DefaultParameterSetName = "readwrite")]
-    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "readonly" })]
-    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "readwrite" })]
+    [Cmdlet(VerbsCommon.Get, "Fallout4Mod", DefaultParameterSetName = "modkey-readwrite")]
+    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "path-readonly", "modkey-readonly" })]
+    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "path-readwrite", "path-readonly" })]
     public class GetFalloutMod : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readwrite")]
         public required ModPath Path;
+
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readwrite")]
+        public ModKey ModKey;
 
         [Parameter()]
         public GroupMask? ImportMask;
@@ -32,11 +38,16 @@ namespace PSMutagen.Fallout4
         [Parameter()]
         public IFileSystem? FileSystem;
 
-        [Parameter(ParameterSetName = "readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
         public SwitchParameter ReadOnly;
 
         protected override void ProcessRecord()
         {
+            if (ParameterSetName.StartsWith("modkey"))
+            {
+                Path = PSMutagenConfig.ResolveModkeyPath(ModKey);
+            }
             if (ReadOnly.IsPresent)
             {
                 WriteObject(Fallout4Mod.CreateFromBinaryOverlay(Path, StringsParam, FileSystem));

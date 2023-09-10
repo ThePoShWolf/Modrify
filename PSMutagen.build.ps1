@@ -69,8 +69,6 @@ task dotnetBuild {
         Get-ChildItem "$($modules[$m].basePath)\build\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
                 Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
-            } else {
-                Remove-Item $_.FullName -Force
             }
         }
 

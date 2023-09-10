@@ -1,10 +1,12 @@
 ﻿using System.Management.Automation;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Environments;
-using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
 using System.Collections;
+using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Order;
+using Mutagen.Bethesda.Plugins.Records;
 
 namespace PSMutagen.Core
 {
@@ -20,13 +22,13 @@ namespace PSMutagen.Core
     {
         public static IGameEnvironment? Environment;
 
-        public static GameRelease TryGetGameRelease()
+        public static IGameEnvironment TryGetEnvironment()
         {
             if (Environment == null)
             {
                 throw new InvalidOperationException("Unable to determine release. Please set the game environment first by running 'Set-MutaGameEnvironment' or passing the release with the -Release parameter");
             }
-            return Environment.GameRelease;
+            return Environment;
         }
 
         public static bool CheckIfModuleIsLoaded(GameRelease Game)
@@ -55,6 +57,11 @@ namespace PSMutagen.Core
                     throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on PSMutagen's GitHub repository.");
             }
         }
+
+        public static string ResolveModkeyPath(ModKey modkey)
+        {
+            return $"{TryGetEnvironment().DataFolderPath}\\{modkey}";
+        }
     }
 
     [Cmdlet(VerbsCommon.Set, "MutaGameEnvironment")]
@@ -74,7 +81,7 @@ namespace PSMutagen.Core
                 PSMutagenConfig.Environment = GameEnvironment.Typical.Construct(Game);
                 if (PassThru.IsPresent)
                 {
-                    WriteObject(PSMutagenConfig.Environment);
+                    WriteObject(PSMutagenConfig.TryGetEnvironment());
                 }
             }
             else
@@ -91,7 +98,27 @@ namespace PSMutagen.Core
     {
         protected override void ProcessRecord()
         {
-            WriteObject(PSMutagenConfig.Environment);
+            WriteObject(PSMutagenConfig.TryGetEnvironment());
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Get, "MutaLoadOrder")]
+    [OutputType(typeof(ILoadOrderGetter<IModListingGetter<IModGetter>>))]
+    public class GetMutaLoadOrder : PSCmdlet
+    {
+        protected override void ProcessRecord()
+        {
+            WriteObject(PSMutagenConfig.TryGetEnvironment().LoadOrder.ToArray());
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Get, "MutaPriorityOrder")]
+    [OutputType(typeof(IEnumerable<IModListingGetter<IModGetter>>))]
+    public class GetMutaPriorityOrder : PSCmdlet
+    {
+        protected override void ProcessRecord()
+        {
+            WriteObject(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder.ToArray());
         }
     }
 }

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-SkyrimMod
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns a Skyrim Mod object, optionally readonly.
 
 ## SYNTAX
 
@@ -37,16 +37,16 @@ Get-SkyrimMod -ModKey <ModKey> [-ImportMask <GroupMask>] [-StringsParam <Strings
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns a Skyrim Mod object either by path or mod name and optionally read only, which is more performant.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-SkyrimMod -ModKey HearthFires.esm -ReadOnly
 ```
 
-{{ Add example description here }}
+Returns a Skyrim Mod object that will contain all of the data in HearthFires.esm, specifically read only.
 
 ## PARAMETERS
 
@@ -81,7 +81,7 @@ Accept wildcard characters: False
 ```
 
 ### -ModKey
-{{ Fill ModKey Description }}
+This is the name of the mod. For example: Completionist.esp
 
 ```yaml
 Type: ModKey
@@ -111,7 +111,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+The fully qualified path to the mod.
 
 ```yaml
 Type: ModPath
@@ -126,7 +126,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReadOnly
-{{ Fill ReadOnly Description }}
+Optionally return the mod as readonly, which is much more performant. Useful for reporting purposes.
 
 ```yaml
 Type: SwitchParameter
@@ -141,7 +141,7 @@ Accept wildcard characters: False
 ```
 
 ### -Release
-{{ Fill Release Description }}
+Only required if you haven't already set your game environment with Set-MutaGameEnvironment.
 
 ```yaml
 Type: SkyrimRelease

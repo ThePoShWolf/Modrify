@@ -13,13 +13,13 @@ using PSMutagen.Core;
 
 namespace PSMutagen.Fallout4
 {
-    [Cmdlet(VerbsCommon.Get, "Fallout4Mod", DefaultParameterSetName = "readwrite")]
-    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "mod-readonly", "modkey-readonly" })]
-    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "mod-readwrite", "mod-readonly" })]
+    [Cmdlet(VerbsCommon.Get, "Fallout4Mod", DefaultParameterSetName = "modkey-readwrite")]
+    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "path-readonly", "modkey-readonly" })]
+    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "path-readwrite", "path-readonly" })]
     public class GetFalloutMod : PSCmdlet
     {
-        [Parameter(Mandatory = true, ParameterSetName = "mod-readonly")]
-        [Parameter(Mandatory = true, ParameterSetName = "mod-readwrite")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readwrite")]
         public required ModPath Path;
 
         [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
@@ -39,7 +39,7 @@ namespace PSMutagen.Fallout4
         public IFileSystem? FileSystem;
 
         [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
-        [Parameter(Mandatory = true, ParameterSetName = "mod-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
         public SwitchParameter ReadOnly;
 
         protected override void ProcessRecord()

@@ -13,13 +13,13 @@ using PSMutagen.Core;
 
 namespace PSMutagen.Skyrim
 {
-    [Cmdlet(VerbsCommon.Get, "SkyrimMod", DefaultParameterSetName = "readwrite")]
-    [OutputType(typeof(ISkyrimModDisposableGetter), ParameterSetName = new string[] { "mod-readonly", "modkey-readonly" })]
-    [OutputType(typeof(ISkyrimMod), ParameterSetName = new string[] { "mod-readwrite", "mod-readonly" })]
+    [Cmdlet(VerbsCommon.Get, "SkyrimMod", DefaultParameterSetName = "modkey-readwrite")]
+    [OutputType(typeof(ISkyrimModDisposableGetter), ParameterSetName = new string[] { "path-readonly", "modkey-readonly" })]
+    [OutputType(typeof(ISkyrimMod), ParameterSetName = new string[] { "path-readwrite", "path-readonly" })]
     public class GetSkyrimMod : PSCmdlet
     {
-        [Parameter(Mandatory = true, ParameterSetName = "mod-readonly")]
-        [Parameter(Mandatory = true, ParameterSetName = "mod-readwrite")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readwrite")]
         public required ModPath Path;
 
         [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
@@ -42,7 +42,7 @@ namespace PSMutagen.Skyrim
         public SkyrimRelease Release = PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
         [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
-        [Parameter(Mandatory = true, ParameterSetName = "mod-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
         public SwitchParameter ReadOnly;
 
         protected override void ProcessRecord()

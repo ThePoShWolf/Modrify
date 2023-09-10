@@ -106,10 +106,7 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            foreach (var rec in Helpers.CopyHelper(Mod, Record, CopyType.AsOverride))
-            {
-                WriteObject(rec);
-            }
+            WriteObject(Helpers.CopyHelper(Mod, Record, CopyType.AsOverride));
         }
     }
 

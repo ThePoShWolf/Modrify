@@ -5,6 +5,8 @@ using Noggog;
 using System.Reflection.Metadata;
 using System.Collections;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Order;
+using Mutagen.Bethesda.Plugins.Records;
 
 namespace PSMutagen.Core
 {
@@ -97,6 +99,26 @@ namespace PSMutagen.Core
         protected override void ProcessRecord()
         {
             WriteObject(PSMutagenConfig.TryGetEnvironment());
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Get, "MutaLoadOrder")]
+    [OutputType(typeof(ILoadOrderGetter<IModListingGetter<IModGetter>>))]
+    public class GetMutaLoadOrder : PSCmdlet
+    {
+        protected override void ProcessRecord()
+        {
+            WriteObject(PSMutagenConfig.TryGetEnvironment().LoadOrder.ToArray());
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Get, "MutaPriorityOrder")]
+    [OutputType(typeof(IEnumerable<IModListingGetter<IModGetter>>))]
+    public class GetMutaPriorityOrder : PSCmdlet
+    {
+        protected override void ProcessRecord()
+        {
+            WriteObject(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder.ToArray());
         }
     }
 }

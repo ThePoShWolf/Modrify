@@ -25,17 +25,39 @@ Writes the data stored in a SkyrimMod object to disk.
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
-{{ Add example code here }}
-{{ Add example code here }}
+# Create a new mod
+$mod = New-SkyrimMod -ModKey 'TestMod.esp'
+# find the nord race
+$nordRace = Get-SkyrimMajorRecords -ModKey Skyrim.esm -RecordType Race | Where-Object {$_.EditorID -eq 'NordRace'}
+# Get all nord NPCs
+$nordNpcs = Get-SkyrimMajorRecords -ModKey Skyrim.esm -RecordType Npc | Where-Object {$_.Race -eq $nordRace}
+# copy all nord NPCs as overrides into the new mod
+$overrides = $nordNpcs | Copy-SkyrimRecordAsOverride -Mod $mod
+# do something to the nords
+$overrides | %{
+    ...
+}
+# Write the new data to a file in the data directory
+Write-SkyrimMod -Mod $mod -Path "$((Get-MutaGameEnvironment).DataFolderPath)\TestMod.esp"
 ```
 
-{{ Add example description here }}
+This example gets all Nord NPCs using Get-SkyrimMajorRecords and filtering Where-Object.
+
+This will only return Races and NPCs from the Skyrim.esm master file. If you wish to get the winning overrides from your entire load order, use: Get-SkyrimWinningOverrides instead.
 
 ## PARAMETERS
 
 ### -BinaryWriteParameters
-{{ Fill BinaryWriteParameters Description }}
+The [Mutagen.Bethesda.Plugins.Binary.Parameters.BinaryWriteParameters] object to pass to the mod writer.
+
+In the future there will be a function to create this object type. For now, use:
+
+```powershell
+$bwp = [Mutagen.Bethesda.Plugins.Binary.Parameters.BinaryWriteParameters]::new()
+# If the modkey to write to is different then the modkey provided on mod creation, ignore that error
+$bwp.ModKey = [Mutagen.Bethesda.Plugins.Binary.Parameters.ModKeyOption]::NoCheck
+Write-SkyrimMod -Mod $mod -Path "$((Get-MutaGameEnvironment).DataFolderPath)\TestMod.esp"
+```
 
 ```yaml
 Type: BinaryWriteParameters
@@ -65,7 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### -Mod
-{{ Fill Mod Description }}
+The mod object to write. Can be created from scratch with New-SkyrimMod or retrieved from disk with Get-SkyrimMod.
 
 ```yaml
 Type: IMod
@@ -80,7 +102,7 @@ Accept wildcard characters: False
 ```
 
 ### -ParallelWriteParameters
-{{ Fill ParallelWriteParameters Description }}
+TBD
 
 ```yaml
 Type: ParallelWriteParameters
@@ -95,7 +117,13 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+The fully qualified file path to write to.
+
+The data folder can be retrieved with:
+
+```powershell
+(Get-MutaGameEnvironment).DataFolderPath
+```
 
 ```yaml
 Type: FileInfo
@@ -110,7 +138,9 @@ Accept wildcard characters: False
 ```
 
 ### -SkipCompressionFix
-{{ Fill SkipCompressionFix Description }}
+Currently Mutagen does not support writting mods that have the compression flag enabled so Write-SkyrimMod will cycle through each record and ensure that flag is disabled.
+
+Use this flag to disable that functionality.
 
 ```yaml
 Type: SwitchParameter

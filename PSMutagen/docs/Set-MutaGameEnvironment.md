@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-MutaGameEnvironment
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+The first command to run for any work in PSMutagen. This sets your game environment to be the specified game.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Set-MutaGameEnvironment [-Game] <GameRelease> [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+PSMutagen supports several game releases that are supported by Mutagen. In order to know which game to work with, you specify that with this command.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Set-MutaGameEnvironment SkyrimSE
 ```
 
-{{ Add example description here }}
+Sets the game environment to be Skyrim Special Edition.
 
 ## PARAMETERS
 
 ### -Game
-{{ Fill Game Description }}
+The game to be referenced. Not all games supported by Mutagen are yet supported by PSMutagen.
 
 ```yaml
 Type: GameRelease
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -PassThru
-{{ Fill PassThru Description }}
+Will return the GameEnvironment object.
 
 ```yaml
 Type: SwitchParameter

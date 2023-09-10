@@ -25,7 +25,7 @@ Write-FalloutMod -Mod <IMod> -Path <FileInfo> [-BinaryWriteParameters <BinaryWri
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

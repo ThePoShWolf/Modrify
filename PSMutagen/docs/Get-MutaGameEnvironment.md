@@ -23,7 +23,7 @@ The GameEnvironment object created by Set-MutaGameEnvironment has a lot of usefu
 
 ### Example 1
 ```powershell
-PS C:\> Get-MutaGameEnvironment
+Get-MutaGameEnvironment
 ```
 
 As simple as it comes, returns the GameEnvironment object.

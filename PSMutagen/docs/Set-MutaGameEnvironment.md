@@ -23,7 +23,7 @@ PSMutagen supports several game releases that are supported by Mutagen. In order
 
 ### Example 1
 ```powershell
-PS C:\> Set-MutaGameEnvironment SkyrimSE
+Set-MutaGameEnvironment SkyrimSE
 ```
 
 Sets the game environment to be Skyrim Special Edition.

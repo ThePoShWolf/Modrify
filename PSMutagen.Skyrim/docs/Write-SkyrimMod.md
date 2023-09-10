@@ -8,7 +8,7 @@ schema: 2.0.0
 # Write-SkyrimMod
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Writes a SkyrimMod object to disk.
 
 ## SYNTAX
 
@@ -19,13 +19,15 @@ Write-SkyrimMod -Mod <IMod> -Path <FileInfo> [-BinaryWriteParameters <BinaryWrit
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Writes the data stored in a SkyrimMod object to disk.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
+{{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

@@ -23,7 +23,7 @@ Copy-FalloutRecordAsNewRecord -Mod <IFallout4Mod> [-Record] <IFallout4MajorRecor
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

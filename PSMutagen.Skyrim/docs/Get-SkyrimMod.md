@@ -43,7 +43,7 @@ Returns a Skyrim Mod object either by path or mod name and optionally read only,
 
 ### Example 1
 ```powershell
-PS C:\> Get-SkyrimMod -ModKey HearthFires.esm -ReadOnly
+Get-SkyrimMod -ModKey HearthFires.esm -ReadOnly
 ```
 
 Returns a Skyrim Mod object that will contain all of the data in HearthFires.esm, specifically read only.

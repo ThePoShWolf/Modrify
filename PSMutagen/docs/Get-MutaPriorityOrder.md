@@ -25,7 +25,7 @@ For example, in Skyrim Skyrim.esm is last in the returned array.
 
 ### Example 1
 ```powershell
-PS C:\> Get-MutaPriorityOrder
+Get-MutaPriorityOrder
 ```
 
 Returns the reversed load order.

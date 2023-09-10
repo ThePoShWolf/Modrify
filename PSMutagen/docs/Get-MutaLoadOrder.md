@@ -25,7 +25,7 @@ For example, in Skyrim Skyrim.esm is the first item in this list.
 
 ### Example 1
 ```powershell
-PS C:\> Get-MutaLoadOrder
+Get-MutaLoadOrder
 ```
 
 Returns the load order.

@@ -58,10 +58,10 @@ namespace PSMutagen.Fallout4
     public class GetFalloutMajorRecords : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = "bymod")]
-        public IFallout4ModGetter? Mod;
+        public required IFallout4ModGetter Mod;
 
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = "bymodkey")]
-        public ModKey? ModKey;
+        public ModKey ModKey;
 
         [Parameter(ParameterSetName = "bymodkey")]
         [Parameter(ParameterSetName = "bymod")]
@@ -74,8 +74,7 @@ namespace PSMutagen.Fallout4
         {
             if (ParameterSetName == "bymodkey")
             {
-                ModPath path = $"{PSMutagenConfig.TryGetEnvironment().DataFolderPath}\\{ModKey.ToString()}";
-                Mod = Fallout4Mod.CreateFromBinaryOverlay(path);
+                Mod = Fallout4Mod.CreateFromBinaryOverlay(PSMutagenConfig.ResolveModkeyPath(ModKey));
             }
             if (RecordType == null)
             {

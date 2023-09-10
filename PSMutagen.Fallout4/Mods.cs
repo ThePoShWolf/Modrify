@@ -9,16 +9,22 @@ using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Binary.Parameters;
 using System.IO.Abstractions;
+using PSMutagen.Core;
 
 namespace PSMutagen.Fallout4
 {
-    [Cmdlet(VerbsCommon.Get, "FalloutMod", DefaultParameterSetName = "readwrite")]
-    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "readonly" })]
-    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "readwrite" })]
+    [Cmdlet(VerbsCommon.Get, "Fallout4Mod", DefaultParameterSetName = "readwrite")]
+    [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "mod-readonly", "modkey-readonly" })]
+    [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "mod-readwrite", "mod-readonly" })]
     public class GetFalloutMod : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ParameterSetName = "mod-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "mod-readwrite")]
         public required ModPath Path;
+
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readwrite")]
+        public ModKey ModKey;
 
         [Parameter()]
         public GroupMask? ImportMask;
@@ -32,11 +38,16 @@ namespace PSMutagen.Fallout4
         [Parameter()]
         public IFileSystem? FileSystem;
 
-        [Parameter(ParameterSetName = "readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "mod-readonly")]
         public SwitchParameter ReadOnly;
 
         protected override void ProcessRecord()
         {
+            if (ParameterSetName.StartsWith("modkey"))
+            {
+                Path = PSMutagenConfig.ResolveModkeyPath(ModKey);
+            }
             if (ReadOnly.IsPresent)
             {
                 WriteObject(Fallout4Mod.CreateFromBinaryOverlay(Path, StringsParam, FileSystem));

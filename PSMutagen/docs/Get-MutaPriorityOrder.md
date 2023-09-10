@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-MutaPriorityOrder
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the selected game's load order reversed.
 
 ## SYNTAX
 
@@ -17,16 +17,16 @@ Get-MutaPriorityOrder [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Assuming Set-MutaGameEnvironment has been run, this will return the current game's load order reversed, which means the last mod loaded is the first mod in the returned array.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-MutaPriorityOrder
 ```
 
-{{ Add example description here }}
+Returns the reversed load order.
 
 ## PARAMETERS
 

@@ -33,6 +33,17 @@ Sets the game environment to be Skyrim Special Edition.
 ### -Game
 The game to be referenced. Not all games supported by Mutagen are yet supported by PSMutagen.
 
+Options are:
+
+Oblivion
+SkyrimLE
+SkyrimSE
+SkyrimVR
+Fallout4
+EnderalLE
+EnderalSE
+SkyrimSEGog
+
 ```yaml
 Type: GameRelease
 Parameter Sets: (All)

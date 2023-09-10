@@ -2,10 +2,11 @@
 
 Powered by [Mutagen](https://github.com/Mutagen-Modding/Mutagen).
 
-PSMutagen is a PowerShell module intended to:
+PSMutagen is a PowerShell module with the goals of:
 
-- Provide the same or similar features as whats available to Pascal scripts in xEdit
+- Providing the same or similar features as whats available to scripting in xEdit
 - Make mod reading, editing, overriding (etc) easily accessible at the commandline
+- Expose the complete Mutagen functionality in PowerShell
 
 ## Installation
 
@@ -35,3 +36,5 @@ Start by setting your game environment:
 ```powershell
 Set-MutaGameEnvironment -Release SkyrimSE
 ```
+
+Once you've set the game environment, you will be able to use the other commands in each module.

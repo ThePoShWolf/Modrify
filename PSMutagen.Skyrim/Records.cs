@@ -26,7 +26,10 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            WriteObject(Helpers.WinningContextOverrides(RecordType).ToArray());
+            foreach (var rec in Helpers.WinningContextOverrides(RecordType).ToArray())
+            {
+                WriteObject(rec);
+            }
         }
     }
 
@@ -44,7 +47,10 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            WriteObject(OverrideMixIns.WinningOverrides(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray());
+            foreach (var rec in OverrideMixIns.WinningOverrides(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray())
+            {
+                WriteObject(rec);
+            }
         }
     }
 
@@ -72,12 +78,17 @@ namespace PSMutagen.Skyrim
             }
             if (RecordType == null)
             {
-                WriteObject(Mod.EnumerateMajorRecords().ToArray());
+                foreach (var rec in Mod.EnumerateMajorRecords().ToArray())
+                {
+                    WriteObject(rec);
+                }
             }
             else
             {
-                //WriteObject(Helpers.MajorRecordTypes[RecordType]);
-                WriteObject(Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]).ToArray());
+                foreach (var rec in Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]).ToArray())
+                {
+                    WriteObject(rec);
+                }
             }
         }
     }
@@ -95,7 +106,10 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            WriteObject(Helpers.CopyHelper(Mod, Record, CopyType.AsOverride));
+            foreach (var rec in Helpers.CopyHelper(Mod, Record, CopyType.AsOverride))
+            {
+                WriteObject(rec);
+            }
         }
     }
 

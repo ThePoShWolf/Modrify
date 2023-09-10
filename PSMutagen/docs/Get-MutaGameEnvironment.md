@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-MutaGameEnvironment
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the GameEnvironment object created by Set-MutaGameEnvironment.
 
 ## SYNTAX
 
@@ -17,16 +17,16 @@ Get-MutaGameEnvironment [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+The GameEnvironment object created by Set-MutaGameEnvironment has a lot of useful information about your game including the data folder path, the load order file path, and your load order.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-MutaGameEnvironment
 ```
 
-{{ Add example description here }}
+As simple as it comes, returns the GameEnvironment object.
 
 ## PARAMETERS
 

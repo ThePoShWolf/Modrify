@@ -72,12 +72,12 @@ namespace PSMutagen.Skyrim
             }
             if (RecordType == null)
             {
-                WriteObject(Mod.EnumerateMajorRecords());
+                WriteObject(Mod.EnumerateMajorRecords().ToArray());
             }
             else
             {
                 //WriteObject(Helpers.MajorRecordTypes[RecordType]);
-                WriteObject(Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]));
+                WriteObject(Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]).ToArray());
             }
         }
     }

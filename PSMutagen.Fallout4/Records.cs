@@ -78,11 +78,11 @@ namespace PSMutagen.Fallout4
             }
             if (RecordType == null)
             {
-                WriteObject(Mod.EnumerateMajorRecords());
+                WriteObject(Mod.EnumerateMajorRecords().ToArray());
             }
             else
             {
-                WriteObject(Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]));
+                WriteObject(Mod.EnumerateMajorRecords(Helpers.MajorRecordTypes[RecordType]).ToArray());
             }
         }
     }

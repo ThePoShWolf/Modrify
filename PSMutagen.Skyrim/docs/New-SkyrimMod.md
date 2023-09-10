@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-SkyrimMod
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a new Skyrim mod in memory.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ New-SkyrimMod -ModKey <ModKey> [-Release <SkyrimRelease>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns a new Skyrim mod in memory. Use Get-SkyrimMod to retrieve existing mods from disk.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+New-SkyrimMod -Modkey 'TestMod.esp'
 ```
 
-{{ Add example description here }}
+Creates a new mod in memory called 'TestMod.esp'
 
 ## PARAMETERS
 
 ### -ModKey
-{{ Fill ModKey Description }}
+The name of the mod.
 
 ```yaml
 Type: ModKey
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Release
-{{ Fill Release Description }}
+If you haven't already set your game environment with Set-MutaGameEnvironment, specify the Skyrim version with this parameter.
 
 ```yaml
 Type: SkyrimRelease

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-MutaLoadOrder
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the sorted load order for the selected game.
 
 ## SYNTAX
 
@@ -17,16 +17,18 @@ Get-MutaLoadOrder [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the sorted load order for the selected game. First mod loaded is the first mod in this array.
+
+For example, in Skyrim Skyrim.esm is the first item in this list.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-MutaLoadOrder
 ```
 
-{{ Add example description here }}
+Returns the load order.
 
 ## PARAMETERS
 

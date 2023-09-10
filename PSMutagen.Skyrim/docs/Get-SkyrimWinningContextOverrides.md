@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-SkyrimWinningContextOverrides
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the winning overrides with additional context.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Get-SkyrimWinningContextOverrides -RecordType <String> [-IncludeDeletedRecords <
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns an array of winning overrides contexts for the specified type for your entire load order. This is actually a very fast cmdlet.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+Get-SkyrimWinningContextOverrides -RecordType Npc
 ```
 
-{{ Add example description here }}
+Returns the Winning Context Override for all Npcs present in your load order.
 
 ## PARAMETERS
 
 ### -IncludeDeletedRecords
-{{ Fill IncludeDeletedRecords Description }}
+If true, includes deleted records.
 
 ```yaml
 Type: Boolean
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -RecordType
-{{ Fill RecordType Description }}
+The type of record to search for. Use tab completion to see the full list.
 
 ```yaml
 Type: String

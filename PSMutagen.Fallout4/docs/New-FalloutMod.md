@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-FalloutMod
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a new Fallout 4 mod in memory.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ New-FalloutMod -ModKey <ModKey> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns a new Fallout 4 mod in memory. Use Get-FalloutMod to retrieve existing mods from disk.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+New-FalloutMod -Modkey 'TestMod.esp'
 ```
 
-{{ Add example description here }}
+Creates a new mod in memory called 'TestMod.esp'
 
 ## PARAMETERS
 
 ### -ModKey
-{{ Fill ModKey Description }}
+The name of the mod.
 
 ```yaml
 Type: ModKey

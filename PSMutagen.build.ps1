@@ -125,6 +125,8 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
             $moduleManifestData['FormatsToProcess'] = "$($modules[$m].moduleName).format.ps1xml"
         }
         Update-ModuleManifest @moduleManifestData
+
+        Get-ChildItem $modules[$m].modulePath -Recurse
     }
 }
 

@@ -27,7 +27,7 @@ $mod = New-SkyrimMod -ModKey 'TestMod.esp'
 Get-SkyrimMajorRecord -Mod 'Skyrim.esm' -RecordType Npc | Copy-SkyrimRecordAsNewRecord -Mod $mod
 ```
 
-This will copy all Npcs from the Skyrim master file into TestMod as new records. This is very fast.
+This will copy all Npcs from the Skyrim master file into TestMod as new records. This is actually quite fast.
 
 ## PARAMETERS
 
@@ -48,6 +48,14 @@ Accept wildcard characters: False
 
 ### -Record
 The record to be copied.
+
+This can be created by going into a mod group or by using Get-SkyrimMajorRecords.
+
+For example, to get NPCs from a mod, use:
+
+```powershell
+(Get-SkyrimMod 'Skyrim.esm').Npc
+```
 
 ```yaml
 Type: ISkyrimMajorRecordGetter

@@ -41,7 +41,7 @@ $overrides | %{
 Write-SkyrimMod -Mod $mod -Path "$((Get-MutaGameEnvironment).DataFolderPath)\TestMod.esp"
 ```
 
-This example gets all Nord NPCs using Get-SkyrimMajorRecords and filtering Where-Object.
+This example gets all Nord NPCs using Get-SkyrimMajorRecords and filtering with Where-Object.
 
 This will only return Races and NPCs from the Skyrim.esm master file. If you wish to get the winning overrides from your entire load order, use: Get-SkyrimWinningOverrides instead.
 

@@ -1,3 +1,5 @@
+[![PSMutagen](https://img.shields.io/powershellgallery/v/PSMutagen.svg?style=flat-square&label=PSMutagen "PSMutagen")](https://www.powershellgallery.com/packages/PSMutagen/)
+
 # PSMutagen
 
 Powered by [Mutagen](https://github.com/Mutagen-Modding/Mutagen).
@@ -32,8 +34,8 @@ Since module dependency has been configured, if you install a submodule, it will
 
 The current list of submodules:
 
-- `PSMutagen.Skyrim`
-- `PSMutagen.Fallout4`
+- `PSMutagen.Skyrim`: [![PSMutagen.Skyrim](https://img.shields.io/powershellgallery/v/PSMutagen.Skyrim.svg?style=flat-square&label=PSMutagen.Skyrim "PSMutagen.Skyrim")](https://www.powershellgallery.com/packages/PSMutagen.Skyrim/)
+- `PSMutagen.Fallout4`: [![PSMutagen.Fallout4](https://img.shields.io/powershellgallery/v/PSMutagen.Fallout4.svg?style=flat-square&label=PSMutagen.Fallout4 "PSMutagen.Fallout4")](https://www.powershellgallery.com/packages/PSMutagen.Fallout4/)
 
 This list is based on support by the underlying library ([Mutagen](https://github.com/Mutagen-Modding/Mutagen)) as well as implementation here into this module. If you don't see a specific Bethesda game in this list, check Mutagen first. If Mutagen supports it, open an issue here and I will look at implementation.
 

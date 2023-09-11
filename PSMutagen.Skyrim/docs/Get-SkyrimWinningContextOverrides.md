@@ -17,7 +17,7 @@ Get-SkyrimWinningContextOverrides -RecordType <String> [-IncludeDeletedRecords <
 ```
 
 ## DESCRIPTION
-Returns an array of winning overrides contexts for the specified type for your entire load order. This is actually a very fast cmdlet.
+Returns an array of winning overrides contexts for the specified type for your entire load order. This is actually quite fast.
 
 ## EXAMPLES
 

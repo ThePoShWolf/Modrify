@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-FalloutWinningContextOverrides
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the winning overrides with additional context.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Get-FalloutWinningContextOverrides -RecordType <String> [-IncludeDeletedRecords 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns an array of winning overrides contexts for the specified type for your entire load order. This is actually quite fast.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+Get-FalloutWinningContextOverrides -RecordType Npc
 ```
 
-{{ Add example description here }}
+Returns the Winning Context Override for all Npcs present in your load order.
 
 ## PARAMETERS
 
 ### -IncludeDeletedRecords
-{{ Fill IncludeDeletedRecords Description }}
+If true, includes deleted records.
 
 ```yaml
 Type: Boolean
@@ -46,13 +46,13 @@ Accept wildcard characters: False
 ```
 
 ### -RecordType
-{{ Fill RecordType Description }}
+The type of record to search for. Use tab completion to see the full list.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: AcousticSpace, ActionRecord, Activator, ActorValueInformation, AddonNode, AlchemicalApparatus, Ammunition, AnimatedObject, APlacedTrap, Armor, ArmorAddon, ArtObject, AssociationType, AStoryManagerNode, BodyPartData, Book, CameraPath, CameraShot, Cell, Class, Climate, CollisionLayer, ColorRecord, CombatStyle, ConstructibleObject, Container, Debris, DefaultObjectManager, DialogBranch, DialogResponses, DialogTopic, DialogView, Door, DualCastData, EffectShader, EncounterZone, EquipType, Explosion, Eyes, Faction, Flora, Footstep, FootstepSet, FormList, Furniture, GameSetting, Global, Grass, Hair, Hazard, HeadPart, IdleAnimation, IdleMarker, ImageSpace, ImageSpaceAdapter, Impact, ImpactDataSet, Ingestible, Ingredient, Key, Keyword, Landscape, LandscapeTexture, LensFlare, LeveledItem, LeveledNpc, LeveledSpell, Light, LightingTemplate, LoadScreen, Location, LocationReferenceType, MagicEffect, MaterialObject, MaterialType, Message, MiscItem, MoveableStatic, MovementType, MusicTrack, MusicType, NavigationMesh, NavigationMeshInfoMap, Npc, ObjectEffect, Outfit, Package, Perk, PlacedNpc, PlacedObject, Projectile, Quest, Race, Region, Relationship, ReverbParameters, Scene, Scroll, ShaderParticleGeometry, Shout, SkyrimMajorRecord, SoulGem, SoundCategory, SoundDescriptor, SoundMarker, SoundOutputModel, Spell, Static, TalkingActivator, TextureSet, Tree, VisualEffect, VoiceType, VolumetricLighting, Water, Weapon, Weather, WordOfPower, Worldspace, IPlaceableObject, IReferenceableObject, IExplodeSpawn, IIdleRelation, IObjectId, IItem, IItemOrList, IConstructible, IOutfitTarget, IBindableEquipment, IComplexLocation, IDialog, IOwner, IRelatable, IRegionTarget, IAliasVoiceType, ILockList, IWorldspaceOrList, IVoiceTypeOrList, INpcOrList, IWeaponOrList, ISpellOrList, IPlacedTrapTarget, IHarvestTarget, IMagicItem, IKeywordLinkedReference, INpcSpawn, ISpellRecord, IEmittance, ILocationRecord, IKnowable, IEffectRecord, ILinkedReference, IPlaced, IPlacedSimple, IPlacedThing, ISound
+Accepted values: ActionRecord, Activator, ActorValueInformation, ADamageType, AddonNode, Ammunition, APlacedTrap, Armor, ArmorAddon, ArtObject, AStoryManagerNode, Book, CameraPath, CameraShot, Cell, Climate, CollisionLayer, ColorRecord, CombatStyle, Container, DialogBranch, DialogResponses, DialogTopic, Door, EffectShader, EncounterZone, EquipType, Explosion, Faction, Furniture, GameSetting, Global, Grass, Hazard, HeadPart, Holotape, IdleAnimation, IdleMarker, ImageSpace, ImageSpaceAdapter, Impact, Ingestible, Ingredient, InstanceNamingRules, Key, Keyword, LeveledItem, LeveledNpc, Light, LoadScreen, Location, MagicEffect, MaterialObject, MaterialSwap, MaterialType, Message, MiscItem, MovableStatic, MusicTrack, MusicType, NavigationMesh, Npc, ObjectEffect, AObjectModification, Package, PackIn, Perk, PlacedNpc, PlacedObject, Projectile, Quest, Race, Region, Relationship, Scene, ShaderParticleGeometry, SoundCategory, SoundDescriptor, SoundOutputModel, Static, StaticCollection, TalkingActivator, Terminal, TextureSet, Transform, Tree, VisualEffect, VoiceType, Water, Weapon, Weather, Worldspace, Zoom, AttractionRule, Component, LocationReferenceType, AnimationSoundTagSet, Class, Debris, FormList, ImpactDataSet, LeveledSpell, Outfit, SoundMarker, AcousticSpace, ReverbParameters, LandscapeTexture, Spell, Footstep, FootstepSet, GodRays, LensFlare, Flora, BodyPartData, MovementType, DualCastData, ConstructibleObject, AimModel, BendableSpline, NavigationMeshInfoMap, LightingTemplate, Layer, ReferenceGroup, Landscape, AnimatedObject, DefaultObjectManager, DefaultObject, DialogView, AssociationType, AudioEffectChain, SoundKeywordMapping, SceneCollection, AudioCategorySnapshot, NavigationMeshObstacleManager, ObjectVisibilityManager
 
 Required: True
 Position: Named

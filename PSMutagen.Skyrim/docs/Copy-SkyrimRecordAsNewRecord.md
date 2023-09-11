@@ -8,7 +8,7 @@ schema: 2.0.0
 # Copy-SkyrimRecordAsNewRecord
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Copy a record as a new record into a mod file.
 
 ## SYNTAX
 
@@ -17,21 +17,22 @@ Copy-SkyrimRecordAsNewRecord -Mod <ISkyrimMod> [-Record] <ISkyrimMajorRecordGett
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Copies the selected record into a mod as a new record. Requires a mod object to have been created with Get-SkyrimMod, New-SkyrimMod, or pull from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+$mod = New-SkyrimMod -ModKey 'TestMod.esp'
+Get-SkyrimMajorRecord -Mod 'Skyrim.esm' -RecordType Npc | Copy-SkyrimRecordAsNewRecord -Mod $mod
 ```
 
-{{ Add example description here }}
+This will copy all Npcs from the Skyrim master file into TestMod as new records. This is very fast.
 
 ## PARAMETERS
 
 ### -Mod
-{{ Fill Mod Description }}
+The mod object. Created with Get-SkyrimMod, New-SkyrimMod, or pulled from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
 
 ```yaml
 Type: ISkyrimMod
@@ -46,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -Record
-{{ Fill Record Description }}
+The record to be copied.
 
 ```yaml
 Type: ISkyrimMajorRecordGetter

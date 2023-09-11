@@ -8,7 +8,7 @@ schema: 2.0.0
 # Copy-FalloutRecordAsOverride
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Copy a record as an override into a mod file.
 
 ## SYNTAX
 
@@ -17,21 +17,22 @@ Copy-FalloutRecordAsOverride -Mod <IFallout4Mod> [-Record] <IFallout4MajorRecord
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Copies the selected record into a mod as an override. Requires a mod object to have been created with Get-SkyrimMod, New-SkyrimMod, or pull from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+$mod = New-SkyrimMod -ModKey 'TestMod.esp'
+Get-SkyrimMajorRecord -Mod 'Skyrim.esm' -RecordType Npc | Copy-SkyrimRecordAsOverride -Mod $mod
 ```
 
-{{ Add example description here }}
+This will copy all Npcs from the Skyrim master file into TestMod as an override. This is actually quite fast.
 
 ## PARAMETERS
 
 ### -Mod
-{{ Fill Mod Description }}
+The mod object. Created with Get-SkyrimMod, New-SkyrimMod, or pulled from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
 
 ```yaml
 Type: IFallout4Mod
@@ -46,7 +47,15 @@ Accept wildcard characters: False
 ```
 
 ### -Record
-{{ Fill Record Description }}
+The record to be copied.
+
+This can be created by going into a mod group or by using Get-FalloutMajorRecords.
+
+For example, to get NPCs from a mod, use:
+
+```powershell
+(Get-FalloutMod 'Fallout4.esm').Npc
+```
 
 ```yaml
 Type: IFallout4MajorRecordGetter

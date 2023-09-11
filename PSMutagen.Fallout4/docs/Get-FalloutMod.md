@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-Fallout4Mod
 
 ## SYNOPSIS
-Returns a Skyrim Mod object, optionally readonly.
+Returns a Fallout 4 Mod object, optionally readonly.
 
 ## SYNTAX
 
@@ -37,16 +37,16 @@ Get-Fallout4Mod -ModKey <ModKey> [-ImportMask <GroupMask>] [-StringsParam <Strin
 ```
 
 ## DESCRIPTION
-Returns a Skyrim Mod object either by path or mod name and optionally read only, which is more performant.
+Returns a Fallout 4 Mod object either by path or mod name and optionally read only, which is more performant.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-Get-SkyrimMod -ModKey HearthFires.esm -ReadOnly
+Get-FalloutMod -ModKey HearthFires.esm -ReadOnly
 ```
 
-Returns a Skyrim Mod object that will contain all of the data in HearthFires.esm, specifically read only.
+Returns a Fallout 4 Mod object that will contain all of the data in HearthFires.esm, specifically read only.
 
 ## PARAMETERS
 

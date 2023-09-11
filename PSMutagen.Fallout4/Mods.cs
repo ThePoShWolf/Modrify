@@ -13,7 +13,7 @@ using PSMutagen.Core;
 
 namespace PSMutagen.Fallout4
 {
-    [Cmdlet(VerbsCommon.Get, "Fallout4Mod", DefaultParameterSetName = "modkey-readwrite")]
+    [Cmdlet(VerbsCommon.Get, "FalloutMod", DefaultParameterSetName = "modkey-readwrite")]
     [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "path-readonly", "modkey-readonly" })]
     [OutputType(typeof(IFallout4Mod), ParameterSetName = new string[] { "path-readwrite", "path-readonly" })]
     public class GetFalloutMod : PSCmdlet

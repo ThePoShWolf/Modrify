@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-FalloutWinningOverrides
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns winning overrides for your entire load order.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Get-FalloutWinningOverrides -RecordType <String> [-IncludeDeletedRecords <Boolea
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns an array of winning overrides of the specified type for your entire load order. This is actually a very fast cmdlet.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+Get-FalloutWinningOverrides -RecordType Npc
 ```
 
-{{ Add example description here }}
+Returns the winning override for all NPCs.
 
 ## PARAMETERS
 
 ### -IncludeDeletedRecords
-{{ Fill IncludeDeletedRecords Description }}
+If true, returns deleted records as well.
 
 ```yaml
 Type: Boolean

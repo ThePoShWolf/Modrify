@@ -81,7 +81,9 @@ Accept wildcard characters: False
 ```
 
 ### -ModKey
-This is the name of the mod. For example: Completionist.esp
+This is the file name of the mod. For example: "Unofficial Skyrim Special Edition Patch.esp".
+
+If this parameter is used, the mod will be searched for in the data folder.
 
 ```yaml
 Type: ModKey
@@ -111,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-The fully qualified path to the mod.
+The fully qualified path to the mod file.
 
 ```yaml
 Type: ModPath

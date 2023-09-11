@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-Fallout4Mod
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns a Skyrim Mod object, optionally readonly.
 
 ## SYNTAX
 
@@ -37,16 +37,16 @@ Get-Fallout4Mod -ModKey <ModKey> [-ImportMask <GroupMask>] [-StringsParam <Strin
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns a Skyrim Mod object either by path or mod name and optionally read only, which is more performant.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+Get-SkyrimMod -ModKey HearthFires.esm -ReadOnly
 ```
 
-{{ Add example description here }}
+Returns a Skyrim Mod object that will contain all of the data in HearthFires.esm, specifically read only.
 
 ## PARAMETERS
 
@@ -81,7 +81,9 @@ Accept wildcard characters: False
 ```
 
 ### -ModKey
-{{ Fill ModKey Description }}
+This is the file name of the mod. For example: "Unofficial Fallout 4 Patch.esp"
+
+If this parameter is used, the mod will be searched for in the data folder.
 
 ```yaml
 Type: ModKey
@@ -111,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+The fully qualified path to the mod file.
 
 ```yaml
 Type: ModPath
@@ -126,7 +128,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReadOnly
-{{ Fill ReadOnly Description }}
+Optionally return the mod as readonly, which is much more performant. Useful for reporting purposes.
 
 ```yaml
 Type: SwitchParameter

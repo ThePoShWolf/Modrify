@@ -49,6 +49,14 @@ Accept wildcard characters: False
 ### -Record
 The record to be copied.
 
+This can be created by going into a mod group or by using Get-SkyrimMajorRecords.
+
+For example, to get NPCs from a mod, use:
+
+```powershell
+(Get-SkyrimMod 'Skyrim.esm').Npc
+```
+
 ```yaml
 Type: ISkyrimMajorRecordGetter
 Parameter Sets: (All)

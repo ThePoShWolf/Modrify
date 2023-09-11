@@ -8,7 +8,7 @@ schema: 2.0.0
 # Copy-FalloutRecordAsDeepCopy
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Copy a record as a new record into a mod file, preserving the FormKey.
 
 ## SYNTAX
 
@@ -17,21 +17,22 @@ Copy-FalloutRecordAsDeepCopy -Mod <IFallout4Mod> [-Record] <IFallout4MajorRecord
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Copies the selected record into a mod as a new record, preserving the FormKey. Requires a mod object to have been created with Get-FalloutMod, New-FalloutMod, or pull from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+$mod = New-FalloutMod -ModKey 'TestMod.esp'
+Get-FalloutMajorRecord -Mod 'Fallout4.esm' -RecordType Npc | Copy-FalloutRecordAsDeepCopy -Mod $mod
 ```
 
-{{ Add example description here }}
+This will copy all Npcs from the Fallout 4 master file into TestMod as new records, preserving the FormKey.
 
 ## PARAMETERS
 
 ### -Mod
-{{ Fill Mod Description }}
+The mod object. Created with Get-FalloutMod, New-FalloutMod, or pulled from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
 
 ```yaml
 Type: IFallout4Mod
@@ -46,7 +47,15 @@ Accept wildcard characters: False
 ```
 
 ### -Record
-{{ Fill Record Description }}
+The record to be copied.
+
+This can be created by going into a mod group or by using Get-FalloutMajorRecords.
+
+For example, to get NPCs from a mod, use:
+
+```powershell
+(Get-FalloutMod 'Fallout4.esm').Npc
+```
 
 ```yaml
 Type: IFallout4MajorRecordGetter

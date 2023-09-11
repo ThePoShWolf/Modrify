@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-SkyrimMajorRecords
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns major records from a Skyrim mod.
 
 ## SYNTAX
 
@@ -23,21 +23,21 @@ Get-SkyrimMajorRecords [-Mod] <ISkyrimModGetter> [-RecordType <String>] [<Common
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns major records from the specific Skyrim mod. Either all records or the specified type of records.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+Get-SkyrimMajorRecords -ModKey 'Skyrim.esm' -RecordType Npc
 ```
 
-{{ Add example description here }}
+Gets all NPCs from the Skyrim master file.
 
 ## PARAMETERS
 
 ### -Mod
-{{ Fill Mod Description }}
+A SkyrimMod object either created with New-SkyrimMod, Get-SkyrimMod, or pull from the load order with Get-MutaLoadOrder/Get-MutaPriorityOrder
 
 ```yaml
 Type: ISkyrimModGetter
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -ModKey
-{{ Fill ModKey Description }}
+The name of a mod to pull. The cmdlet will look for the mod in the data folder.
 
 ```yaml
 Type: ModKey
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -RecordType
-{{ Fill RecordType Description }}
+The type of record to be returned. Use tab-completion to see the full list.
 
 ```yaml
 Type: String

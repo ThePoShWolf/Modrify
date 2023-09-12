@@ -23,6 +23,12 @@ jobs:
         shell: pwsh
         run: Invoke-Build -Task ModuleBuild
 
+      - name: Archive results
+        uses: actions/upload-artifact@v3
+        with:
+          name: PSMutagen-All
+          path: /build
+
       # Not sure how to test this module in a github actions pipeline without installing a Bethesda game on the runner.
       # - name: Test Module
       #   shell: pwsh

@@ -27,6 +27,7 @@ task Clean {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Cleaning $m..."
         if (Get-Module $modules[$m].moduleName) {
             Remove-Module $modules[$m].moduleName
         }
@@ -45,6 +46,7 @@ task DocBuild ModuleBuild, {
         if (-not (Test-Path $modules[$m].docPath)) {
             New-Item $modules[$m].docPath -ItemType Directory
         }
+        Write-Host "Building docs for $m..."
         New-ExternalHelp $modules[$m].docPath -OutputPath "$($modules[$m].modulePath)\EN-US"
     }
 }
@@ -54,6 +56,7 @@ task dotnetBuild {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Building $m..."
         Set-Location $modules[$m].basePath
         dotnet clean
         dotnet restore
@@ -86,6 +89,7 @@ task GenerateFormats {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Generating formats for $m..."
         # Generate the formats
         & "$($modules[$m].basePath)\$($modules[$m].moduleName).ezout.ps1" -RelativeDestination "../build/$($modules[$m].moduleName)"
     }
@@ -97,9 +101,8 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
-
+        Write-Host "Building the manifest for $m..."
         # Get exported functions
-        Write-Host "Generating exported functions for $($m)..."
         if ($modules[$m].isSubModule) {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\PSMutagen\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\PSMutagen\PSMutagen.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
         } else {
@@ -147,6 +150,7 @@ task Publish Test, DocBuild, {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Publishing $m..."
         if ($null -ne $NugetApiKey) {
             Publish-Module -Path $modules[$m].modulePath -NuGetApiKey $NugetApiKey -Repository PsGallery
         }

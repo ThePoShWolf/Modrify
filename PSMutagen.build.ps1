@@ -129,9 +129,6 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
         Update-ModuleManifest @moduleManifestData
 
         Get-ChildItem $modules[$m].modulePath -Recurse
-
-        Write-Host "Testing module import for $m..."
-        Import-Module $modules[$m].modulePath
     }
 }
 

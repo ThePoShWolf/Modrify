@@ -8,7 +8,7 @@ on:
 
 jobs:
   CICD:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
 

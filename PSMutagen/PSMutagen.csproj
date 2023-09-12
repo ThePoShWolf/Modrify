@@ -7,6 +7,18 @@
 	<ItemGroup>
 		<PackageReference Include="Mutagen.Bethesda.Core" Version="0.42.0" />
 		<PackageReference Include="System.Management.Automation" Version="7.3.6" />
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Win32.Registry.AccessControl" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Win32.SystemEvents" Version="7.0.0" />
+		<PackageReference Include="System.CodeDom" Version="7.0.0" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+		<PackageReference Include="System.Diagnostics.EventLog" Version="7.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+		<PackageReference Include="System.Management" Version="7.0.2" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="7.0.3" />
+		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="7.0.1" />
+		<PackageReference Include="System.Security.Permissions" Version="7.0.0" />
+		<PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
 	</ItemGroup>
 	<!--<Target Name="PreBuild" BeforeTargets="PreBuildEvent"><Exec Command="echo Configuration: $(Configuration)&#xD;&#xA;echo DevEnvDir: $(DevEnvDir)&#xD;&#xA;echo OutDir: $(OutDir)&#xD;&#xA;echo ProjectDir: $(ProjectDir)&#xD;&#xA;echo VisualStudioVersion: $(VisualStudioVersion)&#xD;&#xA;echo AssemblySearchPaths: $(AssemblySearchPaths)&#xD;&#xA;echo AssemblyName: $(AssemblyName)&#xD;&#xA;echo BaseIntermediateOutputPath: $(BaseIntermediateOutputPath)&#xD;&#xA;echo CscToolPath: $(CscToolPath)" /></Target>-->
 </Project>

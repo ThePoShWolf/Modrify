@@ -65,7 +65,7 @@ task dotnetBuild {
 
         # Copy the dependency .dlls
         if (-not (Test-Path "$($modules[$m].modulePath)\lib" -PathType Container)) {
-            New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory
+            New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory | Out-Null
         }
         $filesToSkip = if ($modules[$m].isSubModule) {
             Get-ChildItem "$PSScriptRoot\build\PSMutagen\lib\*.dll"
@@ -91,7 +91,7 @@ task GenerateFormats {
         }
         Write-Host "Generating formats for $m..."
         # Generate the formats
-        & "$($modules[$m].basePath)\$($modules[$m].moduleName).ezout.ps1" -RelativeDestination "../build/$($modules[$m].moduleName)"
+        & "$($modules[$m].basePath)\$($modules[$m].moduleName).ezout.ps1" -RelativeDestination "../build/$($modules[$m].moduleName)" | Out-Null
     }
 }
 

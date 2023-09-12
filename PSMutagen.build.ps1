@@ -98,6 +98,7 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
         }
 
         # Get exported functions
+        Write-Host "Generating exported functions for $($m)..."
         if ($modules[$m].isSubModule) {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\PSMutagen\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\PSMutagen\PSMutagen.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
         } else {
@@ -127,6 +128,9 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
         Update-ModuleManifest @moduleManifestData
 
         Get-ChildItem $modules[$m].modulePath -Recurse
+
+        Write-Host "Testing module import for $m..."
+        Import-Module $modules[$m].modulePath
     }
 }
 

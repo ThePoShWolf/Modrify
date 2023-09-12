@@ -33,7 +33,7 @@
     Description       = 'A PowerShell module for working with Bethesda mods.'
 
     # Minimum version of the PowerShell engine required by this module
-    PowerShellVersion = '7.0'
+    PowerShellVersion = '7.3'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''

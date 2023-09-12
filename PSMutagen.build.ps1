@@ -27,7 +27,6 @@ task Clean {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
-        $PSVersionTable
         if (Get-Module $modules[$m].moduleName) {
             Remove-Module $modules[$m].moduleName
         }
@@ -56,8 +55,9 @@ task dotnetBuild {
             continue
         }
         Set-Location $modules[$m].basePath
+        dotnet clean
         dotnet restore
-        dotnet publish -o build
+        dotnet publish
         Set-Location $PSScriptRoot
 
         # Copy the dependency .dlls
@@ -67,7 +67,7 @@ task dotnetBuild {
         $filesToSkip = if ($modules[$m].isSubModule) {
             Get-ChildItem "$PSScriptRoot\build\PSMutagen\lib\*.dll"
         }
-        Get-ChildItem "$($modules[$m].basePath)\build\*.dll" | ForEach-Object {
+        Get-ChildItem "$($modules[$m].basePath)\bin\Debug\net7.0\publish\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
                 Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
             }
@@ -127,8 +127,6 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
             $moduleManifestData['FormatsToProcess'] = "$($modules[$m].moduleName).format.ps1xml"
         }
         Update-ModuleManifest @moduleManifestData
-
-        Get-ChildItem $modules[$m].modulePath -Recurse
     }
 }
 

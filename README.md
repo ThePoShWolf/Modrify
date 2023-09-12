@@ -18,7 +18,7 @@ If you have an issue, question, or wonder how to do a certain thing with this mo
 
 ## Installation
 
-PSMutagen, and its submodules, require [PowerShell 7+](https://github.com/powershell/powershell/releases) and will not work in Windows PowerShell (PowerShell 5.1-). You can test your PowerShell version with:
+PSMutagen, and its submodules, require [PowerShell 7.3+](https://github.com/powershell/powershell/releases) and will not work in Windows PowerShell (PowerShell 5.1-). You can test your PowerShell version with:
 
 ```powershell
 $PSVersionTable

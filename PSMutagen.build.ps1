@@ -27,6 +27,7 @@ task Clean {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        $PSVersionTable
         if (Get-Module $modules[$m].moduleName) {
             Remove-Module $modules[$m].moduleName
         }

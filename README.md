@@ -49,9 +49,9 @@ Set-MutaGameEnvironment -Release SkyrimSE
 
 Once you've set the game environment, you will be able to use the other commands in each module.
 
-### Reporting
+### Getting data
 
-PSMutagen is able to handle reporting very well. For example, if you'd like to build a spread sheet of all people NPCs with their name, race, and factions, you can do so with:
+PSMutagen is able to retrieve data about your load order or specific mods very well. For example, if you'd like to build a spreadsheet of all people NPCs with their name, race, and factions, you can do so with:
 
 ```powershell
 # Get the game environment to capture the LinkCache object

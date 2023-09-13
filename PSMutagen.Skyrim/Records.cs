@@ -13,10 +13,10 @@ namespace PSMutagen.Skyrim
     [Cmdlet(VerbsCommon.Add, "SkyrimKeyword")]
     public class AddSkyrimKeyword : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
         public required IKeyworded<IKeywordGetter> TargetRecord;
 
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, Position = 1)]
         public required IKeywordGetter Keyword;
 
         protected override void ProcessRecord()

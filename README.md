@@ -79,4 +79,17 @@ If you wanted to run that report on a specific mod, you can switch out `Get-Skyr
 
 ### Creating patches
 
-This module can be used for creating patches.
+This module can be used for creating patches. For example, if you needed to add a specific keyword to some armors:
+
+```powershell
+$ge = Set-MutaGameEnvironment SkyrimSE -Passthru
+# Create a new mod in memory
+$newMod = New-SkyrimMod -ModKey 'MyPath.esp'
+# Make the new mod light (esl)
+# This will be easier in the future
+$newmod.ModHeader.Flags = [Mutagen.Bethesda.Skyrim.SkyrimModHeader+HeaderFlag]::LightMaster
+# Get the keyword to add
+$keyword = Get-SkyrimMajorRecord -ModKey 'ModWithKeyword.esm' -RecordType Keyword | ?{$_.EditorID -eq 'KeyWordEditorID'}
+# Get the armors to add keywords to
+
+```

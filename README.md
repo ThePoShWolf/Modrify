@@ -6,13 +6,13 @@ Powered by [Mutagen](https://github.com/Mutagen-Modding/Mutagen).
 
 PSMutagen is a PowerShell module with the goals of:
 
-- Providing the same or similar features as whats available to scripting in xEdit
+- Providing the same or similar features as whats available using Pascal in xEdit
 - Make mod reading, editing, overriding (etc) easily accessible at the commandline
-- Expose the complete Mutagen functionality in PowerShell
+- Expose Mutagen's functionality in PowerShell
 
 I started this module after stumbling across the [Mutagen](https://github.com/Mutagen-Modding/Mutagen) .NET library. I have a strong preference for PowerShell over Pascal, so I was very excited to finally have a way to script Bethesda mods with PowerShell. My professional interests tend to bleed over into my personal interests, so of course I enjoy automation in Skyrim and Fallout 4.
 
-As of this writing, this mod is in v0.0.2, which is its initial public release. As I have time to work with this module to convert some of the xEdit Pascal scripts and write some of my own, expect better examples and more robust code. If you have an issue, question, or wonder how to do a certain thing with this module, please feel free to open up an issue.
+As I have time to work with this module to convert some of the xEdit Pascal scripts and write some of my own, expect better examples and more robust code. If you have an issue, question, or wonder how to do a certain thing with this module, please feel free to open up an issue.
 
 ## Installation
 
@@ -84,12 +84,40 @@ This module can be used for creating patches. For example, if you needed to add 
 ```powershell
 $ge = Set-MutaGameEnvironment SkyrimSE -Passthru
 # Create a new mod in memory
-$newMod = New-SkyrimMod -ModKey 'MyPath.esp'
+$newMod = New-SkyrimMod -ModKey 'MyPatch.esp'
 # Make the new mod light (esl)
 # This will be easier in the future
 $newmod.ModHeader.Flags = [Mutagen.Bethesda.Skyrim.SkyrimModHeader+HeaderFlag]::LightMaster
 # Get the keyword to add
-$keyword = Get-SkyrimMajorRecord -ModKey 'ModWithKeyword.esm' -RecordType Keyword | ?{$_.EditorID -eq 'KeyWordEditorID'}
-# Get the armors to add keywords to
+$keyword = Get-SkyrimMajorRecords -ModKey 'Skyrim.esm' -RecordType Keyword | ?{$_.EditorID -eq 'ArmorClothing'}
+# Get the armors to add keywords to and copy them as override to the new mod
+# You could filter for specific armors using Where-Object (?)
+$armors = Get-SkyrimMajorRecords -ModKey 'Skyrim.esm' -RecordType Armor | Copy-SkyrimRecordAsOverride -Mod $newmod
+# Add the keyword
+$armors | Add-SkyrimKeyword $keyword
+# Write the patch to disk
+Write-SkyrimMod $newMod -Path "$($ge.DataFolderPath)\$($newMod.ModKey)"
+```
 
+## Contributing
+
+The easiest way to contribute is to submit issues and provide detailed information about the bug or suggestion that you have.
+
+If you are the coding type, please feel free to fork, commit changes, and submit a PR.
+
+### Building PSMutagen
+
+Building PSMutagen requires .NET 7 and PowerShell 7.3+ with the `InvokeBuild` module installed. All other dependencies should be automatically resolved.
+
+In the root of the repository, run:
+
+```powershell
+Invoke-Build -Task ModuleBuild
+```
+
+This will invoke the build script which will clean up the build folder (if it exists), run a dotnet clean -> restore -> publish, build the PowerShell manifest, and then collect all the required files in the `./build` folder. Once complete, you should be able to import any one of the modules with:
+
+```powershell
+Import-Module .\build\PSMutagen
+Import-Module .\build\PSMutagen.Skyrim
 ```

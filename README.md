@@ -37,7 +37,9 @@ The current list of submodules:
 
 This list is based on support by the underlying library ([Mutagen](https://github.com/Mutagen-Modding/Mutagen)) as well as implementation here into this module. If you don't see a specific Bethesda game in this list, check Mutagen first. If Mutagen supports it, open an issue here and I will look at implementation.
 
-## Basic usage
+## Usage
+
+### Setup
 
 Start by setting your game environment, so Mutagen knows where to look:
 
@@ -46,3 +48,31 @@ Set-MutaGameEnvironment -Release SkyrimSE
 ```
 
 Once you've set the game environment, you will be able to use the other commands in each module.
+
+### Reporting
+
+PSMutagen is able to handle reporting very well. For example, if you'd like to build a spread sheet of all people NPCs with their name, race, and factions, you can do so with:
+
+```powershell
+# Get the game environment to capture the LinkCache object
+$ge = Set-MutaGameEnvironment SkyrimSE -Passthru
+# List out the races
+$raceStrings = 'ArgonianRace','BretonRace','DarkElfRace','ElderRace','HighElfRace','ImperialRace','KhajiitRace','NordRace','OrcRace','RedguardRace'
+$races = Get-SkyrimWinningOverrides -RecordType Race | ?{$raceStrings -contains $_.EditorID}
+# Get the NPCs with those races
+$npcs = Get-SkyrimWinningOverrides -RecordType Npc | ?{$races -contains $_.Race}
+# Build the output object and export to an Excel spreadsheet
+$npcs | %{
+    [pscustomobject]@{
+        Name = $_.Name.String
+        Race = $_.Race.TryResolve($ge.LinkCache).Name.String
+        Factions = ($_.Factions.Faction | %{$_.TryResolve($ge.LinkCache).Name.String}) -join ', '
+    }
+} | Export-Excel .\SkyrimPeople.xlsx -TableName Npcs -Autosize
+```
+
+_This may throw errors as some factions do not have a name._
+
+This example depends on the [ImportExcel]() module for the `Export-Excel` function.
+
+If you wanted to run that report on a specific mod, you can switch out `Get-SkyrimWinningOverrides` for `Get-SkyrimMajorRecords` and specify a mod by path or ModKey.

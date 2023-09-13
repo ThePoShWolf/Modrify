@@ -66,13 +66,14 @@ $npcs | %{
     [pscustomobject]@{
         Name = $_.Name.String
         Race = $_.Race.TryResolve($ge.LinkCache).Name.String
-        Factions = ($_.Factions.Faction | %{$_.TryResolve($ge.LinkCache).Name.String}) -join ', '
+        Factions = ($_.Factions.Faction | %{$_.TryResolve($ge.LinkCache).EditorID}) -join ', '
     }
 } | Export-Excel .\SkyrimPeople.xlsx -TableName Npcs -Autosize
 ```
 
-_This may throw errors as some factions do not have a name._
+_This may throw errors trying to resolve factions, I'm not yet sure why. It still works._
 
 This example depends on the [ImportExcel]() module for the `Export-Excel` function.
 
 If you wanted to run that report on a specific mod, you can switch out `Get-SkyrimWinningOverrides` for `Get-SkyrimMajorRecords` and specify a mod by path or ModKey.
+

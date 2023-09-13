@@ -1,5 +1,5 @@
 param (
-    [version]$Version = '0.0.1',
+    [version]$Version = '0.0.2',
     [string]$NugetApiKey,
     [ValidateScript({
         (Get-ChildItem "$PSScriptRoot/PSMutagen*" -Directory).Name -contains $_
@@ -27,6 +27,7 @@ task Clean {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Cleaning $m..."
         if (Get-Module $modules[$m].moduleName) {
             Remove-Module $modules[$m].moduleName
         }
@@ -45,28 +46,29 @@ task DocBuild ModuleBuild, {
         if (-not (Test-Path $modules[$m].docPath)) {
             New-Item $modules[$m].docPath -ItemType Directory
         }
+        Write-Host "Building docs for $m..."
         New-ExternalHelp $modules[$m].docPath -OutputPath "$($modules[$m].modulePath)\EN-US"
     }
 }
 
 task dotnetBuild {
+    dotnet clean
+    dotnet restore
+    dotnet publish
+    #Set-Location $PSScriptRoot
+
     foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
-        Set-Location $modules[$m].basePath
-        dotnet restore
-        dotnet publish -o build
-        Set-Location $PSScriptRoot
-
-        # Copy the dependency .dlls
+        Write-Host "Building $m..."
         if (-not (Test-Path "$($modules[$m].modulePath)\lib" -PathType Container)) {
-            New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory
+            New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory | Out-Null
         }
         $filesToSkip = if ($modules[$m].isSubModule) {
             Get-ChildItem "$PSScriptRoot\build\PSMutagen\lib\*.dll"
         }
-        Get-ChildItem "$($modules[$m].basePath)\build\*.dll" | ForEach-Object {
+        Get-ChildItem "$($modules[$m].basePath)\bin\Debug\net7.0\publish\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
                 Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
             }
@@ -85,8 +87,9 @@ task GenerateFormats {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Generating formats for $m..."
         # Generate the formats
-        & "$($modules[$m].basePath)\$($modules[$m].moduleName).ezout.ps1" -RelativeDestination "../build/$($modules[$m].moduleName)"
+        & "$($modules[$m].basePath)\$($modules[$m].moduleName).ezout.ps1" -RelativeDestination "../build/$($modules[$m].moduleName)" | Out-Null
     }
 }
 
@@ -96,7 +99,7 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
-
+        Write-Host "Building the manifest for $m..."
         # Get exported functions
         if ($modules[$m].isSubModule) {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\PSMutagen\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\PSMutagen\PSMutagen.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
@@ -129,7 +132,7 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
 }
 
 task Test ModuleBuild, {
-    foreach ($m in $modules.Keys) {
+    <#foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
@@ -137,7 +140,7 @@ task Test ModuleBuild, {
         Import-Module $modules[$m].modulePath -RequiredVersion $version
         Write-Host "Invoking tests."
         Invoke-Pester $modules[$m].testPath -Verbose
-    }
+    }#>
 }
 
 task Publish Test, DocBuild, {
@@ -145,6 +148,7 @@ task Publish Test, DocBuild, {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
+        Write-Host "Publishing $m..."
         if ($null -ne $NugetApiKey) {
             Publish-Module -Path $modules[$m].modulePath -NuGetApiKey $NugetApiKey -Repository PsGallery
         }

@@ -18,16 +18,6 @@ namespace PSMutagen.Skyrim
                     throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
             }
         }
-
-        public static void AddRecordHelper(ISkyrimMajorRecordGetter targetRecord, ISkyrimMajorRecordGetter Record)
-        {
-            switch (Record.GetType().Name)
-            {
-{mrcases}
-                default:
-                    throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
-            }
-        }
     }
 }
 '@
@@ -36,13 +26,6 @@ $switchCaseTemplate = @'
                 case "{type}":
                 case "{type}BinaryOverlay":
                     mod.{name}.Add(({strongtype})Record);
-                    break;
-'@
-
-$switchmrCaseTemplate = @'
-                case "{type}":
-                case "{type}BinaryOverlay":
-                    targetRecord.{name}.Add(({strongtype})Record);
                     break;
 '@
 
@@ -60,15 +43,6 @@ $cases = foreach ($prop in $props) {
     if ($prop.TypeNameOfValue -match $regex) {
         $strongType = $exceptions -contains $Matches.type ? "Mutagen.Bethesda.Skyrim.$($Matches.type)" : $Matches.type
         $switchCaseTemplate -replace '\{type\}', $Matches.type -replace '\{name\}', $prop.Name -replace '\{strongtype\}', $strongType
-    } else {
-        
-    }
-}
-
-$mrcases = foreach ($prop in $props) {
-    if ($prop.TypeNameOfValue -match $regex) {
-        $strongType = $exceptions -contains $Matches.type ? "Mutagen.Bethesda.Skyrim.$($Matches.type)" : $Matches.type
-        $switchmrCaseTemplate -replace '\{type\}', $Matches.type -replace '\{name\}', $prop.Name -replace '\{strongtype\}', $strongType
     } else {
         
     }

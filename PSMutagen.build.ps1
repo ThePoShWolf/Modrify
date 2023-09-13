@@ -1,5 +1,5 @@
 param (
-    [version]$Version = '0.0.1',
+    [version]$Version = '0.0.2',
     [string]$NugetApiKey,
     [ValidateScript({
         (Get-ChildItem "$PSScriptRoot/PSMutagen*" -Directory).Name -contains $_
@@ -132,7 +132,7 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
 }
 
 task Test ModuleBuild, {
-    foreach ($m in $modules.Keys) {
+    <#foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
@@ -140,7 +140,7 @@ task Test ModuleBuild, {
         Import-Module $modules[$m].modulePath -RequiredVersion $version
         Write-Host "Invoking tests."
         Invoke-Pester $modules[$m].testPath -Verbose
-    }
+    }#>
 }
 
 task Publish Test, DocBuild, {

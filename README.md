@@ -73,7 +73,10 @@ $npcs | %{
 
 _This may throw errors trying to resolve factions, I'm not yet sure why. It still works._
 
-This example depends on the [ImportExcel]() module for the `Export-Excel` function.
+This example depends on the [ImportExcel](https://github.com/dfinke/ImportExcel) module for the `Export-Excel` function.
 
 If you wanted to run that report on a specific mod, you can switch out `Get-SkyrimWinningOverrides` for `Get-SkyrimMajorRecords` and specify a mod by path or ModKey.
 
+### Creating patches
+
+This module can be used for creating patches.

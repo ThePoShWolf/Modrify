@@ -13,7 +13,6 @@ namespace PSMutagen.Skyrim
     [Cmdlet(VerbsCommon.Add, "SkyrimKeyword")]
     public class AddSkyrimKeyword : PSCmdlet
     {
-        [Alias("DestinationMod", "TargetMod")]
         [Parameter(Mandatory = true)]
         public required IKeyworded<IKeywordGetter> TargetRecord;
 

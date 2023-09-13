@@ -52,18 +52,16 @@ task DocBuild ModuleBuild, {
 }
 
 task dotnetBuild {
+    dotnet clean
+    dotnet restore
+    dotnet publish
+    #Set-Location $PSScriptRoot
+
     foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
         Write-Host "Building $m..."
-        Set-Location $modules[$m].basePath
-        dotnet clean
-        dotnet restore
-        dotnet publish
-        Set-Location $PSScriptRoot
-
-        # Copy the dependency .dlls
         if (-not (Test-Path "$($modules[$m].modulePath)\lib" -PathType Container)) {
             New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory | Out-Null
         }

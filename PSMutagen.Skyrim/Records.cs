@@ -6,12 +6,26 @@ using Noggog;
 using System.Reflection.Metadata;
 using PSMutagen.Core;
 using Mutagen.Bethesda.Plugins;
-using Mutagen.Bethesda.Plugins.Cache;
-using Mutagen.Bethesda.Environments;
-using Noggog.WorkEngine;
+using Mutagen.Bethesda.Plugins.Aspects;
 
 namespace PSMutagen.Skyrim
 {
+    [Cmdlet(VerbsCommon.Add, "SkyrimRecord")]
+    public class AddSkyrimRecord : PSCmdlet
+    {
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
+        public required ISkyrimMod Mod;
+
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        public required ISkyrimMajorRecordGetter Record;
+
+        protected override void ProcessRecord()
+        {
+            Helpers.AddRecordHelper(Mod, Record);
+        }
+    }
+
     [Cmdlet(VerbsCommon.Get, "SkyrimWinningContextOverrides")]
     [OutputType(typeof(IEnumerable<IMajorRecordGetter>))]
     public class GetSkyrimWinningContextOverrides : PSCmdlet

@@ -10,6 +10,22 @@ using Mutagen.Bethesda.Plugins.Aspects;
 
 namespace PSMutagen.Skyrim
 {
+    [Cmdlet(VerbsCommon.Add, "SkyrimKeyword")]
+    public class AddSkyrimKeyword : PSCmdlet
+    {
+        [Alias("DestinationMod", "TargetMod")]
+        [Parameter(Mandatory = true)]
+        public required IKeyworded<IKeywordGetter> TargetRecord;
+
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
+        public required IKeywordGetter Keyword;
+
+        protected override void ProcessRecord()
+        {
+            TargetRecord.Keywords.Add(Keyword);
+        }
+    }
+
     [Cmdlet(VerbsCommon.Add, "SkyrimRecord")]
     public class AddSkyrimRecord : PSCmdlet
     {

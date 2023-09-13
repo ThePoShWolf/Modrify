@@ -21,7 +21,19 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            TargetRecord.Keywords.Add(Keyword);
+            if (TargetRecord.Keywords == null)
+            {
+                WriteVerbose("Adding keyword list to record.")
+                TargetRecord.Keywords = new ExtendedList<IFormLinkGetter<IKeywordGetter>>();
+            }
+            if (!TargetRecord.HasKeyword(Keyword))
+            {
+                TargetRecord.Keywords.Add(Keyword);
+            }
+            else
+            {
+                WriteVerbose("Record already has the indicated key.");
+            }
         }
     }
 

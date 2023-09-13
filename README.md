@@ -12,9 +12,7 @@ PSMutagen is a PowerShell module with the goals of:
 
 I started this module after stumbling across the [Mutagen](https://github.com/Mutagen-Modding/Mutagen) .NET library. I have a strong preference for PowerShell over Pascal, so I was very excited to finally have a way to script Bethesda mods with PowerShell. My professional interests tend to bleed over into my personal interests, so of course I enjoy automation in Skyrim and Fallout 4.
 
-As of this writing, this mod is in v0.1.0, which is its initial public release. Expect better examples as I convert some of the small patches I've made to PSMutagen scripts. Along the way I will also convert the xEdit examples to PSMutagen.
-
-If you have an issue, question, or wonder how to do a certain thing with this module, please feel free to open up an issue.
+As of this writing, this mod is in v0.0.2, which is its initial public release. As I have time to work with this module to convert some of the xEdit Pascal scripts and write some of my own, expect better examples and more robust code. If you have an issue, question, or wonder how to do a certain thing with this module, please feel free to open up an issue.
 
 ## Installation
 

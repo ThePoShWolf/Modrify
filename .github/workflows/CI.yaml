@@ -8,6 +8,8 @@ on:
 
 jobs:
   CICD:
+    # Disabling build until GitHub runners support PS 7.3+ (.NET 7)
+    if: false
     runs-on: ubuntu-latest
 
     steps:

@@ -23,7 +23,7 @@ namespace PSMutagen.Skyrim
         {
             if (TargetRecord.Keywords == null)
             {
-                WriteVerbose("Adding keyword list to record.")
+                WriteVerbose("Adding keyword list to record.");
                 TargetRecord.Keywords = new ExtendedList<IFormLinkGetter<IKeywordGetter>>();
             }
             if (!TargetRecord.HasKeyword(Keyword))

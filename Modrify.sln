@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMutagen", "PSMutagen\PSMutagen.csproj", "{4125CEAB-DFB8-4DA8-80AF-8115F8BC515A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify", "Modrify\Modrify.csproj", "{4125CEAB-DFB8-4DA8-80AF-8115F8BC515A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMutagen.Fallout4", "PSMutagen.Fallout4\PSMutagen.Fallout4.csproj", "{163D1E52-C45E-4C99-BDD7-1290ACDDDA3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify.Fallout4", "Modrify.Fallout4\Modrify.Fallout4.csproj", "{163D1E52-C45E-4C99-BDD7-1290ACDDDA3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMutagen.Skyrim", "PSMutagen.Skyrim\PSMutagen.Skyrim.csproj", "{A0730027-353C-4114-9CE7-888E407125F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify.Skyrim", "Modrify.Skyrim\Modrify.Skyrim.csproj", "{A0730027-353C-4114-9CE7-888E407125F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -38,7 +38,7 @@ task Clean {
 }
 
 # Build the docs, depends on PlatyPS
-task DocBuild ModuleBuild, {
+task DocBuild, Clean, dotnetBuild, {
     foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
@@ -94,7 +94,7 @@ task GenerateFormats {
 }
 
 # Build the module
-task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
+task ModuleBuild Clean, dotnetBuild, GenerateFormats, DocBuild, {
     foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue

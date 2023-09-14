@@ -2,20 +2,20 @@ param (
     [version]$Version = '0.0.2',
     [string]$NugetApiKey,
     [ValidateScript({
-        (Get-ChildItem "$PSScriptRoot/PSMutagen*" -Directory).Name -contains $_
+        (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains $_
         })]
     [string]$Module
 )
 $modules = [ordered]@{}
 $basePath = $PSScriptRoot
-Get-ChildItem "$basePath/PSMutagen*" -Directory | Sort-Object | ForEach-Object {
+Get-ChildItem "$basePath/Modrify*" -Directory | Sort-Object | ForEach-Object {
     $modules[$_.Name] = @{
         basePath    = "$basePath\$($_.Name)"
         docPath     = "$basePath\$($_.Name)\docs"
         testPath    = "$basePath\$($_.Name)\tests"
         moduleName  = $_.Name
         modulePath  = "$basePath\build\$($_.Name)"
-        isSubModule = $_.Name -eq 'PSMutagen' ? $false : $true
+        isSubModule = $_.Name -eq 'Modrify' ? $false : $true
     }
 }
 
@@ -66,7 +66,7 @@ task dotnetBuild {
             New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory | Out-Null
         }
         $filesToSkip = if ($modules[$m].isSubModule) {
-            Get-ChildItem "$PSScriptRoot\build\PSMutagen\lib\*.dll"
+            Get-ChildItem "$PSScriptRoot\build\Modrify\lib\*.dll"
         }
         Get-ChildItem "$($modules[$m].basePath)\bin\Debug\net7.0\publish\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
@@ -76,8 +76,8 @@ task dotnetBuild {
 
         Move-Item "$($modules[$m].modulePath)\lib\$m.dll" -Destination $($modules[$m].modulePath) -Force
 
-        if (Test-Path "$($modules[$m].modulePath)\lib\PSMutagen.dll") {
-            Remove-Item "$($modules[$m].modulePath)\lib\PSMutagen.dll" -Force
+        if (Test-Path "$($modules[$m].modulePath)\lib\Modrify.dll") {
+            Remove-Item "$($modules[$m].modulePath)\lib\Modrify.dll" -Force
         }
     }
 }
@@ -102,7 +102,7 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
         Write-Host "Building the manifest for $m..."
         # Get exported functions
         if ($modules[$m].isSubModule) {
-            $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\PSMutagen\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\PSMutagen\PSMutagen.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
+            $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\Modrify\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\Modrify\Modrify.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
         } else {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
         }
@@ -117,7 +117,7 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, {
             ModuleVersion      = $version
             RequiredAssemblies = (Get-ChildItem "$($modules[$m].modulePath)\lib\*.dll" | ForEach-Object { "lib/$($_.Name)" })
             <#RequiredModules   = @{
-                ModuleName = 'PSMutagen'
+                ModuleName = 'Modrify'
                 RequiredVersion = [version]'0.0.1'
             }#>
         }

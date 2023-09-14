@@ -1,5 +1,5 @@
 $template = @'
-namespace PSMutagen.Fallout4
+namespace Modrify.Fallout4
 {
     public static partial class Helpers
     {

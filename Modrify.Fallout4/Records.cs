@@ -4,11 +4,11 @@ using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
-using PSMutagen.Core;
+using Modrify.Core;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Aspects;
 
-namespace PSMutagen.Fallout4
+namespace Modrify.Fallout4
 {
     [Cmdlet(VerbsCommon.Add, "FalloutKeyword")]
     public class AddFalloutKeyword : PSCmdlet
@@ -90,13 +90,13 @@ namespace PSMutagen.Fallout4
 
         protected override void ProcessRecord()
         {
-            if (PSMutagenConfig.Environment == null)
+            if (ModrifyConfig.Environment == null)
             {
                 throw new PSInvalidOperationException("Unable to load the load order. Please set your environment with 'Set-MutaGameEnvironment'");
             }
             else
             {
-                foreach (var rec in OverrideMixIns.WinningOverrides(PSMutagenConfig.Environment.LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray())
+                foreach (var rec in OverrideMixIns.WinningOverrides(ModrifyConfig.Environment.LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray())
                 {
                     WriteObject(rec);
                 }
@@ -125,7 +125,7 @@ namespace PSMutagen.Fallout4
         {
             if (ParameterSetName == "bymodkey")
             {
-                Mod = Fallout4Mod.CreateFromBinaryOverlay(PSMutagenConfig.ResolveModkeyPath(ModKey));
+                Mod = Fallout4Mod.CreateFromBinaryOverlay(ModrifyConfig.ResolveModkeyPath(ModKey));
             }
             if (RecordType == null)
             {

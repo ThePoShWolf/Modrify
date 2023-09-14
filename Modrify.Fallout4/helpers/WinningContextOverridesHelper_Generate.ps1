@@ -1,11 +1,11 @@
 $template = @'
 using Mutagen.Bethesda.Fallout4;
 using Mutagen.Bethesda;
-using PSMutagen.Core;
+using Modrify.Core;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Environments;
 
-namespace PSMutagen.Fallout4
+namespace Modrify.Fallout4
 {
     public static partial class Helpers
     {
@@ -16,7 +16,7 @@ namespace PSMutagen.Fallout4
             {
 {cases}
                 default:
-                    throw new ArgumentException($"Unsupported or improperly implemented type: {recordType}. Please raise an issue in PSMutagen's GitHub repository.");
+                    throw new ArgumentException($"Unsupported or improperly implemented type: {recordType}. Please raise an issue in Modrify's GitHub repository.");
             }
         }
     }

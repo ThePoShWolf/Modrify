@@ -1,6 +1,6 @@
 ---
-external help file: PSMutagen.Skyrim.dll-Help.xml
-Module Name: PSMutagen.Skyrim
+external help file: Modrify.Skyrim.dll-Help.xml
+Module Name: Modrify.Skyrim
 online version:
 schema: 2.0.0
 ---

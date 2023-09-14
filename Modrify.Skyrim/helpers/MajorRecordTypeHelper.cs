@@ -1,4 +1,4 @@
-namespace PSMutagen.Skyrim
+namespace Modrify.Skyrim
 {
     public static partial class Helpers
     {

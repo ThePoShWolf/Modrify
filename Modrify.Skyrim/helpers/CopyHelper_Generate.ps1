@@ -3,9 +3,9 @@ using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
-using PSMutagen.Core;
+using Modrify.Core;
 
-namespace PSMutagen.Skyrim
+namespace Modrify.Skyrim
 {
     public static partial class Helpers
     {
@@ -15,7 +15,7 @@ namespace PSMutagen.Skyrim
             {
 {cases}
                 default:
-                    throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
+                    throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in Modrify's GitHub repository.");
             }
         }
     }

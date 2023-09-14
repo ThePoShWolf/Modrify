@@ -1,6 +1,6 @@
 using Mutagen.Bethesda.Skyrim;
 
-namespace PSMutagen.Skyrim
+namespace Modrify.Skyrim
 {
     public static partial class Helpers
     {
@@ -458,7 +458,7 @@ namespace PSMutagen.Skyrim
                     break;
 
                 default:
-                    throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in PSMutagen's GitHub repository.");
+                    throw new ArgumentException($"Unsupported or improperly implemented type: {Record.GetType().Name}. Please raise an issue in Modrify's GitHub repository.");
             }
         }
     }

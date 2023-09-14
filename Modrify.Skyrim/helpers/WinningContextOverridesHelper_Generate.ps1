@@ -1,22 +1,22 @@
 $template = @'
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda;
-using PSMutagen.Core;
+using Modrify.Core;
 using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Environments;
 
-namespace PSMutagen.Skyrim
+namespace Modrify.Skyrim
 {
     public static partial class Helpers
     {
         public static IEnumerable<IModContext<ISkyrimMod, ISkyrimModGetter, ISkyrimMajorRecord, ISkyrimMajorRecordGetter>> WinningContextOverrides(string recordType)
         {
-            IGameEnvironment<ISkyrimMod, ISkyrimModGetter> sge = GameEnvironment.Typical.Skyrim(PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
+            IGameEnvironment<ISkyrimMod, ISkyrimModGetter> sge = GameEnvironment.Typical.Skyrim(ModrifyConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
             switch (recordType)
             {
 {cases}
                 default:
-                    throw new ArgumentException($"Unsupported or improperly implemented type: {recordType}. Please raise an issue in PSMutagen's GitHub repository.");
+                    throw new ArgumentException($"Unsupported or improperly implemented type: {recordType}. Please raise an issue in Modrify's GitHub repository.");
             }
         }
     }

@@ -1,6 +1,6 @@
 ---
-external help file: PSMutagen.dll-Help.xml
-Module Name: PSMutagen
+external help file: Modrify.dll-Help.xml
+Module Name: Modrify
 online version:
 schema: 2.0.0
 ---

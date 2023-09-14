@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule        = 'PSMutagen.Fallout4.dll'
+    RootModule        = 'Modrify.Fallout4.dll'
 
     # Version number of this module.
     ModuleVersion     = '0.0.2'
@@ -53,7 +53,7 @@
     # Modules that must be imported into the global environment prior to importing this module
     RequiredModules   = @(
         @{
-            ModuleName      = 'PSMutagen'
+            ModuleName      = 'Modrify'
             RequiredVersion = '0.0.2'
         }
     )
@@ -65,10 +65,10 @@
     # ScriptsToProcess = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    #TypesToProcess    = @( 'PSMutagen.types.ps1xml' )
+    #TypesToProcess    = @( 'Modrify.types.ps1xml' )
 
     # Format files (.ps1xml) to be loaded when importing this module
-    # FormatsToProcess  = @( 'PSMutagen.Fallout4.format.ps1xml' )
+    # FormatsToProcess  = @( 'Modrify.Fallout4.format.ps1xml' )
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()
@@ -103,10 +103,10 @@
             # Tags = @()
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/ThePoShWolf/PSMutagen/blob/main/LICENSE'
+            LicenseUri = 'https://github.com/ThePoShWolf/Modrify/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/ThePoShWolf/PSMutagen'
+            ProjectUri = 'https://github.com/ThePoShWolf/Modrify'
 
             # A URL to an icon representing this module.
             # IconUri = ''

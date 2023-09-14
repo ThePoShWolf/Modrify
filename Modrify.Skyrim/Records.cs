@@ -4,11 +4,11 @@ using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins.Records;
 using Noggog;
 using System.Reflection.Metadata;
-using PSMutagen.Core;
+using Modrify.Core;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Aspects;
 
-namespace PSMutagen.Skyrim
+namespace Modrify.Skyrim
 {
     [Cmdlet(VerbsCommon.Add, "SkyrimKeyword")]
     public class AddSkyrimKeyword : PSCmdlet
@@ -88,7 +88,7 @@ namespace PSMutagen.Skyrim
 
         protected override void ProcessRecord()
         {
-            foreach (var rec in OverrideMixIns.WinningOverrides(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray())
+            foreach (var rec in OverrideMixIns.WinningOverrides(ModrifyConfig.TryGetEnvironment().LoadOrder.PriorityOrder, Helpers.MajorRecordTypes[RecordType], IncludeDeletedRecords).ToArray())
             {
                 WriteObject(rec);
             }
@@ -115,7 +115,7 @@ namespace PSMutagen.Skyrim
         {
             if (ParameterSetName == "bymodkey")
             {
-                Mod = SkyrimMod.CreateFromBinaryOverlay(PSMutagenConfig.ResolveModkeyPath(ModKey), PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
+                Mod = SkyrimMod.CreateFromBinaryOverlay(ModrifyConfig.ResolveModkeyPath(ModKey), ModrifyConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease());
             }
             if (RecordType == null)
             {

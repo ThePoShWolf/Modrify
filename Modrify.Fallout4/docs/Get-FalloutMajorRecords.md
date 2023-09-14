@@ -1,6 +1,6 @@
 ---
-external help file: PSMutagen.Fallout4.dll-Help.xml
-Module Name: PSMutagen.Fallout4
+external help file: Modrify.Fallout4.dll-Help.xml
+Module Name: Modrify.Fallout4
 online version:
 schema: 2.0.0
 ---

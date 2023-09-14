@@ -9,9 +9,9 @@ using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Binary.Parameters;
 using System.IO.Abstractions;
-using PSMutagen.Core;
+using Modrify.Core;
 
-namespace PSMutagen.Fallout4
+namespace Modrify.Fallout4
 {
     [Cmdlet(VerbsCommon.Get, "FalloutMod", DefaultParameterSetName = "modkey-readwrite")]
     [OutputType(typeof(IFallout4ModDisposableGetter), ParameterSetName = new string[] { "path-readonly", "modkey-readonly" })]
@@ -46,7 +46,7 @@ namespace PSMutagen.Fallout4
         {
             if (ParameterSetName.StartsWith("modkey"))
             {
-                Path = PSMutagenConfig.ResolveModkeyPath(ModKey);
+                Path = ModrifyConfig.ResolveModkeyPath(ModKey);
             }
             if (ReadOnly.IsPresent)
             {

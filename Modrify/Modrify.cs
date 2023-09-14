@@ -8,7 +8,7 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Order;
 using Mutagen.Bethesda.Plugins.Records;
 
-namespace PSMutagen.Core
+namespace Modrify.Core
 {
 
     public enum CopyType
@@ -18,7 +18,7 @@ namespace PSMutagen.Core
         DeepCopy
     }
 
-    public class PSMutagenConfig
+    public class ModrifyConfig
     {
         public static IGameEnvironment? Environment;
 
@@ -50,11 +50,11 @@ namespace PSMutagen.Core
                 case GameRelease.SkyrimVR:
                 case GameRelease.SkyrimSE:
                 case GameRelease.SkyrimSEGog:
-                    return "PSMutagen.Skyrim";
+                    return "Modrify.Skyrim";
                 case GameRelease.Fallout4:
-                    return "PSMutagen.Fallout4";
+                    return "Modrify.Fallout4";
                 default:
-                    throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on PSMutagen's GitHub repository.");
+                    throw new ArgumentException($"Game release '{Game}' is not yet supported. Please open an issue on Modrify's GitHub repository.");
             }
         }
 
@@ -76,17 +76,17 @@ namespace PSMutagen.Core
 
         protected override void ProcessRecord()
         {
-            if (PSMutagenConfig.CheckIfModuleIsLoaded(Game))
+            if (ModrifyConfig.CheckIfModuleIsLoaded(Game))
             {
-                PSMutagenConfig.Environment = GameEnvironment.Typical.Construct(Game);
+                ModrifyConfig.Environment = GameEnvironment.Typical.Construct(Game);
                 if (PassThru.IsPresent)
                 {
-                    WriteObject(PSMutagenConfig.TryGetEnvironment());
+                    WriteObject(ModrifyConfig.TryGetEnvironment());
                 }
             }
             else
             {
-                string module = PSMutagenConfig.GetModuleForGameRelease(Game);
+                string module = ModrifyConfig.GetModuleForGameRelease(Game);
                 throw new Exception($"Game release '{Game}' requires the '{module}' module to be loaded. Please load that module and try again.");
             }
         }
@@ -98,7 +98,7 @@ namespace PSMutagen.Core
     {
         protected override void ProcessRecord()
         {
-            WriteObject(PSMutagenConfig.TryGetEnvironment());
+            WriteObject(ModrifyConfig.TryGetEnvironment());
         }
     }
 
@@ -108,7 +108,7 @@ namespace PSMutagen.Core
     {
         protected override void ProcessRecord()
         {
-            WriteObject(PSMutagenConfig.TryGetEnvironment().LoadOrder.ToArray());
+            WriteObject(ModrifyConfig.TryGetEnvironment().LoadOrder.ToArray());
         }
     }
 
@@ -118,7 +118,7 @@ namespace PSMutagen.Core
     {
         protected override void ProcessRecord()
         {
-            WriteObject(PSMutagenConfig.TryGetEnvironment().LoadOrder.PriorityOrder.ToArray());
+            WriteObject(ModrifyConfig.TryGetEnvironment().LoadOrder.PriorityOrder.ToArray());
         }
     }
 }

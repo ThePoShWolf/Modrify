@@ -9,9 +9,9 @@ using System.Reflection.Metadata;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Binary.Parameters;
 using System.IO.Abstractions;
-using PSMutagen.Core;
+using Modrify.Core;
 
-namespace PSMutagen.Skyrim
+namespace Modrify.Skyrim
 {
     [Cmdlet(VerbsCommon.Get, "SkyrimMod", DefaultParameterSetName = "modkey-readwrite")]
     [OutputType(typeof(ISkyrimModDisposableGetter), ParameterSetName = new string[] { "path-readonly", "modkey-readonly" })]
@@ -39,7 +39,7 @@ namespace PSMutagen.Skyrim
         public IFileSystem? FileSystem;
 
         [Parameter()]
-        public SkyrimRelease Release = PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
+        public SkyrimRelease Release = ModrifyConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
         [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
         [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
@@ -49,7 +49,7 @@ namespace PSMutagen.Skyrim
         {
             if (ParameterSetName.StartsWith("modkey"))
             {
-                Path = PSMutagenConfig.ResolveModkeyPath(ModKey);
+                Path = ModrifyConfig.ResolveModkeyPath(ModKey);
             }
             if (ReadOnly.IsPresent)
             {
@@ -70,7 +70,7 @@ namespace PSMutagen.Skyrim
         public required ModKey ModKey;
 
         [Parameter()]
-        public SkyrimRelease Release = PSMutagenConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
+        public SkyrimRelease Release = ModrifyConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
         protected override void ProcessRecord()
         {

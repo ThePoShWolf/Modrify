@@ -1,6 +1,6 @@
 ---
-external help file: PSMutagen.dll-Help.xml
-Module Name: PSMutagen
+external help file: Modrify.dll-Help.xml
+Module Name: Modrify
 online version:
 schema: 2.0.0
 ---
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-MutaGameEnvironment
 
 ## SYNOPSIS
-The first command to run for any work in PSMutagen. This sets your game environment to be the specified game.
+The first command to run for any work in Modrify. This sets your game environment to be the specified game.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Set-MutaGameEnvironment [-Game] <GameRelease> [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-PSMutagen supports several game releases that are supported by Mutagen. In order to know which game to work with, you specify that with this command.
+Modrify supports several game releases that are supported by Mutagen. In order to know which game to work with, you specify that with this command.
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ Sets the game environment to be Skyrim Special Edition.
 ## PARAMETERS
 
 ### -Game
-The game to be referenced. Not all games supported by Mutagen are yet supported by PSMutagen.
+The game to be referenced. Not all games supported by Mutagen are yet supported by Modrify.
 
 Options are:
 

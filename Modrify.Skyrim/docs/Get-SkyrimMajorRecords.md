@@ -37,7 +37,7 @@ Gets all NPCs from the Skyrim master file.
 ## PARAMETERS
 
 ### -Mod
-A SkyrimMod object either created with New-SkyrimMod, Get-SkyrimMod, or pull from the load order with Get-MutaLoadOrder/Get-MutaPriorityOrder
+A SkyrimMod object either created with New-SkyrimMod, Get-SkyrimMod, or pull from the load order with Get-ModLoadOrder/Get-ModPriorityOrder
 
 ```yaml
 Type: ISkyrimModGetter

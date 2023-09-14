@@ -17,7 +17,7 @@ Copy-SkyrimRecordAsNewRecord -Mod <ISkyrimMod> [-Record] <ISkyrimMajorRecordGett
 ```
 
 ## DESCRIPTION
-Copies the selected record into a mod as a new record. Requires a mod object to have been created with Get-SkyrimMod, New-SkyrimMod, or pull from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
+Copies the selected record into a mod as a new record. Requires a mod object to have been created with Get-SkyrimMod, New-SkyrimMod, or pull from the load order Get-ModLoadOrder/Get-ModPriorityOrder.
 
 ## EXAMPLES
 
@@ -32,7 +32,7 @@ This will copy all Npcs from the Skyrim master file into TestMod as new records.
 ## PARAMETERS
 
 ### -Mod
-The mod object. Created with Get-SkyrimMod, New-SkyrimMod, or pulled from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
+The mod object. Created with Get-SkyrimMod, New-SkyrimMod, or pulled from the load order Get-ModLoadOrder/Get-ModPriorityOrder.
 
 ```yaml
 Type: ISkyrimMod

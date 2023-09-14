@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-MutaLoadOrder
+# Get-ModLoadOrder
 
 ## SYNOPSIS
 Returns the sorted load order for the selected game.
@@ -13,7 +13,7 @@ Returns the sorted load order for the selected game.
 ## SYNTAX
 
 ```
-Get-MutaLoadOrder [<CommonParameters>]
+Get-ModLoadOrder [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,7 +25,7 @@ For example, in Skyrim Skyrim.esm is the first item in this list.
 
 ### Example 1
 ```powershell
-Get-MutaLoadOrder
+Get-ModLoadOrder
 ```
 
 Returns the load order.

@@ -37,7 +37,7 @@ Gets all NPCs from the Fallout 4 master file.
 ## PARAMETERS
 
 ### -Mod
-A Fallout4Mod object either created with New-FalloutMod, Get-FalloutMod, or pull from the load order with Get-MutaLoadOrder/Get-MutaPriorityOrder
+A Fallout4Mod object either created with New-FalloutMod, Get-FalloutMod, or pull from the load order with Get-ModLoadOrder/Get-ModPriorityOrder
 
 ```yaml
 Type: IFallout4ModGetter

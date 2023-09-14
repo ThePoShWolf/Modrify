@@ -17,7 +17,7 @@ Copy-FalloutRecordAsOverride -Mod <IFallout4Mod> [-Record] <IFallout4MajorRecord
 ```
 
 ## DESCRIPTION
-Copies the selected record into a mod as an override. Requires a mod object to have been created with GetFalloutMod, NewFalloutMod, or pull from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
+Copies the selected record into a mod as an override. Requires a mod object to have been created with GetFalloutMod, NewFalloutMod, or pull from the load order Get-ModLoadOrder/Get-ModPriorityOrder.
 
 ## EXAMPLES
 
@@ -32,7 +32,7 @@ This will copy all Npcs from the Fallout 4 master file into TestMod as an overri
 ## PARAMETERS
 
 ### -Mod
-The mod object. Created with GetFalloutMod, NewFalloutMod, or pulled from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
+The mod object. Created with GetFalloutMod, NewFalloutMod, or pulled from the load order Get-ModLoadOrder/Get-ModPriorityOrder.
 
 ```yaml
 Type: IFallout4Mod

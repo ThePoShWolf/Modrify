@@ -17,7 +17,7 @@ Copy-FalloutRecordAsNewRecord -Mod <IFallout4Mod> [-Record] <IFallout4MajorRecor
 ```
 
 ## DESCRIPTION
-Copies the selected record into a mod as a new record. Requires a mod object to have been created with Get-FalloutMod, New-FalloutMod, or pull from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
+Copies the selected record into a mod as a new record. Requires a mod object to have been created with Get-FalloutMod, New-FalloutMod, or pull from the load order Get-ModLoadOrder/Get-ModPriorityOrder.
 
 ## EXAMPLES
 
@@ -32,7 +32,7 @@ This will copy all Npcs from the Fallout 4 master file into TestMod as new recor
 ## PARAMETERS
 
 ### -Mod
-The mod object. Created with Get-FalloutMod, New-FalloutMod, or pulled from the load order Get-MutaLoadOrder/Get-MutaPriorityOrder.
+The mod object. Created with Get-FalloutMod, New-FalloutMod, or pulled from the load order Get-ModLoadOrder/Get-ModPriorityOrder.
 
 ```yaml
 Type: IFallout4Mod

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-MutaPriorityOrder
+# Get-ModPriorityOrder
 
 ## SYNOPSIS
 Returns the selected game's load order reversed.
@@ -13,7 +13,7 @@ Returns the selected game's load order reversed.
 ## SYNTAX
 
 ```
-Get-MutaPriorityOrder [<CommonParameters>]
+Get-ModPriorityOrder [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,7 +25,7 @@ For example, in Skyrim Skyrim.esm is last in the returned array.
 
 ### Example 1
 ```powershell
-Get-MutaPriorityOrder
+Get-ModPriorityOrder
 ```
 
 Returns the reversed load order.

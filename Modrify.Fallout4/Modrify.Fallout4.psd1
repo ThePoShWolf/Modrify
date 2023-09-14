@@ -12,13 +12,13 @@
     RootModule        = 'Modrify.Fallout4.dll'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.2'
+    ModuleVersion     = '0.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
 
     # ID used to uniquely identify this module
-    GUID              = '74270c5f-3546-408a-9441-5d0e9288e680'
+    GUID              = '7989ad9b-7125-4c40-8d26-42db15ec9a1b'
 
     # Author of this module
     Author            = 'ThePoShWolf'
@@ -54,7 +54,7 @@
     RequiredModules   = @(
         @{
             ModuleName      = 'Modrify'
-            RequiredVersion = '0.0.2'
+            RequiredVersion = '0.0.3'
         }
     )
 

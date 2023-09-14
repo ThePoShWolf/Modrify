@@ -12,13 +12,13 @@
     RootModule        = 'Modrify.dll'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.2'
+    ModuleVersion     = '0.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
 
     # ID used to uniquely identify this module
-    GUID              = 'edac2199-f937-411b-8887-7979063f0a67'
+    GUID              = '8aabe204-bc11-4448-b478-dc87e432e74e'
 
     # Author of this module
     Author            = 'ThePoShWolf'

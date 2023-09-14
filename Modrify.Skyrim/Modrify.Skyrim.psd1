@@ -12,13 +12,13 @@
     RootModule        = 'Modrify.Skyrim.dll'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.2'
+    ModuleVersion     = '0.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
 
     # ID used to uniquely identify this module
-    GUID              = '417ba17b-f0ef-4d5d-bd0c-70e71e58e590  '
+    GUID              = 'ff09967d-220d-44e2-990c-bddbf1151714'
 
     # Author of this module
     Author            = 'ThePoShWolf'
@@ -54,7 +54,7 @@
     RequiredModules   = @(
         @{
             ModuleName      = 'Modrify'
-            RequiredVersion = '0.0.2'
+            RequiredVersion = '0.0.3'
         }
     )
 

@@ -1,10 +1,10 @@
-[![PSMutagen](https://img.shields.io/powershellgallery/v/PSMutagen.svg?style=flat-square&label=PSMutagen "PSMutagen")](https://www.powershellgallery.com/packages/PSMutagen/)
+[![Modrify](https://img.shields.io/powershellgallery/v/Modrify.svg?style=flat-square&label=Modrify "Modrify")](https://www.powershellgallery.com/packages/Modrify/)
 
-# PSMutagen
+# Modrify
 
 Powered by [Mutagen](https://github.com/Mutagen-Modding/Mutagen).
 
-PSMutagen is a PowerShell module with the goals of:
+Modrify is a PowerShell module with the goals of:
 
 - Providing the same or similar features as whats available using Pascal in xEdit
 - Make mod reading, editing, overriding (etc) easily accessible at the commandline
@@ -19,24 +19,24 @@ As I have time to work with this module to convert some of the xEdit Pascal scri
 
 ## Installation
 
-PSMutagen, and its submodules, require [PowerShell 7.3+](https://github.com/powershell/powershell/releases) and will not work in any earlier version of PowerShell (7.2-) or Windows PowerShell (PowerShell 5.1-). You can test your PowerShell version with:
+Modrify, and its submodules, require [PowerShell 7.3+](https://github.com/powershell/powershell/releases) and will not work in any earlier version of PowerShell (7.2-) or Windows PowerShell (PowerShell 5.1-). You can test your PowerShell version with:
 
 ```powershell
 $PSVersionTable
 ```
 
-PSMutagen, and its submodules, are available in the PowerShell Gallery, so they can be installed with:
+Modrify, and its submodules, are available in the PowerShell Gallery, so they can be installed with:
 
 ```powershell
-Install-Module PSMutagen
+Install-Module Modrify
 ```
 
 Since module dependency has been configured, if you install a submodule, it will automatically install the root module as well.
 
 The current list of submodules:
 
-- `PSMutagen.Skyrim`: [![PSMutagen.Skyrim](https://img.shields.io/powershellgallery/v/PSMutagen.Skyrim.svg?style=flat-square&label=PSMutagen.Skyrim "PSMutagen.Skyrim")](https://www.powershellgallery.com/packages/PSMutagen.Skyrim/)
-- `PSMutagen.Fallout4`: [![PSMutagen.Fallout4](https://img.shields.io/powershellgallery/v/PSMutagen.Fallout4.svg?style=flat-square&label=PSMutagen.Fallout4 "PSMutagen.Fallout4")](https://www.powershellgallery.com/packages/PSMutagen.Fallout4/)
+- `Modrify.Skyrim`: [![Modrify.Skyrim](https://img.shields.io/powershellgallery/v/Modrify.Skyrim.svg?style=flat-square&label=Modrify.Skyrim "Modrify.Skyrim")](https://www.powershellgallery.com/packages/Modrify.Skyrim/)
+- `Modrify.Fallout4`: [![Modrify.Fallout4](https://img.shields.io/powershellgallery/v/Modrify.Fallout4.svg?style=flat-square&label=Modrify.Fallout4 "Modrify.Fallout4")](https://www.powershellgallery.com/packages/Modrify.Fallout4/)
 
 This list is based on support by the underlying library ([Mutagen](https://github.com/Mutagen-Modding/Mutagen)) as well as implementation here into this module. If you don't see a specific Bethesda game in this list, check Mutagen first. If Mutagen supports it, open an issue here and I will look at implementation.
 
@@ -54,11 +54,11 @@ Once you've set the game environment, you will be able to use the other commands
 
 ### Getting data
 
-PSMutagen is able to retrieve data about your load order or specific mods very well. For example, if you'd like to build a spreadsheet of all people NPCs with their name, race, and factions, you can do so with:
+Modrify is able to retrieve data about your load order or specific mods very well. For example, if you'd like to build a spreadsheet of all people NPCs with their name, race, and factions, you can do so with:
 
 ```powershell
 # Get the game environment to capture the LinkCache object
-$ge = Set-MutaGameEnvironment SkyrimSE -Passthru
+$ge = Set-ModrifyGame SkyrimSE -Passthru
 # List out the races
 $raceStrings = 'ArgonianRace','BretonRace','DarkElfRace','ElderRace','HighElfRace','ImperialRace','KhajiitRace','NordRace','OrcRace','RedguardRace'
 $races = Get-SkyrimWinningOverrides -RecordType Race | ?{$raceStrings -contains $_.EditorID}
@@ -85,7 +85,7 @@ If you wanted to run that report on a specific mod, you can switch out `Get-Skyr
 This module can be used for creating patches. For example, if you needed to add a specific keyword to some armors:
 
 ```powershell
-$ge = Set-MutaGameEnvironment SkyrimSE -Passthru
+$ge = Set-ModrifyGame SkyrimSE -Passthru
 # Create a new mod in memory
 $newMod = New-SkyrimMod -ModKey 'MyPatch.esp'
 # Make the new mod light (esl)
@@ -108,9 +108,9 @@ The easiest way to contribute is to submit issues and provide detailed informati
 
 If you are the coding type, please feel free to fork, commit changes, and submit a PR.
 
-### Building PSMutagen
+### Building Modrify
 
-Building PSMutagen requires .NET 7 and PowerShell 7.3+ with the `InvokeBuild` module installed. All other dependencies should be automatically resolved.
+Building Modrify requires .NET 7 and PowerShell 7.3+ with the `InvokeBuild` module installed. All other dependencies should be automatically resolved.
 
 In the root of the repository, run:
 
@@ -121,6 +121,6 @@ Invoke-Build -Task ModuleBuild
 This will invoke the build script which will clean up the build folder (if it exists), run a dotnet clean -> restore -> publish, build the PowerShell manifest, and then collect all the required files in the `./build` folder. Once complete, you should be able to import any one of the modules with:
 
 ```powershell
-Import-Module .\build\PSMutagen
-Import-Module .\build\PSMutagen.Skyrim
+Import-Module .\build\Modrify
+Import-Module .\build\Modrify.Skyrim
 ```

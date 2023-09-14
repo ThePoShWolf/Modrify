@@ -47,7 +47,7 @@ This list is based on support by the underlying library ([Mutagen](https://githu
 Start by setting your game environment, so Mutagen knows where to look:
 
 ```powershell
-Set-MutaGameEnvironment -Release SkyrimSE
+Set-ModrifyGame -Release SkyrimSE
 ```
 
 Once you've set the game environment, you will be able to use the other commands in each module.

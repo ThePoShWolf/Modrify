@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Release
-If you haven't already set your game environment with Set-MutaGameEnvironment, specify the Skyrim version with this parameter.
+If you haven't already set your game environment with Set-ModrifyGame, specify the Skyrim version with this parameter.
 
 If you have set your game environment already, this parameter is not needed.
 

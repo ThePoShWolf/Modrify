@@ -26,7 +26,7 @@ namespace Modrify.Core
         {
             if (Environment == null)
             {
-                throw new InvalidOperationException("Unable to determine release. Please set the game environment first by running 'Set-MutaGameEnvironment' or passing the release with the -Release parameter");
+                throw new InvalidOperationException("Unable to determine release. Please set the game environment first by running 'Set-ModrifyGame' or passing the release with the -Release parameter");
             }
             return Environment;
         }
@@ -64,7 +64,7 @@ namespace Modrify.Core
         }
     }
 
-    [Cmdlet(VerbsCommon.Set, "MutaGameEnvironment")]
+    [Cmdlet(VerbsCommon.Set, "ModrifyGame")]
     [OutputType(typeof(IGameEnvironment), ParameterSetName = new string[] { "passthru" })]
     public class SetGameEnvironment : PSCmdlet
     {
@@ -92,7 +92,7 @@ namespace Modrify.Core
         }
     }
 
-    [Cmdlet(VerbsCommon.Get, "MutaGameEnvironment")]
+    [Cmdlet(VerbsCommon.Get, "ModrifyGame")]
     [OutputType(typeof(IGameEnvironment))]
     public class GetGameEnvironment : PSCmdlet
     {
@@ -102,9 +102,9 @@ namespace Modrify.Core
         }
     }
 
-    [Cmdlet(VerbsCommon.Get, "MutaLoadOrder")]
+    [Cmdlet(VerbsCommon.Get, "ModLoadOrder")]
     [OutputType(typeof(ILoadOrderGetter<IModListingGetter<IModGetter>>))]
-    public class GetMutaLoadOrder : PSCmdlet
+    public class GetModLoadOrder : PSCmdlet
     {
         protected override void ProcessRecord()
         {
@@ -112,9 +112,9 @@ namespace Modrify.Core
         }
     }
 
-    [Cmdlet(VerbsCommon.Get, "MutaPriorityOrder")]
+    [Cmdlet(VerbsCommon.Get, "ModPriorityOrder")]
     [OutputType(typeof(IEnumerable<IModListingGetter<IModGetter>>))]
-    public class GetMutaPriorityOrder : PSCmdlet
+    public class GetModPriorityOrder : PSCmdlet
     {
         protected override void ProcessRecord()
         {

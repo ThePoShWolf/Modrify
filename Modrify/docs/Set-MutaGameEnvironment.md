@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-MutaGameEnvironment
+# Set-ModrifyGame
 
 ## SYNOPSIS
 The first command to run for any work in Modrify. This sets your game environment to be the specified game.
@@ -13,7 +13,7 @@ The first command to run for any work in Modrify. This sets your game environmen
 ## SYNTAX
 
 ```
-Set-MutaGameEnvironment [-Game] <GameRelease> [-PassThru] [<CommonParameters>]
+Set-ModrifyGame [-Game] <GameRelease> [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ Modrify supports several game releases that are supported by Mutagen. In order t
 
 ### Example 1
 ```powershell
-Set-MutaGameEnvironment SkyrimSE
+Set-ModrifyGame SkyrimSE
 ```
 
 Sets the game environment to be Skyrim Special Edition.

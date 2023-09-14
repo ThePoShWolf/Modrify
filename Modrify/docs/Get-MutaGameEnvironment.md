@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-MutaGameEnvironment
 
 ## SYNOPSIS
-Returns the GameEnvironment object created by Set-MutaGameEnvironment.
+Returns the GameEnvironment object created by Set-ModrifyGame.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-MutaGameEnvironment [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The GameEnvironment object created by Set-MutaGameEnvironment has a lot of useful information about your game including the data folder path, the load order file path, and your load order.
+The GameEnvironment object created by Set-ModrifyGame has a lot of useful information about your game including the data folder path, the load order file path, and your load order.
 
 ## EXAMPLES
 

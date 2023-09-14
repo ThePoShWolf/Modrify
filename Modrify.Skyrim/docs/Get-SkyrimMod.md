@@ -143,7 +143,7 @@ Accept wildcard characters: False
 ```
 
 ### -Release
-Only required if you haven't already set your game environment with Set-MutaGameEnvironment.
+Only required if you haven't already set your game environment with Set-ModrifyGame.
 
 ```yaml
 Type: SkyrimRelease

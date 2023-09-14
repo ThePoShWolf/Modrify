@@ -92,7 +92,7 @@ namespace Modrify.Fallout4
         {
             if (ModrifyConfig.Environment == null)
             {
-                throw new PSInvalidOperationException("Unable to load the load order. Please set your environment with 'Set-MutaGameEnvironment'");
+                throw new PSInvalidOperationException("Unable to load the load order. Please set your environment with 'Set-ModrifyGame'");
             }
             else
             {

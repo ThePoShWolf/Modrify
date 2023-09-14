@@ -110,7 +110,13 @@ If you are the coding type, please feel free to fork, commit changes, and submit
 
 ### Building Modrify
 
-Building Modrify requires .NET 7 and PowerShell 7.3+ with the `InvokeBuild` module installed. All other dependencies should be automatically resolved.
+Building Modrify requires .NET 7 and PowerShell 7.3+ with the following PowerShell modules:
+
+- `InvokeBuild`
+- `PlatyPS`
+- `EZOut`
+
+All other dependencies should be automatically resolved.
 
 In the root of the repository, run:
 
@@ -118,7 +124,7 @@ In the root of the repository, run:
 Invoke-Build -Task ModuleBuild
 ```
 
-This will invoke the build script which will clean up the build folder (if it exists), run a dotnet clean -> restore -> publish, build the PowerShell manifest, and then collect all the required files in the `./build` folder. Once complete, you should be able to import any one of the modules with:
+This will invoke the build script which will clean up the build folder (if it exists), run a dotnet clean -> restore -> publish, build the PowerShell manifest, and then collect all the required files into the `./build` folder, sorting into module sub folders. Once complete, you should be able to import any one of the modules with:
 
 ```powershell
 Import-Module .\build\Modrify

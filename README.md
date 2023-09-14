@@ -1,6 +1,6 @@
-|[![Modrify](https://img.shields.io/powershellgallery/v/Modrify.svg?label=Modrify "Modrify")](https://www.powershellgallery.com/packages/Modrify/) | [![Modrify.Skyrim](https://img.shields.io/powershellgallery/v/Modrify.Skyrim.svg?label=Modrify.Skyrim "Modrify.Skyrim")](https://www.powershellgallery.com/packages/Modrify.Skyrim/) | [![Modrify.Fallout4](https://img.shields.io/powershellgallery/v/Modrify.Fallout4.svg?label=Modrify.Fallout4 "Modrify.Fallout4")](https://www.powershellgallery.com/packages/Modrify.Fallout4/)|
+[![Modrify](https://img.shields.io/powershellgallery/v/Modrify.svg?label=Modrify "Modrify")](https://www.powershellgallery.com/packages/Modrify/) | [![Modrify.Skyrim](https://img.shields.io/powershellgallery/v/Modrify.Skyrim.svg?label=Modrify.Skyrim "Modrify.Skyrim")](https://www.powershellgallery.com/packages/Modrify.Skyrim/) | [![Modrify.Fallout4](https://img.shields.io/powershellgallery/v/Modrify.Fallout4.svg?label=Modrify.Fallout4 "Modrify.Fallout4")](https://www.powershellgallery.com/packages/Modrify.Fallout4/)
+:---:|:---:|:---:
 |[![](https://img.shields.io/powershellgallery/dt/Modrify.svg)](https://www.powershellgallery.com/packages/Modrify/)|[![Modrify.Skyrim](https://img.shields.io/powershellgallery/dt/Modrify.Skyrim.svg)](https://www.powershellgallery.com/packages/Modrify.Skyrim/)|[![Modrify.Fallout4](https://img.shields.io/powershellgallery/dt/Modrify.Fallout4.svg)](https://www.powershellgallery.com/packages/Modrify.Fallout4/)|
-|---|---|---|
 
 # Modrify
 

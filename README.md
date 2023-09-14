@@ -46,7 +46,7 @@ This list is based on support by the underlying library ([Mutagen](https://githu
 
 ### Setup
 
-Start by setting your game environment, so Mutagen knows where to look:
+Start by setting your game environment, so Modrify knows where to look:
 
 ```powershell
 Set-ModrifyGame -Release SkyrimSE

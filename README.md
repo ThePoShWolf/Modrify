@@ -1,4 +1,5 @@
-[![Modrify](https://img.shields.io/powershellgallery/v/Modrify.svg?style=flat-square&label=Modrify "Modrify")](https://www.powershellgallery.com/packages/Modrify/)
+|[![Modrify](https://img.shields.io/powershellgallery/v/Modrify.svg?style=flat-square&label=Modrify "Modrify")](https://www.powershellgallery.com/packages/Modrify/)|[![Modrify.Skyrim](https://img.shields.io/powershellgallery/v/Modrify.Skyrim.svg?style=flat-square&label=Modrify.Skyrim "Modrify.Skyrim")](https://www.powershellgallery.com/packages/Modrify.Skyrim/)|[![Modrify.Fallout4](https://img.shields.io/powershellgallery/v/Modrify.Fallout4.svg?style=flat-square&label=Modrify.Fallout4 "Modrify.Fallout4")](https://www.powershellgallery.com/packages/Modrify.Fallout4/)|
+|---|---|---|
 
 # Modrify
 
@@ -35,8 +36,8 @@ Since module dependency has been configured, if you install a submodule, it will
 
 The current list of submodules:
 
-- `Modrify.Skyrim`: [![Modrify.Skyrim](https://img.shields.io/powershellgallery/v/Modrify.Skyrim.svg?style=flat-square&label=Modrify.Skyrim "Modrify.Skyrim")](https://www.powershellgallery.com/packages/Modrify.Skyrim/)
-- `Modrify.Fallout4`: [![Modrify.Fallout4](https://img.shields.io/powershellgallery/v/Modrify.Fallout4.svg?style=flat-square&label=Modrify.Fallout4 "Modrify.Fallout4")](https://www.powershellgallery.com/packages/Modrify.Fallout4/)
+- `Modrify.Skyrim`
+- `Modrify.Fallout4`
 
 This list is based on support by the underlying library ([Mutagen](https://github.com/Mutagen-Modding/Mutagen)) as well as implementation here into this module. If you don't see a specific Bethesda game in this list, check Mutagen first. If Mutagen supports it, open an issue here and I will look at implementation.
 

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-MutaGameEnvironment
+# Get-ModrifyGame
 
 ## SYNOPSIS
 Returns the GameEnvironment object created by Set-ModrifyGame.
@@ -13,7 +13,7 @@ Returns the GameEnvironment object created by Set-ModrifyGame.
 ## SYNTAX
 
 ```
-Get-MutaGameEnvironment [<CommonParameters>]
+Get-ModrifyGame [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ The GameEnvironment object created by Set-ModrifyGame has a lot of useful inform
 
 ### Example 1
 ```powershell
-Get-MutaGameEnvironment
+Get-ModrifyGame
 ```
 
 As simple as it comes, returns the GameEnvironment object.

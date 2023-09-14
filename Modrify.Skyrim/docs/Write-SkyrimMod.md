@@ -38,7 +38,7 @@ $overrides | %{
     ...
 }
 # Write the new data to a file in the data directory
-Write-SkyrimMod -Mod $mod -Path "$((Get-MutaGameEnvironment).DataFolderPath)\TestMod.esp"
+Write-SkyrimMod -Mod $mod -Path "$((Get-ModrifyGame).DataFolderPath)\TestMod.esp"
 ```
 
 This example gets all Nord NPCs using Get-SkyrimMajorRecords and filtering with Where-Object.
@@ -56,7 +56,7 @@ In the future there will be a function to create this object type. For now, use:
 $bwp = [Mutagen.Bethesda.Plugins.Binary.Parameters.BinaryWriteParameters]::new()
 # If the modkey to write to is different then the modkey provided on mod creation, ignore that error
 $bwp.ModKey = [Mutagen.Bethesda.Plugins.Binary.Parameters.ModKeyOption]::NoCheck
-Write-SkyrimMod -Mod $mod -Path "$((Get-MutaGameEnvironment).DataFolderPath)\TestMod.esp"
+Write-SkyrimMod -Mod $mod -Path "$((Get-ModrifyGame).DataFolderPath)\TestMod.esp"
 ```
 
 ```yaml
@@ -122,7 +122,7 @@ The fully qualified file path to write to.
 The data folder can be retrieved with:
 
 ```powershell
-(Get-MutaGameEnvironment).DataFolderPath
+(Get-ModrifyGame).DataFolderPath
 ```
 
 ```yaml

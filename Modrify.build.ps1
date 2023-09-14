@@ -38,7 +38,7 @@ task Clean {
 }
 
 # Build the docs, depends on PlatyPS
-task DocBuild, Clean, dotnetBuild, {
+task DocBuild Clean, dotnetBuild, {
     foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue

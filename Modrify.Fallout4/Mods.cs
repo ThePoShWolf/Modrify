@@ -65,10 +65,16 @@ namespace Modrify.Fallout4
     {
         [Parameter(Mandatory = true)]
         public ModKey ModKey;
+        public Fallout4ModHeader.HeaderFlag? HeaderFlag;
 
         protected override void ProcessRecord()
         {
-            WriteObject(new Fallout4Mod(ModKey));
+            IFallout4Mod mod = new Fallout4Mod(ModKey);
+            if (HeaderFlag != null)
+            {
+                mod.ModHeader.Flags = (Fallout4ModHeader.HeaderFlag)HeaderFlag;
+            }
+            WriteObject(mod);
         }
     }
 

@@ -65,10 +65,16 @@ namespace Modrify.Fallout4
     {
         [Parameter(Mandatory = true)]
         public ModKey ModKey;
+        public Fallout4ModHeader.HeaderFlag? HeaderFlag;
 
         protected override void ProcessRecord()
         {
-            WriteObject(new Fallout4Mod(ModKey));
+            IFallout4Mod mod = new Fallout4Mod(ModKey);
+            if (HeaderFlag != null)
+            {
+                mod.ModHeader.Flags = (Fallout4ModHeader.HeaderFlag)HeaderFlag;
+            }
+            WriteObject(mod);
         }
     }
 
@@ -78,7 +84,7 @@ namespace Modrify.Fallout4
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter()]
         public required FileInfo Path;
 
         [Parameter()]
@@ -101,6 +107,10 @@ namespace Modrify.Fallout4
                 {
                     rec.IsCompressed = false;
                 }
+            }
+            if (Path == null)
+            {
+                Path = new FileInfo(ModrifyConfig.ResolveModkeyPath(Mod.ModKey));
             }
             if (ParallelWriteParameters != null)
             {

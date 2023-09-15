@@ -84,7 +84,7 @@ namespace Modrify.Fallout4
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter()]
         public required FileInfo Path;
 
         [Parameter()]
@@ -107,6 +107,10 @@ namespace Modrify.Fallout4
                 {
                     rec.IsCompressed = false;
                 }
+            }
+            if (Path == null)
+            {
+                Path = new FileInfo(ModrifyConfig.ResolveModkeyPath(Mod.ModKey));
             }
             if (ParallelWriteParameters != null)
             {

@@ -92,7 +92,7 @@ namespace Modrify.Skyrim
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter()]
         public required FileInfo Path;
 
         [Parameter()]
@@ -115,6 +115,10 @@ namespace Modrify.Skyrim
                 {
                     rec.IsCompressed = false;
                 }
+            }
+            if (Path == null)
+            {
+                Path = new FileInfo(ModrifyConfig.ResolveModkeyPath(Mod.ModKey));
             }
             if (ParallelWriteParameters != null)
             {

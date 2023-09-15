@@ -88,11 +88,8 @@ This module can be used for creating patches. For example, if you needed to add 
 
 ```powershell
 $ge = Set-ModrifyGame SkyrimSE -Passthru
-# Create a new mod in memory
-$newMod = New-SkyrimMod -ModKey 'MyPatch.esp'
-# Make the new mod light (esl)
-# This will be easier in the future
-$newmod.ModHeader.Flags = [Mutagen.Bethesda.Skyrim.SkyrimModHeader+HeaderFlag]::LightMaster
+# Create a new light (ESL) mod in memory
+$newMod = New-SkyrimMod -ModKey 'MyPatch.esp' -HeaderFlags LightMaster
 # Get the keyword to add
 $keyword = Get-SkyrimMajorRecords -ModKey 'Skyrim.esm' -RecordType Keyword | ?{$_.EditorID -eq 'ArmorClothing'}
 # Get the armors to add keywords to and copy them as override to the new mod

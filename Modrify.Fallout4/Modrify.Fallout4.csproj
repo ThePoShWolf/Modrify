@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<NoWarn>$(NoWarn);CS8604</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Mutagen.Bethesda.Fallout4" Version="0.42.0" />
-		<PackageReference Include="System.Management.Automation" Version="7.3.6" />
+		<PackageReference Include="Mutagen.Bethesda.Fallout4" Version="0.43.3" />
+		<PackageReference Include="System.Management.Automation" Version="7.4.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Modrify\Modrify.csproj" />

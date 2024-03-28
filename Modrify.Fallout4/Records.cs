@@ -125,7 +125,7 @@ namespace Modrify.Fallout4
         {
             if (ParameterSetName == "bymodkey")
             {
-                Mod = Fallout4Mod.CreateFromBinaryOverlay(ModrifyConfig.ResolveModkeyPath(ModKey));
+                Mod = Fallout4Mod.CreateFromBinaryOverlay(ModrifyConfig.ResolveModkeyPath(ModKey), ModrifyConfig.TryGetEnvironment().GameRelease.ToFallout4Release());
             }
             if (RecordType == null)
             {

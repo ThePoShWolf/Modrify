@@ -38,6 +38,9 @@ namespace Modrify.Fallout4
         [Parameter()]
         public IFileSystem? FileSystem;
 
+        [Parameter()]
+        public Fallout4Release Release = ModrifyConfig.TryGetEnvironment().GameRelease.ToFallout4Release();
+
         [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
         [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
         public SwitchParameter ReadOnly;
@@ -50,11 +53,11 @@ namespace Modrify.Fallout4
             }
             if (ReadOnly.IsPresent)
             {
-                WriteObject(Fallout4Mod.CreateFromBinaryOverlay(Path, StringsParam, FileSystem));
+                WriteObject(Fallout4Mod.CreateFromBinaryOverlay(Path, Release, StringsParam, FileSystem));
             }
             else
             {
-                WriteObject(Fallout4Mod.CreateFromBinary(Path, ImportMask, StringsParam, Parallel, FileSystem));
+                WriteObject(Fallout4Mod.CreateFromBinary(Path, Release, ImportMask, StringsParam, Parallel, FileSystem));
             }
         }
     }
@@ -66,9 +69,13 @@ namespace Modrify.Fallout4
         [Parameter(Mandatory = true)]
         public ModKey ModKey;
 
+
+        [Parameter()]
+        public Fallout4Release Release = ModrifyConfig.TryGetEnvironment().GameRelease.ToFallout4Release();
+
         protected override void ProcessRecord()
         {
-            WriteObject(new Fallout4Mod(ModKey));
+            WriteObject(new Fallout4Mod(ModKey, Release));
         }
     }
 

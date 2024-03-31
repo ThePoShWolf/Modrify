@@ -129,3 +129,14 @@ This will invoke the build script which will clean up the build folder (if it ex
 Import-Module .\build\Modrify
 Import-Module .\build\Modrify.Skyrim
 ```
+
+## Changelog
+
+### 0.0.4
+
+- Updated to Mutagen 0.43.3
+- Added `-HeaderFlags` to `New-*Mod` cmdlets
+
+### 0.0.3
+
+- Initial release

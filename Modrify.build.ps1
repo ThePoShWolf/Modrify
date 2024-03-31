@@ -1,5 +1,5 @@
 param (
-    [version]$Version = '0.0.3',
+    [version]$Version = '0.0.4',
     [string]$NugetApiKey,
     [ValidateScript({
         (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains $_
@@ -103,7 +103,8 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, DocBuild, {
         # Get exported functions
         if ($modules[$m].isSubModule) {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\Modrify\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\Modrify\Modrify.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
-        } else {
+        }
+        else {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
         }
 

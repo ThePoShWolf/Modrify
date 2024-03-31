@@ -72,9 +72,17 @@ namespace Modrify.Skyrim
         [Parameter()]
         public SkyrimRelease Release = ModrifyConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
+        [Parameter()]
+        public SkyrimModHeader.HeaderFlag? HeaderFlag;
+
         protected override void ProcessRecord()
         {
-            WriteObject(new SkyrimMod(ModKey, Release));
+            ISkyrimMod mod = new SkyrimMod(ModKey, Release);
+            if (HeaderFlag != null)
+            {
+                mod.ModHeader.Flags = (SkyrimModHeader.HeaderFlag)HeaderFlag;
+            }
+            WriteObject(mod);
         }
     }
 
@@ -84,7 +92,7 @@ namespace Modrify.Skyrim
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public required IMod Mod;
 
-        [Parameter(Mandatory = true)]
+        [Parameter()]
         public required FileInfo Path;
 
         [Parameter()]
@@ -107,6 +115,10 @@ namespace Modrify.Skyrim
                 {
                     rec.IsCompressed = false;
                 }
+            }
+            if (Path == null)
+            {
+                Path = new FileInfo(ModrifyConfig.ResolveModkeyPath(Mod.ModKey));
             }
             if (ParallelWriteParameters != null)
             {

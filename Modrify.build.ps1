@@ -117,13 +117,15 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, DocBuild, {
             FunctionsToExport  = $commands
             ModuleVersion      = $version
             RequiredAssemblies = (Get-ChildItem "$($modules[$m].modulePath)\lib\*.dll" | ForEach-Object { "lib/$($_.Name)" })
-            <#RequiredModules   = @{
-                ModuleName = 'Modrify'
-                RequiredVersion = [version]'0.0.1'
-            }#>
+        }
+        if ($modules[$m].isSubModule) {
+            $moduleManifestData['RequiredModules'] = @{
+                ModuleName      = 'Modrify'
+                RequiredVersion = $Version
+            }
         }
         if ($null -ne $preRelease) {
-            $moduleManifestData['Prerelease'] = $preRelease
+            #$moduleManifestData['Prerelease'] = $preRelease
         }
         if (Test-Path "$($modules[$m].modulePath)\$($modules[$m].moduleName).format.ps1xml") {
             $moduleManifestData['FormatsToProcess'] = "$($modules[$m].moduleName).format.ps1xml"

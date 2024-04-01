@@ -76,7 +76,7 @@ namespace Modrify.Fallout4
 
         protected override void ProcessRecord()
         {
-            IFallout4Mod mod = new Fallout4Mod(ModKey);
+            IFallout4Mod mod = new Fallout4Mod(ModKey, Release);
             if (HeaderFlag != null)
             {
                 mod.ModHeader.Flags = (Fallout4ModHeader.HeaderFlag)HeaderFlag;

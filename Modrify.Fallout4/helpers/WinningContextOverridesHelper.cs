@@ -10,7 +10,7 @@ namespace Modrify.Fallout4
     {
         public static IEnumerable<IModContext<IFallout4Mod, IFallout4ModGetter, IFallout4MajorRecord, IFallout4MajorRecordGetter>> WinningContextOverrides(string recordType)
         {
-            IGameEnvironment<IFallout4Mod, IFallout4ModGetter> fge = GameEnvironment.Typical.Fallout4();
+            IGameEnvironment<IFallout4Mod, IFallout4ModGetter> fge = GameEnvironment.Typical.Fallout4(ModrifyConfig.TryGetEnvironment().GameRelease.ToFallout4Release());
             switch (recordType)
             {
                 case "GameSetting":

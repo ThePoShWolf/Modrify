@@ -1,5 +1,5 @@
 param (
-    [version]$Version = '0.0.3',
+    [version]$Version = '0.0.4',
     [string]$NugetApiKey,
     [ValidateScript({
         (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains $_
@@ -68,7 +68,7 @@ task dotnetBuild {
         $filesToSkip = if ($modules[$m].isSubModule) {
             Get-ChildItem "$PSScriptRoot\build\Modrify\lib\*.dll"
         }
-        Get-ChildItem "$($modules[$m].basePath)\bin\Debug\net7.0\publish\*.dll" | ForEach-Object {
+        Get-ChildItem "$($modules[$m].basePath)\bin\Release\net8.0\publish\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
                 Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
             }
@@ -103,7 +103,8 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, DocBuild, {
         # Get exported functions
         if ($modules[$m].isSubModule) {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\Modrify\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\Modrify\Modrify.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
-        } else {
+        }
+        else {
             $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
         }
 
@@ -116,13 +117,15 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, DocBuild, {
             FunctionsToExport  = $commands
             ModuleVersion      = $version
             RequiredAssemblies = (Get-ChildItem "$($modules[$m].modulePath)\lib\*.dll" | ForEach-Object { "lib/$($_.Name)" })
-            <#RequiredModules   = @{
-                ModuleName = 'Modrify'
-                RequiredVersion = [version]'0.0.1'
-            }#>
+        }
+        if ($modules[$m].isSubModule) {
+            $moduleManifestData['RequiredModules'] = @{
+                ModuleName      = 'Modrify'
+                RequiredVersion = $Version
+            }
         }
         if ($null -ne $preRelease) {
-            $moduleManifestData['Prerelease'] = $preRelease
+            #$moduleManifestData['Prerelease'] = $preRelease
         }
         if (Test-Path "$($modules[$m].modulePath)\$($modules[$m].moduleName).format.ps1xml") {
             $moduleManifestData['FormatsToProcess'] = "$($modules[$m].moduleName).format.ps1xml"

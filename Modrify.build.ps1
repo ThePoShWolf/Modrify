@@ -68,7 +68,7 @@ task dotnetBuild {
         $filesToSkip = if ($modules[$m].isSubModule) {
             Get-ChildItem "$PSScriptRoot\build\Modrify\lib\*.dll"
         }
-        Get-ChildItem "$($modules[$m].basePath)\bin\Debug\net8.0\publish\*.dll" | ForEach-Object {
+        Get-ChildItem "$($modules[$m].basePath)\bin\Release\net8.0\publish\*.dll" | ForEach-Object {
             if ($filesToSkip.Name -notcontains $_.Name) {
                 Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
             }

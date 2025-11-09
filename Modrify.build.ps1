@@ -1,21 +1,41 @@
 param (
-    [version]$Version = '0.0.3',
+    [version]$Version = '0.1.0',
     [string]$NugetApiKey,
     [ValidateScript({
-        (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains $_
+            (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains $_
         })]
     [string]$Module
 )
 $modules = [ordered]@{}
 $basePath = $PSScriptRoot
-Get-ChildItem "$basePath/Modrify*" -Directory | Sort-Object | ForEach-Object {
-    $modules[$_.Name] = @{
-        basePath    = "$basePath\$($_.Name)"
-        docPath     = "$basePath\$($_.Name)\docs"
-        testPath    = "$basePath\$($_.Name)\tests"
-        moduleName  = $_.Name
-        modulePath  = "$basePath\build\$($_.Name)"
-        isSubModule = $_.Name -eq 'Modrify' ? $false : $true
+$dotnetConfiguration = 'Release'
+$dotnetVersion = "net8.0"
+
+# Handle the new ALC architecture where modules have .Cmdlets and .Engine projects
+$moduleConfigs = @{
+    'Modrify.Skyrim'   = @{
+        cmdletsPath = "$basePath\Modrify.Skyrim.Cmdlets"
+        enginePath  = "$basePath\Modrify.Skyrim.Engine"
+    }
+    'Modrify.Fallout4' = @{
+        cmdletsPath = "$basePath\Modrify.Fallout4.Cmdlets"
+        enginePath  = "$basePath\Modrify.Fallout4.Engine"
+    }
+}
+
+foreach ($moduleName in $moduleConfigs.Keys) {
+    $config = $moduleConfigs[$moduleName]
+    
+    # Check if the new structure exists (cmdlets + engine) or fall back to legacy
+    if (Test-Path $config.cmdletsPath) {
+        $modules[$moduleName] = @{
+            basePath   = $config.cmdletsPath
+            enginePath = $config.enginePath
+            docPath    = "$($config.cmdletsPath)\docs"
+            testPath   = "$($config.cmdletsPath)\tests"
+            moduleName = $moduleName
+            modulePath = "$basePath\build\$moduleName"
+        }
     }
 }
 
@@ -29,7 +49,7 @@ task Clean {
         }
         Write-Host "Cleaning $m..."
         if (Get-Module $modules[$m].moduleName) {
-            Remove-Module $modules[$m].moduleName
+            Remove-Module $modules[$m].moduleName -Force
         }
         if (Test-Path $modules[$m].modulePath) {
             Remove-Item $modules[$m].modulePath -Recurse -ErrorAction Ignore | Out-Null
@@ -54,30 +74,39 @@ task DocBuild Clean, dotnetBuild, {
 task dotnetBuild {
     dotnet clean
     dotnet restore
-    dotnet publish
-    #Set-Location $PSScriptRoot
-
+    
     foreach ($m in $modules.Keys) {
         if ((-not [string]::IsNullOrEmpty($module)) -and $m -ne $module) {
             continue
         }
         Write-Host "Building $m..."
-        if (-not (Test-Path "$($modules[$m].modulePath)\lib" -PathType Container)) {
-            New-Item "$($modules[$m].modulePath)\lib" -ItemType Directory | Out-Null
+        # Build the new ALC architecture (cmdlets + engine)
+        Write-Host "  Building engine assembly..."
+        dotnet build "$($modules[$m].enginePath)" --configuration $dotnetConfiguration
+            
+        Write-Host "  Building cmdlets assembly..."
+        dotnet build "$($modules[$m].basePath)" --configuration $dotnetConfiguration
+            
+        # Create module structure
+        if (-not (Test-Path $modules[$m].modulePath -PathType Container)) {
+            New-Item $modules[$m].modulePath -ItemType Directory | Out-Null
         }
-        $filesToSkip = if ($modules[$m].isSubModule) {
-            Get-ChildItem "$PSScriptRoot\build\Modrify\lib\*.dll"
+            
+        # Copy the main cmdlets DLL to the module root
+        $cmdletsDll = "$($modules[$m].basePath)\bin\$dotnetConfiguration\$dotnetVersion\$($modules[$m].moduleName).Cmdlets.dll"
+        if (Test-Path $cmdletsDll) {
+            Copy-Item $cmdletsDll -Destination "$($modules[$m].modulePath)\$($modules[$m].moduleName).dll" -Force
         }
-        Get-ChildItem "$($modules[$m].basePath)\bin\Debug\net7.0\publish\*.dll" | ForEach-Object {
-            if ($filesToSkip.Name -notcontains $_.Name) {
-                Copy-Item $_.FullName -Destination "$($modules[$m].modulePath)\lib\" -Force
+            
+        # Copy the lib folder (created by MSBuild target or manual copy)
+        $dependenciesSource = "$($modules[$m].basePath)\bin\$dotnetConfiguration\$dotnetVersion"
+        $dependenciesTarget = "$($modules[$m].modulePath)\lib"
+        if (Test-Path $dependenciesSource) {
+            if (Test-Path $dependenciesTarget) {
+                Remove-Item $dependenciesTarget -Recurse -Force
             }
-        }
-
-        Move-Item "$($modules[$m].modulePath)\lib\$m.dll" -Destination $($modules[$m].modulePath) -Force
-
-        if (Test-Path "$($modules[$m].modulePath)\lib\Modrify.dll") {
-            Remove-Item "$($modules[$m].modulePath)\lib\Modrify.dll" -Force
+            Copy-Item $dependenciesSource -Destination $dependenciesTarget -Recurse -Force
+            Write-Host "  Copied lib folder with $(Get-ChildItem $dependenciesTarget | Measure-Object | Select-Object -ExpandProperty Count) files"
         }
     }
 }
@@ -88,8 +117,17 @@ task GenerateFormats {
             continue
         }
         Write-Host "Generating formats for $m..."
-        # Generate the formats
-        & "$($modules[$m].basePath)\$($modules[$m].moduleName).ezout.ps1" -RelativeDestination "../build/$($modules[$m].moduleName)" | Out-Null
+        
+        # Look for .ezout.ps1 files in the appropriate location
+        $ezoutScript = $null
+        # For ALC modules, try cmdlets path first, then legacy path
+        $ezoutScript = "$($modules[$m].basePath)\$($modules[$m].moduleName).Cmdlets.ezout.ps1"
+        if ($ezoutScript -and (Test-Path $ezoutScript)) {
+            # Generate the formats
+            & $ezoutScript -RelativeDestination "../build/$($modules[$m].moduleName)" | Out-Null
+        } else {
+            Write-Warning "No .ezout.ps1 script found for $m"
+        }
     }
 }
 
@@ -100,15 +138,25 @@ task ModuleBuild Clean, dotnetBuild, GenerateFormats, DocBuild, {
             continue
         }
         Write-Host "Building the manifest for $m..."
-        # Get exported functions
-        if ($modules[$m].isSubModule) {
-            $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$basePath\build\Modrify\lib\*.dll' | %{Add-Type -Path `$_.FullName};gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$basePath\Build\Modrify\Modrify.dll';Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
+        
+        # Find and copy the manifest
+        $manifestSource = $null
+        # For ALC modules, try cmdlets path first, then legacy path
+        $manifestSource = "$($modules[$m].basePath)\$($modules[$m].moduleName).Cmdlets.psd1"
+        
+        if ($manifestSource -and (Test-Path $manifestSource)) {
+            Copy-Item $manifestSource -Destination "$($modules[$m].modulePath)\$($modules[$m].moduleName).psd1" -Force
         } else {
-            $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;gci '$($modules[$m].modulePath)\lib\*.dll' | %{Add-Type -Path `$_.FullName};Import-Module '$($modules[$m].modulePath)\$m.dll';(Get-Command -Module $m).Name"
+            Write-Error "Could not find manifest file for $m"
+            continue
         }
-
+        
+        # Get exported functions
+        # For ALC modules, import the cmdlets assembly directly
+        $commands = & pwsh -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command "`$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;Import-Module '$($modules[$m].modulePath)\$m.dll' -Force;(Get-Command -Module $m).Name"
+        
         # Copy the manifest
-        Copy-Item "$($modules[$m].basePath)\$($modules[$m].moduleName).psd1" -Destination $modules[$m].modulePath -Force
+        Copy-Item "$($modules[$m].basePath)\$($modules[$m].moduleName).Cmdlets.psd1" -Destination $modules[$m].modulePath -Force
 
         $moduleManifestData = @{
             Path               = "$($modules[$m].modulePath)\$($modules[$m].moduleName).psd1"
@@ -170,7 +218,7 @@ task QuickClean {
     }
 }
 
-task QuickBuild QuickClean, BuildModuleFile, GenerateFormats
+task QuickBuild QuickClean, dotnetBuild, GenerateFormats
 
 task QuickReimport QuickBuild, {
     foreach ($m in $modules.Keys) {

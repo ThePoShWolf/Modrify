@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NoWarn>$(NoWarn);CS8604</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.52.0" />
+		<PackageReference Include="System.Management.Automation" Version="7.4.13" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Modrify\Modrify.csproj" />
+	</ItemGroup>
+</Project>

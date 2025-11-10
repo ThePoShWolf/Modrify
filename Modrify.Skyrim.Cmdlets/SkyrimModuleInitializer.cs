@@ -19,12 +19,14 @@ namespace Modrify.Skyrim.Cmdlets
         {
             // Add the Resolving event handler here
             AssemblyLoadContext.Default.Resolving += ResolveEngine;
+            AssemblyLoadContext.Default.Resolving += ResolveFrameworkAssemblies;
         }
 
         public void OnRemove(PSModuleInfo psModuleInfo)
         {
             // Remove the Resolving event handler here
             AssemblyLoadContext.Default.Resolving -= ResolveEngine;
+            AssemblyLoadContext.Default.Resolving -= ResolveFrameworkAssemblies;
         }
 
         private static Assembly? ResolveEngine(
@@ -40,7 +42,7 @@ namespace Modrify.Skyrim.Cmdlets
             // to distinguish our assembly here,
             // since it's unique to our module.
             // There should be no other Modrify.Skyrim.Engine.dll on the system.
-            if (!assemblyToResolve.Name.Equals("Modrify.Skyrim.Engine"))
+            if (assemblyToResolve.Name?.Equals("Modrify.Skyrim.Engine") != true)
             {
                 return null;
             }
@@ -51,6 +53,44 @@ namespace Modrify.Skyrim.Cmdlets
             // and then passed through into PowerShell's ALC,
             // becoming the bridge between both
             return s_dependencyAlc.LoadFromAssemblyName(assemblyToResolve);
+        }
+
+        private static Assembly? ResolveFrameworkAssemblies(AssemblyLoadContext context, AssemblyName assemblyToResolve)
+        {
+            // Handle framework assemblies that might have version conflicts
+            var frameworkAssemblies = new[]
+            {
+                "System.Text.Encoding.CodePages",
+                "System.Collections.Immutable",
+                "System.Memory"
+            };
+
+            if (assemblyToResolve.Name != null &&
+                frameworkAssemblies.Contains(assemblyToResolve.Name, StringComparer.OrdinalIgnoreCase))
+            {
+                // Try to find the assembly that's already loaded in the current context
+                var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+                foreach (var loadedAssembly in loadedAssemblies)
+                {
+                    if (string.Equals(loadedAssembly.GetName().Name, assemblyToResolve.Name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return loadedAssembly;
+                    }
+                }
+
+                // If not found in loaded assemblies, try to load from GAC or runtime
+                try
+                {
+                    return Assembly.Load(new AssemblyName(assemblyToResolve.Name));
+                }
+                catch
+                {
+                    // If all else fails, return null to let the default resolution continue
+                    return null;
+                }
+            }
+
+            return null;
         }
     }
 }

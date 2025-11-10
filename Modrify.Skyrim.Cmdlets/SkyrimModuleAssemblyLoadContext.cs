@@ -14,6 +14,18 @@ namespace Modrify.Skyrim.Cmdlets
 
         protected override Assembly? Load(AssemblyName assemblyName)
         {
+            // Handle framework assembly version redirects
+            if (assemblyName.Name == "System.Text.Encoding.CodePages")
+            {
+                // Redirect to the version already loaded in PowerShell
+                var loadedAssembly = System.AppDomain.CurrentDomain.GetAssemblies()
+                    .FirstOrDefault(a => a.GetName().Name == "System.Text.Encoding.CodePages");
+                if (loadedAssembly != null)
+                {
+                    return loadedAssembly;
+                }
+            }
+
             // We do the simple logic here of
             // looking for an assembly of the given name
             // in the configured dependency directory

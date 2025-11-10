@@ -61,6 +61,20 @@ namespace Modrify.Skyrim.Engine.Internal
             }
         }
 
+        public static object GetSkyrimModFromPath(string path, bool readOnly = false)
+        {
+            var release = SkyrimConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
+
+            if (readOnly)
+            {
+                return SkyrimMod.CreateFromBinaryOverlay(path, release);
+            }
+            else
+            {
+                return SkyrimMod.CreateFromBinary(path, release);
+            }
+        }
+
         public static object NewSkyrimMod(string modKey, string release = "SkyrimSE")
         {
             var modKeyObj = ResolveModKey(modKey);

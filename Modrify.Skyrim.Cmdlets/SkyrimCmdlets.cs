@@ -6,16 +6,28 @@ namespace Modrify.Skyrim.Cmdlets
     [Cmdlet(VerbsCommon.Get, "SkyrimMod")]
     public class GetSkyrimModCommand : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
-        public string ModKey { get; set; } = "";
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readwrite")]
+        public required string Path;
 
-        [Parameter()]
-        public SwitchParameter ReadOnly { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readwrite")]
+        public required string ModKey;
+
+        [Parameter(Mandatory = true, ParameterSetName = "modkey-readonly")]
+        [Parameter(Mandatory = true, ParameterSetName = "path-readonly")]
+        public SwitchParameter ReadOnly;
 
         protected override void ProcessRecord()
         {
-            var result = SkyrimEngine.GetSkyrimMod(ModKey, ReadOnly.IsPresent);
-            WriteObject(result);
+            if (ParameterSetName.StartsWith("modkey"))
+            {
+                WriteObject(SkyrimEngine.GetSkyrimMod(ModKey, ReadOnly.IsPresent));
+            }
+            else
+            {
+                WriteObject(SkyrimEngine.GetSkyrimModFromPath(Path, ReadOnly.IsPresent));
+            }
         }
     }
 

@@ -14,6 +14,11 @@ namespace Modrify.Skyrim.Engine
             return SkyrimMods.GetSkyrimMod(modKey, readOnly);
         }
 
+        public static object GetSkyrimModFromPath(string path, bool readOnly = false)
+        {
+            return SkyrimMods.GetSkyrimModFromPath(path, readOnly);
+        }
+
         public static object NewSkyrimMod(string modKey, string release = "SkyrimSE")
         {
             return SkyrimMods.NewSkyrimMod(modKey, release);

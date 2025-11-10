@@ -39,7 +39,7 @@ namespace Modrify.Skyrim.Engine.Internal
                 {
                     throw new ArgumentException("modKey contains unsupported file extension.");
                 }
-                modKey = modKey.Substring(0, modKey.IndexOf("."));
+                modKey = modKey[..modKey.IndexOf(".")];
             }
             var modKeyObj = new ModKey(modKey, mType);
             var path = SkyrimConfig.ResolveModkeyPath(modKeyObj);

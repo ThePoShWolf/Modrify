@@ -50,24 +50,30 @@ namespace Modrify.Skyrim.Cmdlets
         }
     }
 
-    [Cmdlet(VerbsCommon.Get, "SkyrimMajorRecords")]
+    [Cmdlet(VerbsCommon.Get, "SkyrimMajorRecords", DefaultParameterSetName = "bymodkey")]
     public class GetSkyrimMajorRecordsCommand : PSCmdlet
     {
-        [Parameter()]
-        public string? ModKey { get; set; }
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = "bymod")]
+        public required Object Mod;
 
-        [Parameter()]
-        public object? Mod { get; set; }
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = "bymodkey")]
+        public string ModKey;
 
-        [Parameter()]
-        public string? RecordType { get; set; }
+        [Parameter(ParameterSetName = "bymodkey")]
+        [Parameter(ParameterSetName = "bymod")]
+        // Set taken from MajorRecordTypes
+        [ValidateSet("AcousticSpace", "ActionRecord", "Activator", "ActorValueInformation", "AddonNode", "AlchemicalApparatus", "Ammunition", "AnimatedObject", "APlacedTrap", "Armor", "ArmorAddon", "ArtObject", "AssociationType", "AStoryManagerNode", "BodyPartData", "Book", "CameraPath", "CameraShot", "Cell", "Class", "Climate", "CollisionLayer", "ColorRecord", "CombatStyle", "ConstructibleObject", "Container", "Debris", "DefaultObjectManager", "DialogBranch", "DialogResponses", "DialogTopic", "DialogView", "Door", "DualCastData", "EffectShader", "EncounterZone", "EquipType", "Explosion", "Eyes", "Faction", "Flora", "Footstep", "FootstepSet", "FormList", "Furniture", "GameSetting", "Global", "Grass", "Hair", "Hazard", "HeadPart", "IdleAnimation", "IdleMarker", "ImageSpace", "ImageSpaceAdapter", "Impact", "ImpactDataSet", "Ingestible", "Ingredient", "Key", "Keyword", "Landscape", "LandscapeTexture", "LensFlare", "LeveledItem", "LeveledNpc", "LeveledSpell", "Light", "LightingTemplate", "LoadScreen", "Location", "LocationReferenceType", "MagicEffect", "MaterialObject", "MaterialType", "Message", "MiscItem", "MoveableStatic", "MovementType", "MusicTrack", "MusicType", "NavigationMesh", "NavigationMeshInfoMap", "Npc", "ObjectEffect", "Outfit", "Package", "Perk", "PlacedNpc", "PlacedObject", "Projectile", "Quest", "Race", "Region", "Relationship", "ReverbParameters", "Scene", "Scroll", "ShaderParticleGeometry", "Shout", "SkyrimMajorRecord", "SoulGem", "SoundCategory", "SoundDescriptor", "SoundMarker", "SoundOutputModel", "Spell", "Static", "TalkingActivator", "TextureSet", "Tree", "VisualEffect", "VoiceType", "VolumetricLighting", "Water", "Weapon", "Weather", "WordOfPower", "Worldspace", "IPlaceableObject", "IReferenceableObject", "IExplodeSpawn", "IIdleRelation", "IObjectId", "IItem", "IItemOrList", "IConstructible", "IOutfitTarget", "IBindableEquipment", "IComplexLocation", "IDialog", "IOwner", "IRelatable", "IRegionTarget", "IAliasVoiceType", "ILockList", "IWorldspaceOrList", "IVoiceTypeOrList", "INpcOrList", "IWeaponOrList", "ISpellOrList", "IPlacedTrapTarget", "IHarvestTarget", "IMagicItem", "IKeywordLinkedReference", "INpcSpawn", "ISpellRecord", "IEmittance", "ILocationRecord", "IKnowable", "IEffectRecord", "ILinkedReference", "IPlaced", "IPlacedSimple", "IPlacedThing", "ISound")]
+        public string? RecordType;
 
         protected override void ProcessRecord()
         {
-            var results = SkyrimEngine.GetSkyrimMajorRecords(ModKey, Mod, RecordType);
-            foreach (var result in results)
+            if (ParameterSetName == "bymodkey")
             {
-                WriteObject(result);
+                Mod = SkyrimEngine.GetSkyrimMod(ModKey);
+            }
+            foreach (var rec in SkyrimEngine.GetSkyrimMajorRecords(null, Mod, RecordType))
+            {
+                WriteObject(rec);
             }
         }
     }

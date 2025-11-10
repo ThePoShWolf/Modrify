@@ -11,6 +11,8 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Binary.Parameters;
 using System.IO.Abstractions;
 using Modrify.Skyrim.Core;
+using Microsoft.VisualBasic;
+using Mutagen.Bethesda.WPF.Reflection.Attributes;
 
 namespace Modrify.Skyrim.Engine.Internal
 {
@@ -18,7 +20,28 @@ namespace Modrify.Skyrim.Engine.Internal
     {
         public static object GetSkyrimMod(string modKey, bool readOnly = false)
         {
-            var modKeyObj = new ModKey(modKey, ModType.Plugin);
+            var mType = ModType.Plugin;
+            if (modKey.Contains('.'))
+            {
+                if (modKey.EndsWith(".esm"))
+                {
+                    mType = ModType.Master;
+                }
+                else if (modKey.EndsWith(".esl"))
+                {
+                    mType = ModType.Light;
+                }
+                else if (modKey.EndsWith(".esp"))
+                {
+                    mType = ModType.Plugin;
+                }
+                else
+                {
+                    throw new ArgumentException("modKey contains unsupported file extension.");
+                }
+                modKey = modKey.Substring(0, modKey.IndexOf("."));
+            }
+            var modKeyObj = new ModKey(modKey, mType);
             var path = SkyrimConfig.ResolveModkeyPath(modKeyObj);
             var release = SkyrimConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 

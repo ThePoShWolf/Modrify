@@ -2,7 +2,7 @@ param (
     [version]$Version = '0.1.0',
     [string]$NugetApiKey,
     [ValidateScript({
-            (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains $_
+            (Get-ChildItem "$PSScriptRoot/Modrify*" -Directory).Name -contains "$_.Cmdlets"
         })]
     [string]$Module
 )
@@ -105,7 +105,17 @@ task dotnetBuild {
             if (Test-Path $dependenciesTarget) {
                 Remove-Item $dependenciesTarget -Recurse -Force
             }
-            Copy-Item $dependenciesSource -Destination $dependenciesTarget -Recurse -Force
+
+            $skip = @(
+                'System.Collections.Immutable',
+                'System.Text.Encoding.CodePages'
+            )
+            #Get-ChildItem $dependenciesSource
+            Get-ChildItem $dependenciesSource | Where-Object { $skip -notcontains $_.BaseName } | ForEach-Object {
+                #Write-Host "$($_.FullName) -> $dependenciesTarget"
+                Copy-Item $_.FullName -Destination $dependenciesTarget
+            }#>
+            #Copy-Item $dependenciesSource -Destination $dependenciesTarget -Recurse -Force
             Write-Host "  Copied lib folder with $(Get-ChildItem $dependenciesTarget | Measure-Object | Select-Object -ExpandProperty Count) files"
         }
     }

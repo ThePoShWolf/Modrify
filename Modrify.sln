@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify", "Modrify\Modrify.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify.Fallout4", "Modrify.Fallout4\Modrify.Fallout4.csproj", "{163D1E52-C45E-4C99-BDD7-1290ACDDDA3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify.Skyrim", "Modrify.Skyrim\Modrify.Skyrim.csproj", "{A0730027-353C-4114-9CE7-888E407125F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify.Skyrim.Engine", "Modrify.Skyrim.Engine\Modrify.Skyrim.Engine.csproj", "{B0730027-353C-4114-9CE7-888E407125F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modrify.Skyrim.Cmdlets", "Modrify.Skyrim.Cmdlets\Modrify.Skyrim.Cmdlets.csproj", "{C0730027-353C-4114-9CE7-888E407125F2}"

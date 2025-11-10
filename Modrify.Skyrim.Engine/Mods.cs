@@ -13,12 +13,14 @@ using System.IO.Abstractions;
 using Modrify.Skyrim.Core;
 using Microsoft.VisualBasic;
 using Mutagen.Bethesda.WPF.Reflection.Attributes;
+using System.Data;
 
 namespace Modrify.Skyrim.Engine.Internal
 {
     public static class SkyrimMods
     {
-        public static object GetSkyrimMod(string modKey, bool readOnly = false)
+
+        private static ModKey ResolveModKey(string modKey)
         {
             var mType = ModType.Plugin;
             if (modKey.Contains('.'))
@@ -41,7 +43,11 @@ namespace Modrify.Skyrim.Engine.Internal
                 }
                 modKey = modKey[..modKey.IndexOf(".")];
             }
-            var modKeyObj = new ModKey(modKey, mType);
+            return new ModKey(modKey, mType);
+        }
+        public static object GetSkyrimMod(string modKey, bool readOnly = false)
+        {
+            var modKeyObj = ResolveModKey(modKey);
             var path = SkyrimConfig.ResolveModkeyPath(modKeyObj);
             var release = SkyrimConfig.TryGetEnvironment().GameRelease.ToSkyrimRelease();
 
@@ -57,7 +63,7 @@ namespace Modrify.Skyrim.Engine.Internal
 
         public static object NewSkyrimMod(string modKey, string release = "SkyrimSE")
         {
-            var modKeyObj = new ModKey(modKey, ModType.Plugin);
+            var modKeyObj = ResolveModKey(modKey);
             var releaseEnum = Enum.Parse<SkyrimRelease>(release);
 
             ISkyrimMod mod = new SkyrimMod(modKeyObj, releaseEnum);
